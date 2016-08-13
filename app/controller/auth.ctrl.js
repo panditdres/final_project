@@ -29,6 +29,7 @@
 				.then(function(res){
 					console.log(res.data);
 					if(res.data.error){
+						// Toastr implemented
 						toastr.error("Please have a unique E-Mail","Error")
 						//alert("PLEASE HAVE UNIQUE EMAIL");
 						//localStorage.clear(res.data);

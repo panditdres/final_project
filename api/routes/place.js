@@ -10,9 +10,9 @@ router.get('/', function(req,res){
 	})
 })
 
-// // add new venue
+// add new venue
 router.post('/', function(req,res){
 	console.log("Venue posting onto the database");
-	//var __place = req.body;
-	console.log("ROUTE VENUE", req.body)
+	var __place = req.body;
+	console.log("ROUTE Place", req.body)
 })
