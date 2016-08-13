@@ -1,0 +1,72 @@
+<div class="map" >
+
+    <script id="searchbox.tpl.html" type="text/ng-template">
+  		<input type="text" placeholder="Search" class="google-search">
+	</script>
+
+	<ui-gmap-google-map center='ctrl.map.center' zoom='ctrl.map.zoom'>
+		<!-- <ui-gmap-drawing-manager options="ctrl.drawingManagerOptions" control="ctrl.drawingManagerControl"></ui-gmap-drawing-manager> -->
+		<ui-gmap-window 
+	        show="ctrl.map.window.show" 
+	        coords="ctrl.map.marker.coords" 
+	        options="ctrl.map.marker.window.options" 
+	        closeClick="ctrl.map.window.closeClick()"
+	        templateUrl="'/partials/infowindow.tpl.html'" 
+	        templateParameter="ctrl.map.window">
+	    </ui-gmap-window>
+
+	    <ui-gmap-windows 
+	    	idKey="ctrl.map.markers.id"
+	    	models="ctrl.map.markers"
+	        show="ctrl.map.window.show" 
+	        coords="'self'" 
+	        options="ctrl.map.marker.window.options" 
+	        closeClick="ctrl.map.marker.window.closeClick()"
+	        templateUrl="'/partials/infowindow.tpl.html'" 
+	        templateParameter="ctrl.map.marker.window">
+	    </ui-gmap-windows>
+
+	    <ui-gmap-search-box 
+			template="ctrl.map.searchbox.template" 
+			events="ctrl.map.searchbox.events"
+			show="ctrl.map.searchbox.window.show">
+		</ui-gmap-search-box>
+		
+		<ui-gmap-marker 
+			models="ctrl.map.marker"
+			coords="ctrl.map.marker.coords" 
+			options="ctrl.map.marker.options" 
+			events="ctrl.map.marker.events" 
+			idkey="ctrl.map.marker.id">
+		</ui-gmap-marker>
+
+		<ui-gmap-markers  
+	        models="ctrl.map.markers" 
+	        coords="'self'"  
+	        events="ctrl.map.markersEvents"
+	        options="ctrl.map.marker.options">
+      	</ui-gmap-markers>
+
+      	<ui-gmap-circle 
+  			center='ctrl.map.circle.center'
+            radius='ctrl.map.circle.radius'
+            fill='ctrl.map.circle.fill'
+            stroke='ctrl.map.circle.stroke'
+            visible='ctrl.map.circle.visible'>
+		</ui-gmap-circle>	
+
+	</ui-gmap-google-map>
+		
+	<!-- 	<div style="display:block;z-index:100;position:absolute;bottom:30px;left:3px;width:380px;height:38px;background:white;"> -->
+        <!-- <label>Show drawing manager (via options)? <input type="checkbox" ng-model="ctrl.drawingManagerOptions.drawingControl"/></label><br/>
+        <label>Allow marker and circle drawing modes (via control)? <input type="checkbox" ng-model="ctrl.markersAndCircleFlag"/></label> -->
+    <!-- </div> -->
+
+</div>
+
+
+<div class="panel absolute">
+<!--   Hello {{ctrl.userData.firstName}}
+  <div ui-sref="login" ng-click="ctrl.interact()">{{ctrl.checkMsg}}</div> -->
+  <div ui-view=""></div>
+</div>

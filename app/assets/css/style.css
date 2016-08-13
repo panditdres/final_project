@@ -1,0 +1,307 @@
+.container-map { height: 400px; }
+
+.angular-google-map-container { height: 100vh; }
+
+.google-search {
+	width: 200px;
+	height: 33px;
+	margin-top: 60px;
+	border-radius: 5px;
+}
+.gmnoprint > .gm-style-mtc {
+  margin-top: 50px;
+}
+.map {
+	height:100%;
+}
+.center {
+	text-align: center;
+}
+.absolute {
+  position: absolute;
+  width: 300px;
+  min-height: 400px;
+  border: 2px solid black;
+  left:10px;
+  top: 100px;
+  font-family: 'Abel', sans-serif;
+  font-weight: 400;
+}
+.admin {
+  text-align: center;
+}
+
+/*UNIVERSAL/GLOBAL STYLES MADE BY US*/
+/* there is a global _ui.css but that is their original
+let's try to edit this one for global in case anything breaks!
+
+NAV BAR STYLINGS INCLUDED
+ */
+
+/*@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,300,700);*/
+
+body {
+font-family: 'Abel', sans-serif;
+font-weight: 400;
+}
+
+h1:hover {
+ 	color: #91adc9;
+ 	cursor: pointer;
+}
+
+ul {
+
+	list-style: none;
+}
+
+h1 {
+font-weight: 300;
+letter-spacing: 2px
+}
+
+p {
+	margin-bottom: 0;
+}
+
+.gap {
+	margin-right: 10px;
+	margin-top: 10px;
+}
+
+p.company {
+	margin-bottom: 10px;
+
+}
+
+
+/*NG FUNCTION COURSERS*/
+[ng-click],
+[data-ng-click],
+[x-ng-click] {
+    cursor: pointer;
+}
+
+/*NAV BAR*/
+
+.brand-icon-div {
+	width: 80%;
+	position: relative;
+	left: 10%;
+	border-bottom: 2px solid black;
+}
+
+.icon-padding {
+	display: inline-block;
+	margin-bottom: 3%;
+}
+
+.navmain-div {
+	float: center;
+	width: 80%;
+	position: relative;
+	left: 10%;
+}
+
+.nav-display > li {
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: grey;
+	box-shadow: none;
+}
+
+
+.login-padding {
+	padding-left: 5%;
+}
+
+.nav-display {
+	display: inline;
+
+	min-width: 10px;
+}
+
+.nav-items {
+	padding-right:3%;
+	cursor: pointer;
+}
+
+.nav-items:hover  {
+	color: #91adc9;
+	width: 140px;
+	}
+
+.last-item {
+	margin: 0;
+	width: 200px;
+	margin-right: 30px;
+}
+.nav-float {
+	float: right;
+} 
+
+.nav-display.nav-float {
+	min-width: 150px;
+}
+.gap {
+	margin-bottom: 50px;
+}
+
+.cart-num { 
+	width: 15px;
+	height: 15px;
+	border: 1px solid #2C3539;
+	border-radius: 2px;
+	display: inline-block;
+} 
+#tablefont {
+	text-align: center;
+}
+.table>tbody>tr>td {
+	vertical-align: middle;
+}
+/*FOOTER STYLING*/
+.footer-right{
+	float:right;
+	font-size: 20px;
+}
+
+footer {
+	margin-top: 2%;
+}
+
+.btn.trash {
+	background-color: transparent;
+}
+
+
+
+
+/* Login Page - blue header with BrainStation logo */
+#auth .login-page > .navbar {
+  background-color: #2b96ff;
+  margin: 0;
+  color: black;
+  height: 65px;
+  line-height: 65px;
+  border: 0px solid transparent;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+#auth .login-page h3{
+  font-size:2rem;
+  color:#555;
+}
+
+
+#auth .logo {
+    width: 34px;
+    display: block;
+}
+
+/* Main Content - login form */
+#auth .login-page .main-content {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#auth .login-page .registration-header {
+  color: white;
+  font-size: 34px;
+  width: 100%;
+  margin: 0 auto 0 auto;
+  text-align: center;
+}
+
+#auth .login-page .btn-primary {
+  background-color: #ff6d37;
+  outline:none;
+}
+
+#auth .login-page .btn-primary:hover {
+  background-color: #FF5B1E;
+  border-color: #FF5B1E;
+}
+
+#auth .login-page .help-links p {
+  margin-top: 0;
+}
+
+#auth .login-page .help-links a {
+  cursor: pointer;
+}
+
+
+
+@media only screen and (min-width:  768px ) {
+  .banner-wrapper.registration-header {
+    padding: 40px 0 10px;
+    width: 53%;
+  }
+}
+
+
+
+/*.login-form {
+  margin: auto;
+  width: 400px;
+  max-width: 100%;
+  padding: 20px 0;
+}*/
+
+  /* Button */
+
+  .bs-form__button.stacked-input-box {
+    margin-bottom: 20px;
+}
+
+.bs-form__button.btn-lg {
+    height: 47px;
+}
+.form-input.btn-primary {
+    border: 0;
+    color: #fff;
+}
+
+.bs-form__button {
+    font-weight: 400;
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+
+.form-input {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    padding-left: 15px;
+    font-size: 13px;
+    font-family: 'Open Sans', "Helvetica", "Arial", sans-serif;
+    border: 1px solid #d6d6d6;
+    color: #808080;
+    border-radius: 2px;
+}
+
+.login-shade-text {
+    color: #a3a3a3;
+    font-size: 13px;
+}
+
+.login-shade-text >a{
+  color:inherit;
+}
+
+
+
+a.sign-in-link.small-text {
+    font-size: 13px;
+}
+a.sign-in-link {
+    color: #3397FA;
+}
+
+
+

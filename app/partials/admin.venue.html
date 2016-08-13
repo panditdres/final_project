@@ -1,0 +1,32 @@
+<h3>
+	Add Venue
+</h3>
+
+<article class="venue-frm">
+	<form name="add-place" ng-submit="ctrl.addPlace()">
+
+		<div>
+			<label>Name</label>
+			<input type="text" name="name" ng-model="ctrl.placeName" required>
+		</div>
+
+		<div>
+			<label>Latitude</label>
+			<input type="text" name="name" ng-model="ctrl.latitude" required>
+		</div>
+
+		<div>
+			<label>Longitude</label>
+			<input type="text" name="name" ng-model="ctrl.longitude" required>
+		</div>
+
+		<div>
+			<label>Type</label>
+			<input type="text" name="name" ng-model="ctrl.type" required>
+		</div>
+		
+		<div>
+			<button type="submit">Add venue</button>
+		</div>
+	</form>
+</article>
