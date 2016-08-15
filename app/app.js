@@ -21,6 +21,7 @@
 				url:'/home',
 				templateUrl:'/partials/map.main.html',
 				controller:'mapCtrl as ctrl',
+				authenticate:true,
 				resolve:{
 					user: function(mapSrv){
 						//console.log("State Params:",$stateParams.userId)
@@ -33,6 +34,7 @@
 				url:'/map',
 				templateUrl:'/partials/mapTemplate.html', 
 				controller:'mapCtrl as ctrl',
+				authenticate:true,
 				resolve:{
 					user: function(mapSrv){
 						//console.log("State Params:",$stateParams.userId)
@@ -50,37 +52,75 @@
 			.state('login', {
 				url:'/login',
 				templateUrl:'/partials/logIn.html',
+				authenticate:false,
 				controller:'authCtrl as ctrl'
 			})
 
 			.state('register', {
 				url:'/register',
 				templateUrl:'/partials/register.html',
+				authenticate:false,
 				controller:'authCtrl as ctrl'
 			})
 
 			.state('adminAuth', {
 				url:'/adminAuth',
 				templateUrl:'/partials/adminAuth.html',
-				controller:'adminCtrl as ctrl'
+				authenticate:false,
+				controller:'authCtrl as ctrl'
 			})
 
 			.state('admin', {
 				url:'/admin',
 				templateUrl:'/partials/admin.html',
-				controller:'adminCtrl as ctrl'
+				controller:'adminCtrl as ctrl',
+				authenticate:true,
+				resolve:{
+					users: function(adminSrv){
+						//console.log("State Params:",$stateParams.userId)
+						return adminSrv.getUsers();
+					}
+				}
 			})
 
 			.state('admin.dash', {
 				url:'/dash',
 				templateUrl:'/partials/admin.dash.html',
+				controller:'adminCtrl as ctrl',
+				authenticate:true,
+				resolve:{
+					users: function(adminSrv){
+						//console.log("State Params:",$stateParams.userId)
+						return adminSrv.getUsers();
+					}
+				}
+			})
+
+			.state('admin.addLocation', {
+				url:'/location',
+				templateUrl:'/partials/admin.venue.html',
+				authenticate:true,
 				controller:'adminCtrl as ctrl'
 			})
 
-			.state('admin.addVenue', {
-				url:'/venue',
-				templateUrl:'/partials/admin.venue.html',
+			.state('admin.allLocation', {
+				url:'/location/all',
+				templateUrl:'/partials/admin.location.html',
+				authenticate:true,
 				controller:'adminCtrl as ctrl'
+			})
+
+			.state('admin.allUsers', {
+				url:'/users',
+				templateUrl:'/partials/admin.user.html',
+				authenticate:true,
+				controller:'adminCtrl as ctrl',
+				resolve:{
+					users: function(adminSrv){
+						//console.log("State Params:",$stateParams.userId)
+						return adminSrv.getUsers();
+					}
+				}
 			})
 
 			$httpProvider.interceptors.push(function(jwtHelper){
@@ -142,4 +182,17 @@
 				}
 			})
 		});
+	
+	angular
+		.module('mapApp')
+		.run(function($rootScope,$state,authSrv){
+			$rootScope.$on("$stateChangeStart", function(event,toState,toParams,fromState,fromParams){
+				if(toState.authenticate && !localStorage.authToken){
+					$state.transitionTo('login');
+					event.preventDefault();
+				}
+			})
+		})
+
+
 })();

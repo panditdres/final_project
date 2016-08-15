@@ -20,7 +20,7 @@ var location_route = require('./routes/location')
 // Use app for the proper route
 app.use('/api/auth',auth_route);
 app.use('/api/users',authentication,users_route);
-app.use('/api/admin',admin_route);
+app.use('/api/admin',authentication,admin_route);
 app.use('/api/location',location_route);
 
 models.sequelize.sync().then(function(){

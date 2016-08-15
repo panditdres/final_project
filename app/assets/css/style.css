@@ -35,9 +35,15 @@
   width: 100%;
   height: 50px;
   z-index: 9999;
-  border: solid black 1px;
   background-color: white;
   text-align: center;
+}
+.map-home{
+  font-family: 'Abel', sans-serif;
+}
+.brand{
+  font-family: 'Abel', sans-serif;
+  margin-top: 8px;
 }
 
 /*UNIVERSAL/GLOBAL STYLES MADE BY US*/
@@ -93,17 +99,7 @@ p.company {
 
 /*NAV BAR*/
 
-.brand-icon-div {
-	width: 80%;
-	position: relative;
-	left: 10%;
-	border-bottom: 2px solid black;
-}
 
-.icon-padding {
-	display: inline-block;
-	margin-bottom: 3%;
-}
 
 .navmain-div {
 	float: center;

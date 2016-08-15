@@ -36,6 +36,7 @@ router.post('/register',function(req,res){
 router.post('/authenticate',function(req,res){
 	console.log('Authentication Endpoint');
 	var __user = req.body;
+	console.log(__user)
 
 	var where = {where:{email:__user.email}};
 	models.Users.find(where)

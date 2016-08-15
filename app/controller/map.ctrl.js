@@ -78,24 +78,6 @@
 		            }
 	          	}
 	        },
-	        circle: {
-	        	id: 0,
-	        	center: {
-	        		latitude: 43.646708,
-	        		longitude: -79.413697
-	        	}, 
-	        	radius: 20,
-	        	stroke: {
-	        		color: '#51BFFF',
-	        		weight: 1,
-	        		opacity: 0.3
-	        	},
-	        	fill: {
-	        		color: '#51BFFF',
-	        		opacity: 0.3
-	        	},
-	        	visible: false
-	        },
 			marker : {
 			    id: 0,
 			    coords: {
