@@ -14,6 +14,7 @@ router.get('/:userId', function(req,res){
 	console.log(req.params);
 	var where = {where:{id:req.params.userId}}
 	models.Users.find(where).then(function(user){
+		console.log(user)
 		res.send(user);
 	})
 })

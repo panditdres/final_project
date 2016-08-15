@@ -37,7 +37,13 @@
 					user: function(mapSrv){
 						//console.log("State Params:",$stateParams.userId)
 						return mapSrv.getUser();
-					}
+					},
+					// access: function(mapSrv){
+					// 	//function does a call that will check if you are signed in, 
+					// 	//if not, go back to login
+					// 	//request to authentication
+					// 	//have a variable to track whether you can get in (controller)
+					// }
 				}
 			})
 

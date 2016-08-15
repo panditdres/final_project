@@ -41,7 +41,7 @@ router.post('/authenticate',function(req,res){
 	models.Users.find(where)
 	.then(function(user){
 		console.log("auth user")
-		if (user == null) {
+		if(user == null) {
 			res.status(403)
 		    .json({err:'unauhthorized'});
 		}

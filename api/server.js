@@ -20,8 +20,8 @@ var place_route = require('./routes/place')
 // Use app for the proper route
 app.use('/api/auth',auth_route);
 app.use('/api/users',authentication,users_route);
-app.use('/api/admin',authentication,admin_route);
-app.use('/api/place',authentication,place_route);
+app.use('/api/admin',admin_route);
+app.use('/api/place',place_route);
 
 models.sequelize.sync().then(function(){
 	app.listen(8092, function(){

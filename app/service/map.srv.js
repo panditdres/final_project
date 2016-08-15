@@ -24,7 +24,9 @@
 		function getUser() {
 			// check if user is even logged in
 			if(localStorage.authToken){
-				return $http.get('/api/users/'+localStorage.loginId).success(function(data,status){
+				return $http.get('/api/users/'+localStorage.loginId)
+				.success(function(data,status){
+				console.log("localStorage ID",localStorage.loginId)
 				console.log("DATA RETRIEVE")
 				console.log(data)
 			})

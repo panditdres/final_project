@@ -78,10 +78,4 @@ router.post('/login',function(req,res){
 	})
 });
 
-router.post('/venue', function(req,res){
-	console.log("Venue posting onto the database");
-	var __venue = req.body;
-	console.log("ROUTE VENUE", __venue)
-})
-
 module.exports = router;

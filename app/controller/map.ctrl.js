@@ -7,6 +7,7 @@
 		var mapVm = this;
 
 		mapVm.userData = user;
+		console.log("USER",mapVm.userData)
 		mapVm.checkMsg = mapSrv.checkMsg();
 		mapVm.interact = mapSrv.interact;
 		mapVm.userCheck = mapSrv.userCheck;
