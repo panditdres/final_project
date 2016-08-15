@@ -16,3 +16,11 @@ router.post('/', function(req,res){
 	var __place = req.body;
 	console.log("ROUTE Place", req.body)
 })
+
+// editing venue
+// route.put('/:placeName', function(req,res){
+// 	console.log("Edit Venue")
+
+// })
+
+module.exports = router;

@@ -14,7 +14,7 @@ module.exports = function(req, res, next) {
             } else {
                 console.log("TOKEN after", token)
                 //console.log("REQUIRE TOKEN",req)
-                //res.send(token);
+                res.send(token);
                 req.decoded = decoded;  
                 next();
             }
