@@ -14,7 +14,7 @@ router.get('/', function(req,res){
 // add new location
 router.post('/', function(req,res){
 	console.log("Venue posting onto the database");
-	console.log("REQ BODY",req.body)
+	console.log("REQ BODY",req.body);
 	var location = req.body;
 	models.Location.create(location)
 		.then(function(location){
@@ -25,13 +25,13 @@ router.post('/', function(req,res){
 })
 
 // editing location
-router.put('/:placeName', function(req,res){
+router.put('/new/:placeName', function(req,res){
 	console.log("Edit Location")
 	var where = {where:{}}
 })
 
 // delete location
-router.delete('/:placeName', function(req,res){
+router.delete('/new/:placeName', function(req,res){
 	console.log("DELETE LOCATION")
 })
 

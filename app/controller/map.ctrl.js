@@ -13,12 +13,24 @@
 		mapVm.userCheck = mapSrv.userCheck;
 		//mapVm.GeolocationMarker = GeolocationMarker;
 
-		// $geolocation.watchPosition({
-		// 	timeout: 60000,
-		// 	maximumAge: 250,
-		// 	enableHighAccuracy: true
-		// })
+		mapVm.profile = profile;
+		mapVm.settings = settings;
 
+		mapVm.showDefault = true;
+		mapVm.showProfile = false;
+		mapVm.showSettings = false;
+
+		function profile(){
+			mapVm.showProfile = true;
+			mapVm.showDefault = false;
+			mapVm.showSettings = false;
+		}
+
+		function settings(){
+			mapVm.showSettings = true;
+			mapVm.showDefault = false;
+			mapVm.showProfile = false;
+		}
 
 		mapVm.map = {
 			center: { latitude: 43.6532, longitude: -79.3832 },

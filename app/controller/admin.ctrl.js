@@ -8,6 +8,7 @@
 	
 		adminVm.logout   = logout;
 		adminVm.users    = users;
+		adminVm.addLocation = addLocation;
 		console.log(adminVm.users)
 
 		function logout(){
@@ -18,6 +19,14 @@
 
 		function addLocation(){
 			console.log("ADDING LOCATION")
+			var location = {
+				"name": adminVm.placeName,
+				"latitude": adminVm.latitude,
+				"longitude": adminVm.longitude,
+				"type": adminVm.type
+			}
+			console.log("LOCATION",location)
+			adminSrv.addLocation(location)
 		}
 
 		

@@ -3,7 +3,7 @@
 </h3>
 
 <div class="panel-body">
-  	<form role="form">
+  	<form role="form" ng-submit="ctrl.addLocation()">
       	<div class="form-group">
           	<label for="nameOfLocation">Name</label>
           	<input type="string" class="form-control" id="nameOfLocation" placeholder="Name" ng-model="ctrl.placeName" required>

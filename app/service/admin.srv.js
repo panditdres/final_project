@@ -9,6 +9,7 @@
 
 		self.getLocations = getLocations();
 		self.getUsers = getUsers;
+		self.addLocation = addLocation;
 
 		function getUsers(){
 			return api.request('/users',{},'GET')
@@ -43,15 +44,10 @@
 			})
 		}
 
-		function addLocation(){
-			var place = {
-				name: adminVm.placeName,
-				lattitude: adminVm.lattitude,
-				longitude: adminVm.longitude,
-				type: adminVm.tpye
-			}
+		function addLocation(location){
 			// make api requests
-			api.request('/place', venue, 'POST')
+			console.log(location);
+			api.request('/location/', location, 'POST')
 			.then(function(res){
 				console.log(res);
 				if(res.status == 200){

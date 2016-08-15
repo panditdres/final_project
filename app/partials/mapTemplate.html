@@ -1,28 +1,20 @@
-<!-- HOME ICON -->
-
-<div class="brand-icon-div">
-  <div class="icon-padding"> 
-    <h1 ui-sref="map.home" class="map-home"> Hello {{ctrl.userData.firstName}}<h1> 
-  </div>
-</div>
-
 <!-- NAV BAR -->
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#"></a></li>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Setting</a></li>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ctrl.userData.firstName}} <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+          <a class="dropbtn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ctrl.userData.firstName}} <span class="caret"></span></a>
+          <ul class="dropdown-content">
+            <li><a ng-click="ctrl.profile()">Profile</a></li>
+            <li><a ng-click="ctrl.settings()">Settings</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">{{ctrl.checkMsg}}</a></li>
+            <li><a ui-sref="login" ng-click="ctrl.interact()">{{ctrl.checkMsg}}</a></li>
           </ul>
         </li>
       </ul>
@@ -30,53 +22,23 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<nav> 
-  <div div class="navmain-div">
-    <!-- <div class="nav-display">
-      <ul class="nav-display">  -->
-        <!-- <li class="nav-display nav-items" ui-sref="map.home">Where to Play</li>
-        <li class="nav-display nav-items" ui-sref="shop.about">Our Story </li> -->
-  <!--     </ul>
-    </div> --> <!-- left nav -->
-    <div class="nav-display nav-float"> 
-      <ul class="nav-display">
-        <li class="nav-display nav-items login-padding" ui-sref="login" ng-click=""> Profile </li>
-        <li class="nav-display nav-items login-padding" ui-sref="login" ng-click=""> Settings </li>
-        <li class="nav-display nav-items login-padding" ui-sref="login" ng-click="ctrl.interact()"> {{ctrl.checkMsg}} </li>
-      </ul>
-    </div>
-  </div> <!-- right nav  -->
-</nav>
+<!-- make each button toggle -->
+<div ng-show="ctrl.showDefault">
+  <h2>Default view</h2>
+</div>
 
-  <div ui-view=""></div>
+<div ng-show="ctrl.showProfile" ng-click="ctrl.profile">
+  <h2>Profile</h2>
+  <div>
+    <h4>Your history</h4>
+  </div>
+</div>
 
-<!-- FOOTER -->
-<!-- <footer>
-<hr>
-  <div class="container">
-    <div class="row gap">
-      <div class="col-md-6">
-        <h5 class="company">Ballers</h5> 
-        <p>Location</p>
-        <p>Email: footy@pickup.com</p>
-        <p>Phone: +49 711 246784</p>
-        <p>Address: Kirchstraße 8, 70173 Stuttgart, Germany</p>
-      </div>
 
-      <div class="col-md-6">
-        <div class="footer-right">  -->
-<!--      <button type="button" class="btn btn-primary gap">Subscribe</button>-->        
-         <!--  <p class="icons">
-            <a href="https://github.com/panditdres/WDI.E-CommerceApp"><i class="fa fa-github gap btn" aria-hidden="true" ></i></a>
-            <a href="https://www.facebook.com"><i class="fa fa-facebook gap btn" aria-hidden="true"></i></a>
-            <a href="https://www.twitter.com"><i class="fa fa-twitter gap btn" aria-hidden="true" href="https://www.twitter.com"></i></a>
-            <a href="https://www.instagram.com"><i class="fa fa-instagram gap btn" aria-hidden="true" ></i></a>
-          </p>
-        </div>
-      </div>
-    
-    </div>
-  </div>  
-</footer>
- -->
- </div>
+<div ng-show="ctrl.showSettings" ng-click="ctrl.settings">
+  <h2>
+    Settings
+  </h2>
+
+</div>
+
