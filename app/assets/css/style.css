@@ -30,6 +30,15 @@
 .admin {
   text-align: center;
 }
+.header-map {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  z-index: 9999;
+  border: solid black 1px;
+  background-color: white;
+  text-align: center;
+}
 
 /*UNIVERSAL/GLOBAL STYLES MADE BY US*/
 /* there is a global _ui.css but that is their original

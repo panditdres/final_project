@@ -3,7 +3,7 @@
 		.module('mapApp')
 		.controller('adminCtrl',adminCtrl)
 
-	function adminCtrl($scope, $http, $state, mapSrv, api) {
+	function adminCtrl($scope, $http, $state, mapSrv, adminSrv, api) {
 		var adminVm = this;
 	
 		adminVm.logInBtn	= 'Log In';
@@ -56,23 +56,12 @@
 			$state.go('login')
 		}
 
-		function addPlace(){
-			var place = {
-				name: adminVm.placeName,
-				lattitude: adminVm.lattitude,
-				longitude: adminVm.longitude,
-				type: adminVm.tpye
-			}
-			// make api request
-			// api.request('/place', venue, 'POST')
-			// .then(function(res){
-			// 	console.log(res);
-			// 	if(res.status == 200){
-			// 		console.log("SUCCES POSTING VENUE")
-			// 	}
-			// }, function(err){
-			// 	console.log('err', err)
-			// })
+		function getLocations(){
+
+		}
+
+		function addLocation(){
+			
 		}
 
 	}

@@ -44,8 +44,7 @@ router.post('/authenticate',function(req,res){
 		if(user == null) {
 			res.status(403)
 		    .json({err:'unauhthorized'});
-		}
-		
+		}	
 		bcrypt.compare(__user.password, user.password, function(err, result) {
 		    // res == true 
 		    console.log("PASSWORD AFTER")

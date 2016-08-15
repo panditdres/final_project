@@ -2,31 +2,25 @@
 	Add Venue
 </h3>
 
-<article class="venue-frm">
-	<form name="add-place" ng-submit="ctrl.addPlace()">
+<div class="panel-body">
+  	<form role="form">
+      	<div class="form-group">
+          	<label for="nameOfLocation">Name</label>
+          	<input type="string" class="form-control" id="nameOfLocation" placeholder="Name" ng-model="ctrl.placeName" required>
+	    </div>
+	    <div class="form-group">
+          	<label for="Latitude">Latitude</label>
+          	<input type="float" class="form-control" id="Latitude" placeholder="Enter Latitude" ng-model="ctrl.latitude" required>
+	    </div>
+	    <div class="form-group">
+          	<label for="Longitude">Longitude</label>
+          	<input type="float" class="form-control" id="Longitude" placeholder="Enter Longitude" ng-model="ctrl.longitude" required>
+	    </div>
+	    <div class="form-group">
+          	<label for="typeOfPitch">Type</label>
+          	<input type="string" class="form-control" id="typeOfPitch" placeholder="Enter type of pitch" ng-model="ctrl.type" required>
+	    </div>
+	    <button type="submit" class="btn btn-info">Submit</button>
+  </form>
 
-		<div>
-			<label>Name</label>
-			<input type="text" name="name" ng-model="ctrl.placeName" required>
-		</div>
-
-		<div>
-			<label>Latitude</label>
-			<input type="text" name="name" ng-model="ctrl.latitude" required>
-		</div>
-
-		<div>
-			<label>Longitude</label>
-			<input type="text" name="name" ng-model="ctrl.longitude" required>
-		</div>
-
-		<div>
-			<label>Type</label>
-			<input type="text" name="name" ng-model="ctrl.type" required>
-		</div>
-		
-		<div>
-			<button type="submit">Add venue</button>
-		</div>
-	</form>
-</article>
+</div>
