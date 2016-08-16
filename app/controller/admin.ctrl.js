@@ -41,7 +41,8 @@
 				"name": adminVm.placeName,
 				"latitude": adminVm.latitude,
 				"longitude": adminVm.longitude,
-				"type": adminVm.type
+				"type": adminVm.type,
+				"maxCapacity": adminVm.capacity
 			}
 			console.log("LOCATION",location)
 			adminSrv.addLocation(location)

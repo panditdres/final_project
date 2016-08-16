@@ -12,6 +12,7 @@
 		self.addLocation = addLocation;
 		self.locations = [];
 		self.users 	   = [];
+		self.currCapacity = 0;
 
 		function getUsers(){
 			return api.request('/users',{},'GET')

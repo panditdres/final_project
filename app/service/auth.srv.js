@@ -14,7 +14,7 @@
 		function register(firstName,lastName,email,password,passwordRedo){
 			//check passwords
 			console.log('register run')
-			if(password == passwordRedo && password != ''){
+			if(password == passwordRedo && password != '' && firstName != '' && lastName != '' && email != ''){
 				var user = {
 					firstName:firstName,
 					lastName:lastName,
@@ -37,8 +37,16 @@
 						$state.go('home.map');
 					}
 				})
-			}
-			else{
+			} else if (firstName = ''){
+				toastr.error("Please fill in your first name","Error")
+			} else if (lastName = ''){
+				toastr.error("Please fill in your last name","Error")
+			} else if (email = ''){
+				toastr.error("Please fill in your email","Error")
+			} else if (password != passwordRedo){
+				toastr.error("Passwords Don't Match","Error")
+			} else {
+				toastr.error("Please fill up the form","Error")
 				authVm.signUpBtn = "Passwords Don't Match";
 			}
 		}

@@ -28,6 +28,7 @@ router.post('/register',function(req,res){
 		        })
 	        } else {
 	        	console.log("ERROR line 30",err);
+	        	res.json({error:err})
 	        }
 	    });
 	});

@@ -45,6 +45,15 @@
   font-family: 'Abel', sans-serif;
   margin-top: 8px;
 }
+.fa-futbol-o{
+  background-color: white
+}
+.auth{
+  height: 100vh;
+}
+p .register {
+  padding: 0px;
+}
 
 /*UNIVERSAL/GLOBAL STYLES MADE BY US*/
 /* there is a global _ui.css but that is their original

@@ -30,12 +30,14 @@
 
 		function formCheck(){
 			if (authVm.firstName = ''){
-
+				toastr.error("Please fill in your first name","Error")
 			} else if (authVm.lastName = ''){
-
+				toastr.error("Please fill in your last name","Error")
 			} else if (authVm.email = ''){
-				
-			} 
+				toastr.error("Please fill in your email","Error")
+			} else if (authVm.password != authVm.passwordRedo){
+				toastr.error("Passwords are not matching","Error")
+			}
 		}
 	}
 

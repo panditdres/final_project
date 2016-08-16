@@ -1,32 +1,23 @@
-<section id="auth">
-  <div class="login-page center">
-    <div id="main-content" class="auth main-content" ng-submit="ctrl.authenticate()">
-      <div class="banner-wrapper registration-header">
-        <h3>Log In</h3>
-      </div>
-      <div class="container-fluid">
-        <div class="login-wrapper">
-          <div class="login-form clearfix">
-            <form method="post" class="stacked-form">
-              <div class="row">
-                <div class="col-xs-12">
-                  <span class="field-validation-valid" data-valmsg-for="EmailAddress" data-valmsg-replace="true"></span>
-                  <input class="form-input bs-input-box stacked-input-box" type="text" name="EmailAddress" value="" placeholder="Email Address" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.email" />
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12">
-                  <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
-                  <input class="form-input bs-input-box stacked-input-box" type="password" name="Password" placeholder="Password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.password" />
-                </div>
-              </div>
-              <input type="submit" value="{{ctrl.logInBtn}}" class="form-input btn btn-primary bs-form__button btn-lg stacked-input-box"/>
-              <p>No account? No problem, create one below</p>
-              <button class="btn btn-primary" ui-sref="register">{{ctrl.registerBtn}}</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+<section class="content bgcolor-4 auth">
+  <div ng-submit="ctrl.authenticate()">
+    <h2 class="center">Log In</h2>
+    <form method="post" class="stacked-form">
+      <span class="input input--ruri">
+        <input class="input__field input__field--ruri" type="text" name="EmailAddress" value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.email"  id="input-28" />
+        <label class="input__label input__label--ruri" for="input-28">
+          <span class="input__label-content input__label-content--ruri">Email</span>
+        </label>
+      </span>
+      <span class="input input--ruri">
+        <input class="input__field input__field--ruri" type="password" name="Password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.password"  id="input-29" />
+        <label class="input__label input__label--ruri" for="input-29">
+          <span class="input__label-content input__label-content--ruri">Password</span>
+        </label>
+      </span>
+      <span class="input input--ruri">
+        <p id="register">No account? No problem, create one here</p>
+        <input class="input__field input__field--ruri btn btn-primary" type="submit" value="Register" id="input-31" />
+      </span>
+    </form>
   </div>
 </section>
