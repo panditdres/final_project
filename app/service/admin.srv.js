@@ -4,12 +4,14 @@
 		.module('mapApp')
 		.service('adminSrv', adminSrv)
 
-	function adminSrv($http, $state, api){
+	function adminSrv($http, $state, api, toastr){
 		var self = this;
 
 		self.getLocations = getLocations;
 		self.getUsers = getUsers;
 		self.addLocation = addLocation;
+		self.locations = [];
+		self.users 	   = [];
 
 		function getUsers(){
 			return api.request('/users',{},'GET')
@@ -47,8 +49,11 @@
 			})
 		}
 
+		function getLocation(locationId){
+			return api.request('/location/'+locationId,{},'GET')
+		}
+
 		function addLocation(location){
-			// make api requests
 			console.log(location);
 			api.request('/location', location, 'POST')
 			.then(function(res){
@@ -62,7 +67,7 @@
 		}
 
 		function updateLocation(locationId, location) {
-			api.request('/location/update'+locationId,location,'POST')
+			api.request('/location/update/'+locationId,location,'POST')
 			.then(function(res){
 				console.log(res)
 				if(res.status == 200) {
@@ -71,19 +76,11 @@
 			})
 		}
 
-		function deleteLocation() {
-			api.request('/location'+locationId,{},'DEL')
+		function deleteLocation(locationId) {
+			api.request('/location/'+locationId,{},'DEL')
 			.then(function(res){
 				console.log(res)
 			})
-		}
-
-		function updateList() {
-
-		}
-
-		function removeLocation() {
-
 		}
 
 	}

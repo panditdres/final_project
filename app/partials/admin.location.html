@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-    	<tr ng-repeat="locations in ctrl.locations">
+    	<tr ng-repeat="locations in ctrl.locations" ng-click="ctrl.getLocation(locations.id)">
     		<td>{{locations.name}}</td>
     		<td>{{locations.latitude}}</td>
     		<td>{{locations.longitude}}</td>

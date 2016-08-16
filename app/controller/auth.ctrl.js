@@ -28,6 +28,15 @@
 			authSrv.adminLogin(authVm.email,authVm.password)
 		}
 
+		function formCheck(){
+			if (authVm.firstName = ''){
+
+			} else if (authVm.lastName = ''){
+
+			} else if (authVm.email = ''){
+				
+			} 
+		}
 	}
 
 })();

@@ -6,7 +6,7 @@
 
 	function mapSrv($http, $state){
 		var self = this;
-		console.log("service loading")
+		console.log("Map service loading")
 
 		self.getUser = getUser;
 		self.userCheck = userCheck;
@@ -16,10 +16,6 @@
 		self.userData;
 		self.logInInfo;
 		self.userId;
-
-		console.log("LOGIN INFO", self.logInInfo)
-		// store the email of each user here and if their email matches/not with the email of the current user, let them see the page, otherwise no
-		// store token for each user here
 
 		function getUser() {
 			// check if user is even logged in

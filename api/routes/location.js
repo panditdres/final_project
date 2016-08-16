@@ -36,11 +36,24 @@ router.post('/', function(req,res){
 })
 
 // editing location
-router.put('/update/:locationId', function(req,res){
+router.put('/:locationId', function(req,res){
 	console.log("Edit Location")
 	console.log(req.params)
 	var where = {where:{id:req.params.locationId}}
 	console.log(where)
+	var __location = req.body;
+	models.Location.find(where).then(function(location){
+		location.updateAttributes({
+			name: __location.name,
+			latitude: __location.latitude,
+			longitude: __location.longitude,
+			type: __location.type
+		});
+		__location.id = req.params.locationId
+		res.json({
+			location:__location
+		})
+	})
 })
 
 // delete location

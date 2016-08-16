@@ -4,7 +4,7 @@
 		.module('mapApp')
 		.service('authSrv', authSrv)
 
-	function authSrv($http, $state, api, mapSrv){
+	function authSrv($http, $state, api, mapSrv, toastr){
 		var self = this;
 
 		self.register = register;
