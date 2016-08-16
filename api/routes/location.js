@@ -2,7 +2,7 @@ var models = require('./../models'),
 	router = require('express').Router();
 
 console.log("loading location route")
-// get all venues
+// get all location - works
 router.get('/', function(req,res){
 	console.log(req.body)
 	models.Location.findAll()
@@ -11,7 +11,18 @@ router.get('/', function(req,res){
 	})
 })
 
-// add new location
+// get one location - works
+router.get('/:locationId', function(req,res){
+	console.log("GET ONE LOCATION",req.params);
+	var where = {where:{id:req.params.locationId}};
+	console.log(where)
+	models.Location.find(where).then(function(location){
+		console.log("RESPONSE", location)
+		res.json({location:location})
+ 	})
+})
+
+// add new location - works
 router.post('/', function(req,res){
 	console.log("Venue posting onto the database");
 	console.log("REQ BODY",req.body);
@@ -25,13 +36,15 @@ router.post('/', function(req,res){
 })
 
 // editing location
-router.put('/new/:placeName', function(req,res){
+router.put('/update/:locationId', function(req,res){
 	console.log("Edit Location")
-	var where = {where:{}}
+	console.log(req.params)
+	var where = {where:{id:req.params.locationId}}
+	console.log(where)
 })
 
 // delete location
-router.delete('/new/:placeName', function(req,res){
+router.delete('/delete/:locationId', function(req,res){
 	console.log("DELETE LOCATION")
 })
 

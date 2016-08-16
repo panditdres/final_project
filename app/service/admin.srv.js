@@ -7,7 +7,7 @@
 	function adminSrv($http, $state, api){
 		var self = this;
 
-		self.getLocations = getLocations();
+		self.getLocations = getLocations;
 		self.getUsers = getUsers;
 		self.addLocation = addLocation;
 
@@ -26,7 +26,7 @@
 			})
 		}
 
-		function deleteUser(){
+		function deleteUser(userId){
 			return api.request('/users'+userId,{},'DEL')
 			.then(function(res){
 				console.log(res)
@@ -38,7 +38,10 @@
 		function getLocations(){
 			return api.request('/location',{},'GET')
 			.then(function(res){
-				console.log(res.data)
+				console.log("GET LOCATION",res.data)
+				self.locations = res.data.locations;
+				console.log(self.locations)
+				return self.locations;
 			}, function(err){
 				console.log(err)
 			})
@@ -47,7 +50,7 @@
 		function addLocation(location){
 			// make api requests
 			console.log(location);
-			api.request('/location/', location, 'POST')
+			api.request('/location', location, 'POST')
 			.then(function(res){
 				console.log(res);
 				if(res.status == 200){
@@ -58,10 +61,13 @@
 			})
 		}
 
-		function updateLocation() {
-			api.request('/location'+locationId,location,'POST')
+		function updateLocation(locationId, location) {
+			api.request('/location/update'+locationId,location,'POST')
 			.then(function(res){
 				console.log(res)
+				if(res.status == 200) {
+					console.log("Updating locations")
+				}
 			})
 		}
 

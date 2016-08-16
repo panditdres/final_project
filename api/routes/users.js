@@ -1,7 +1,7 @@
 var models = require('./../models'),
 	router = require('express').Router();
 
-//get all users
+//get all users - works
 router.get('/',function(req,res){
 	models.Users.findAll()
 	.then(function(users){
@@ -9,7 +9,7 @@ router.get('/',function(req,res){
 	})
 })
 
-// get one user
+// get one user - works
 router.get('/:userId', function(req,res){
 	console.log(req.params);
 	var where = {where:{id:req.params.userId}}
@@ -19,7 +19,7 @@ router.get('/:userId', function(req,res){
 	})
 })
 
-//delete test accounts via url bar
+//delete test accounts via url bar - works
 router.get('/remove/:userId',function(req,res){
 	var where = {where:{id:req.params.userId}}
 	models.Users.find(where).then(function(user){

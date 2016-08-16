@@ -19,6 +19,7 @@ body {
   min-height: 100%;
 }
 .admin {
+  height: 100vh;
   background-color: #f0f3f4
 }
 a {

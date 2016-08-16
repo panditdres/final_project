@@ -1,13 +1,32 @@
-<h3>
+<h2 class="center">
 	All Locations
-</h3>
+</h2>
 <hr>
 
 
-<div class="">
-	<h5>Name: {{users.firstName}}</h5>
-	<h5>Latitude: {{users.lastName}}</h5>
-	<h5>Longitude: {{users.email}}</h5>
-	<h5>Type of field: {{users.email}}</h5>
-	<hr>
-</div>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Type</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    	<tr ng-repeat="locations in ctrl.locations">
+    		<td>{{locations.name}}</td>
+    		<td>{{locations.latitude}}</td>
+    		<td>{{locations.longitude}}</td>
+    		<td>{{locations.type}}</td>
+    		<td><i class="fa fa-pencil" aria-hidden="true"></i></td>
+    		<td><i class="fa fa-trash" aria-hidden="true"></i></td>
+    	</tr>
+    </tbody>
+</table>
+
+<hr>
+
+

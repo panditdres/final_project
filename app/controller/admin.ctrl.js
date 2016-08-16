@@ -3,13 +3,14 @@
 		.module('mapApp')
 		.controller('adminCtrl',adminCtrl)
 
-	function adminCtrl($scope, $http, $state, mapSrv, adminSrv, api, users) {
+	function adminCtrl($scope, $http, $state, mapSrv, adminSrv, api, users, locations) {
 		var adminVm = this;
 	
 		adminVm.logout   = logout;
 		adminVm.users    = users;
+		adminVm.locations = locations;
 		adminVm.addLocation = addLocation;
-		console.log(adminVm.users)
+		console.log(adminVm.locations)
 
 		function logout(){
 			console.log("ADMIN LOG OUT");
@@ -28,6 +29,12 @@
 			console.log("LOCATION",location)
 			adminSrv.addLocation(location)
 		}
+
+		// function updateLocation(){
+
+		// }
+
+
 
 		
 
