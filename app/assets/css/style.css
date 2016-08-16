@@ -30,6 +30,9 @@
 .center {
   text-align: center;
 }
+.table>thead>tr>th {
+  text-align: center;
+}
 .header-map {
   position: absolute;
   width: 100%;

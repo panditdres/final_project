@@ -11,3 +11,5 @@ router.get('/', function(req,res){
 		res.json({history: history})
 	})
 })
+
+module.exports = router;

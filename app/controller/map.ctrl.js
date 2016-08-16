@@ -36,16 +36,6 @@
 			center: { latitude: 43.6532, longitude: -79.3832 },
 			options : {scrollwheel: false},			
 			zoom: 14,
-			window : {
-				marker: {},
-				show: false,
-				option: {},
-				closeClick: function(){
-					console.log("CLOSING")
-					mapVm.map.window.show = false;
-					return mapVm.map.window.show;
-				},
-			},
 			searchbox : { 
 	          	template:'searchbox.tpl.html', 
 	          	events:{
@@ -98,16 +88,16 @@
 			    },
 			    options: { draggable: true },
 			    
-			    events: {
-			    	click: function(marker, window, model){
-	          			console.log("marker show clicked");
-	          			console.log("before",mapVm.map.window.show)
-	          			mapVm.map.window.show  = true;
-	          			console.log("after",mapVm.map.window.show)
-	          			mapVm.map.window.model = model;	
-	          			console.log(model)
-	          		}
-			    }
+			    // events: {
+			    // 	click: function(marker, window, model){
+	      //     			console.log("MARKER show clicked",marker);
+	      //     			console.log("before",mapVm.map.window.show)
+	      //     			mapVm.map.window.show  = true;
+	      //     			console.log("after",mapVm.map.window.show)
+	      //     			mapVm.map.window.model = model;	
+	      //     			console.log("MODEL",model)
+	      //     		}
+			    // }
 			},
 			markers: [
 				{
@@ -198,10 +188,14 @@
 			],
 			markersEvents: {
 				click: function(marker, window, model){
-	          			console.log("marker clicked markers");
-	          			mapVm.map.window.show  = true;
-	          			mapVm.map.window.model = model;	
-	          			// console.log(mapVm.map.window.model)
+	          			console.log("marker clicked MARKERS", marker);
+	          			console.log("MARKERS COORDS LAT", marker.position.lat());
+	          			var window_model = {
+	          				id: marker.key,
+	          				latitude: marker.position.lat(),
+	          				longitude: marker.position.lng()
+	          			}
+	          			console.log("MARKERS MODEL",window_model)
 	          	}
 			}
 		};

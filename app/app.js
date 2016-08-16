@@ -106,6 +106,18 @@
 				controller:'adminCtrl as ctrl'
 			})
 
+			.state('admin.editLocation', {
+				url:'/location/edit/:locationId',
+				templateUrl:'/partials/admin.edit.location.html',
+				authenticate:true,
+				controller:'adminCtrl as ctrl',
+				resolve:{
+					locations: function(adminSrv){
+						return adminSrv.getLocations();
+					}
+				}				
+			})
+
 			.state('admin.allUsers', {
 				url:'/users',
 				templateUrl:'/partials/admin.user.html',
@@ -117,6 +129,13 @@
 						return adminSrv.getUsers();
 					}
 				}
+			})
+
+			.state('admin.editUsers', {
+				url:'/edit/users/:userId',
+				templateUrl:'/partials/admin.edit.user.html',
+				authenticate:true,
+				controller:'adminCtrl as ctrl'
 			})
 
 			$httpProvider.interceptors.push(function(jwtHelper){

@@ -21,7 +21,7 @@
     		<td>{{users.email}}</td>
     		<td>{{users.age}}</td>
     		<td><i class="fa fa-pencil" aria-hidden="true"></i></td>
-    		<td><i class="fa fa-trash" aria-hidden="true"></i></td>
+    		<td><i class="fa fa-trash" aria-hidden="true" ng-click="ctrl.deleteUser(users.id)"></i></td>
     	</tr>
     </tbody>
 </table>

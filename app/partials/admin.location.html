@@ -5,7 +5,7 @@
 
 
 <table class="table table-hover">
-    <thead>
+    <thead id="center">
       <tr>
         <th>Name</th>
         <th>Latitude</th>
@@ -23,8 +23,8 @@
     		<td>{{locations.longitude}}</td>
     		<td>{{locations.type}}</td>
     		<td>{{locations.maxCapacity}}</td>
-    		<td><i class="fa fa-pencil" aria-hidden="true"></i></td>
-    		<td><i class="fa fa-trash" aria-hidden="true"></i></td>
+    		<td><i class="fa fa-pencil" aria-hidden="true" ng-click="ctrl.editLocation(locations); ctrl.getLocation(locations.id)"></i></td>
+    		<td><i class="fa fa-trash" aria-hidden="true" ng-click="ctrl.deleteLocation(locations.id)"></i></td>
     	</tr>
     </tbody>
 </table>

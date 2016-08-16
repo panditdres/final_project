@@ -34,7 +34,7 @@
 	    	idKey="ctrl.map.markers.id"
 	    	models="ctrl.map.markers"
 	        show="ctrl.map.window.show" 
-	        coords="'self'" 
+	        coords="ctrl.map.window.coords" 
 	        options="ctrl.map.marker.window.options" 
 	        closeClick="ctrl.map.marker.window.closeClick()"
 	        templateUrl="'/partials/infowindow.tpl.html'" 
@@ -50,8 +50,7 @@
 		<ui-gmap-marker 
 			models="ctrl.map.marker"
 			coords="ctrl.map.marker.coords" 
-			options="ctrl.map.marker.options" 
-			events="ctrl.map.marker.events" 
+			options="ctrl.map.marker.options"  
 			idkey="ctrl.map.marker.id">
 		</ui-gmap-marker>
 

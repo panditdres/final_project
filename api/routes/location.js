@@ -35,19 +35,22 @@ router.post('/', function(req,res){
 		})
 })
 
-// editing location
-router.put('/:locationId', function(req,res){
+// editing location - works
+router.put('/update/:locationId', function(req,res){
 	console.log("Edit Location")
 	console.log(req.params)
 	var where = {where:{id:req.params.locationId}}
 	console.log(where)
 	var __location = req.body;
+	console.log("__LOCATION", req.body)
 	models.Location.find(where).then(function(location){
+		console.log(__location.maxCapacity)
 		location.updateAttributes({
 			name: __location.name,
 			latitude: __location.latitude,
 			longitude: __location.longitude,
-			type: __location.type
+			type: __location.type,
+			maxCapacity: __location.maxCapacity
 		});
 		__location.id = req.params.locationId
 		res.json({
@@ -56,9 +59,16 @@ router.put('/:locationId', function(req,res){
 	})
 })
 
-// delete location
-router.delete('/delete/:locationId', function(req,res){
+// delete location - works
+router.delete('/:locationId', function(req,res){
 	console.log("DELETE LOCATION")
+	var where = {where:{id:req.params.locationId}}
+	models.Location.find(where).then(function(location){
+		location.destroy();
+		res.json({
+			deleted: true
+		})
+	})
 })
 
 module.exports = router;

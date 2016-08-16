@@ -5,18 +5,33 @@
 
 	function adminCtrl($scope, $stateParams, $http, $state, mapSrv, adminSrv, api, users, locations) {
 		var adminVm = this;
-	
-		adminVm.logout   = logout;
-		adminVm.users    = users;
-		adminVm.locations = locations;
-		adminVm.addLocation = addLocation;
-		adminVm.getLocation = adminSrv.getLocation;
-		console.log(adminVm.locations)
+
+		adminVm.logout         = logout;
+		adminVm.users          = users;
+		adminVm.locations      = locations;
+		adminVm.addLocation    = addLocation;
+		adminVm.getLocation    = adminSrv.getLocation;
+		adminVm.deleteLocation = adminSrv.deleteLocation;
+		adminVm.deleteUser 	   = adminSrv.deleteUser;
+		adminVm.updateLocation = updateLocation;
+		adminVm.editLocation   = editLocation;
+		adminVm.getLocation	   = getLocation;
+
+		adminVm.location   = adminSrv.location;
+		adminVm.locationId = $stateParams.locationId;
+		console.log(adminVm.locationId)
 
 		if($stateParams.locationId != undefined){
 			adminSrv.getLocation($stateParams.locationId)
 			.then(function(res){
 				console.log(res)
+				adminVm.placeName  = res.location.name;
+				adminVm.latitude   = res.location.latitude;
+				adminVm.longitude  = res.location.longitude;
+				adminVm.type	   = res.location.type;	
+				adminVm.capacity   = res.location.maxCapacity;
+				// adminVm.locationId = res.location.id;
+				// console.log(adminVm.locationId)
 			}, function(err){
 				console.log(err)
 			})
@@ -27,6 +42,29 @@
 			.then(function(res){
 				console.log(res)
 			})
+		}
+
+		function getLocation(id){
+			console.log("GET LOCATION")
+			adminSrv.getLocation(id);
+		}
+
+		function editLocation(location){
+			console.log(location)
+			console.log("GO")
+			$state.go('admin.editLocation', {locationId:location.id})
+		}
+
+		function updateLocation(locationId){
+			var updated_Location = {
+				"name": adminVm.placeName,
+				"latitude": adminVm.latitude,
+				"longitude": adminVm.longitude,
+				"type": adminVm.type,
+				"maxCapacity": adminVm.capacity
+			}
+			adminSrv.updateLocation(updated_Location, locationId)
+			$state.go('admin.allLocation');
 		}
 
 		function logout(){
@@ -47,15 +85,6 @@
 			console.log("LOCATION",location)
 			adminSrv.addLocation(location)
 		}
-
-		// function updateLocation(){
-
-		// }
-
-
-
-		
-
 	}
 
 })();
