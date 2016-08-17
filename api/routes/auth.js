@@ -19,7 +19,6 @@ router.post('/register',function(req,res){
 		        	.then(function(user){
 		        	console.log('user', user)
 		        	//remove password from response
-
 		        	user.password ='';
 		        	res.json({user:user,msg:'Account Created'});
 		        }).catch(function(e){

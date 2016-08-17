@@ -11,13 +11,14 @@
 		self.authenticate = authenticate;
 		self.adminLogin = adminLogin;
 
-		function register(firstName,lastName,email,password,passwordRedo){
+		function register(firstName,lastName,userName,email,password,passwordRedo){
 			//check passwords
 			console.log('register run')
 			if(password == passwordRedo && password != '' && firstName != '' && lastName != '' && email != ''){
 				var user = {
 					firstName:firstName,
 					lastName:lastName,
+					username:userName,
 					email:email,
 					password:password
 				}
@@ -27,14 +28,17 @@
 					console.log(res.data);
 					if(res.data.error){
 						// Toastr implemented
-						toastr.error("Please have a unique E-Mail","Error")
-						//alert("PLEASE HAVE UNIQUE EMAIL");
-						//localStorage.clear(res.data);
+						console.log(res.data.error.errors[0].message)
+						if(res.data.error.errors[0].message == "username must be unique"){
+							toastr.error("Please have a unique Username","Error")
+						} else {
+							toastr.error("Please have a unique E-Mail","Error")
+						}
 						$state.go('register');
 					} else {
 						toastr.success("Account created","Success")
 						mapSrv.checkMsg();
-						$state.go('home.map');
+						$state.go('login');
 					}
 				})
 			} else if (firstName = ''){

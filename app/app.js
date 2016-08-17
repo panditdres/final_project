@@ -2,11 +2,11 @@
 	'use strict';
 
 	angular
-		.module('mapApp',['ui.router','uiGmapgoogle-maps','angular-jwt','ngGeolocation','ngAnimate','toastr']);
+		.module('mapApp',['ui.router','uiGmapgoogle-maps','angular-jwt','ngGeolocation','ngAnimate','toastr','ui.bootstrap']);
 
 	angular
 		.module('mapApp')
-		.config(function(uiGmapGoogleMapApiProvider,$stateProvider, $httpProvider, $urlRouterProvider) {
+		.config(function(uiGmapGoogleMapApiProvider,$stateProvider, $httpProvider, $urlRouterProvider, $log, $$uibModal) {
 		    uiGmapGoogleMapApiProvider.configure({
 		        //    key: 'your api key',
 		        v: '3.20', //defaults to latest 3.X anyhow
@@ -25,6 +25,9 @@
 				resolve:{
 					user: function(mapSrv){
 						return mapSrv.getUser();
+					},
+					locations: function(adminSrv){
+						return adminSrv.getLocations();
 					}
 				}
 			})
@@ -37,6 +40,9 @@
 				resolve:{
 					user: function(mapSrv){
 						return mapSrv.getUser();
+					},
+					locations: function(adminSrv){
+						return adminSrv.getLocations();
 					}
 				}
 			})
@@ -131,12 +137,12 @@
 				}
 			})
 
-			.state('admin.editUsers', {
-				url:'/edit/users/:userId',
-				templateUrl:'/partials/admin.edit.user.html',
-				authenticate:true,
-				controller:'adminCtrl as ctrl'
-			})
+			// .state('admin.editUsers', {
+			// 	url:'/edit/users/:userId',
+			// 	templateUrl:'/partials/admin.edit.user.html',
+			// 	authenticate:true,
+			// 	controller:'adminCtrl as ctrl'
+			// })
 
 			$httpProvider.interceptors.push(function(jwtHelper){
 				return {

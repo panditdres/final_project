@@ -4,7 +4,7 @@
 		.module('mapApp')
 		.service('mapSrv', mapSrv)
 
-	function mapSrv($http, $state){
+	function mapSrv($http, $state, api){
 		var self = this;
 		console.log("Map service loading")
 
@@ -12,10 +12,35 @@
 		self.userCheck = userCheck;
 		self.checkMsg = checkMsg;
 		self.interact = interact;
+		self.updateUser = updateUser;
+		self.profile = profile;
+		self.settings = settings;
+		self.defaultView = defaultView;
+
 		self.message;
 		self.userData;
 		self.logInInfo;
 		self.userId;
+
+		function defaultView(){
+			self.showDefault = true;
+			self.showProfile = false;
+			self.showSettings = false;
+		}
+
+		function profile(){
+			console.log("profile")
+			self.showProfile = true;
+			self.showDefault = false;
+			self.showSettings = false;
+		}
+		console.log("SHOW PRO", self.showProfile)
+
+		function settings(){
+			self.showSettings = true;
+			self.showDefault = false;
+			self.showProfile = false;
+		}
 
 		function getUser() {
 			// check if user is even logged in
@@ -42,6 +67,16 @@
 		}
 		console.log("USERID", self.userId)
 
+		function updateUser(user, userId){
+			return api.request('/users/update/'+userId,user,'PUT')
+			.then(function(res){
+				console.log(res)
+				if(res.status === 200){
+					self.profile();
+				}
+			})
+		}
+
 		function userCheck() {
 			console.log("check running");
 			console.log(localStorage.loginId)
@@ -50,7 +85,6 @@
 			} else {
 				$state.go('login')
 			}
-
 		}
 
 		function checkMsg() {

@@ -1,1 +1,31 @@
-admin.edit.user.html
+<h2 class="center">
+	Edit USer
+</h2>
+
+<div class="panel-body">
+  	<form role="form" ng-submit="ctrl.updateLocation(ctrl.locationId)">
+      	<div class="form-group">
+          	<label for="nameOfLocation">First Name</label>
+          	<input type="string" class="form-control" id="nameOfLocation" placeholder="Name" ng-model="ctrl.placeName" required>
+	    </div>
+	    <div class="form-group">
+          	<label for="Latitude">Last Name</label>
+          	<input type="float" class="form-control" id="Latitude" placeholder="Enter Latitude" ng-model="ctrl.latitude" required>
+	    </div>
+	    <div class="form-group">
+          	<label for="Longitude">Email</label>
+          	<input type="float" class="form-control" id="Longitude" placeholder="Enter Longitude" ng-model="ctrl.longitude" required>
+	    </div>
+      <div class="form-group">
+            <label for="Longitude">Old Password</label>
+            <input type="float" class="form-control" id="Longitude" placeholder="Enter Longitude" ng-model="ctrl.longitude" required>
+      </div>
+      <div class="form-group">
+            <label for="Longitude">New Password</label>
+            <input type="float" class="form-control" id="Longitude" placeholder="Enter Longitude" ng-model="ctrl.longitude" required>
+      </div>
+
+	    <button type="submit" class="btn btn-info">Submit</button>
+  </form>
+
+</div>

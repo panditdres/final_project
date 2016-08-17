@@ -30,8 +30,6 @@
 				adminVm.longitude  = res.location.longitude;
 				adminVm.type	   = res.location.type;	
 				adminVm.capacity   = res.location.maxCapacity;
-				// adminVm.locationId = res.location.id;
-				// console.log(adminVm.locationId)
 			}, function(err){
 				console.log(err)
 			})
@@ -50,8 +48,6 @@
 		}
 
 		function editLocation(location){
-			console.log(location)
-			console.log("GO")
 			$state.go('admin.editLocation', {locationId:location.id})
 		}
 

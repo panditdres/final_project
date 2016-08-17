@@ -25,10 +25,13 @@
 <!-- make each button toggle -->
 <div ng-show="ctrl.showDefault">
   <h2>Default view</h2>
+  <div style="overflow:hidden">
+    <img src="https://media.giphy.com/media/3HAYjf3I1OVLXb3W036/giphy.gif">
+  </div>
 </div>
 
 <div ng-show="ctrl.showProfile" ng-click="ctrl.profile">
-  <h2>Profile</h2>
+  <h2>Hello {{ctrl.userData.firstName}}</h2>
   <div>
     <h4>Your history</h4>
   </div>
@@ -40,5 +43,35 @@
     Settings
   </h2>
 
+  <div class="panel-body">
+      <form role="form" ng-submit="ctrl.editUser(ctrl.userId)">
+          <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control" id="nameOfLocation" ng-model="ctrl.firstName" required>
+        </div>
+        <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" class="form-control" id="Latitude" ng-model="ctrl.lastName" required>
+        </div>
+        <div class="form-group">
+              <label for="userName">Username</label>
+              <input type="text" class="form-control" id="Latitude" ng-model="ctrl.userName" required>
+        </div>
+        <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" id="Longitude" ng-model="ctrl.email" required>
+        </div>
+        <div class="form-group">
+              <label for="oldPassword">Old Password</label>
+              <input type="password" class="form-control" id="Longitude" placeholder="Enter Old Password" ng-model="ctrl.oldPassword" required>
+        </div>
+        <div class="form-group">
+              <label for="newPassword">New Password</label>
+              <input type="password" class="form-control" id="Longitude" placeholder="Enter New Password" ng-model="ctrl.newPassword" required>
+        </div>
+
+        <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+  </div>
 </div>
 

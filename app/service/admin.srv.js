@@ -24,6 +24,7 @@
 		self.users 	   = [];
 		self.currCapacity = 0;
 		self.location;
+		self.user;
 
 		console.log("LOCATIONS ARRAY",self.locations)
 
@@ -39,6 +40,15 @@
 				//error callback
 				console.log(err);
 				return;
+			})
+		}
+
+		function getUser(userId){
+			return api.request('/users/'+locationId,{},'GET')
+			.then(function(res){
+				console.log(res.data)
+				self.user = res.data;
+				return self.user;
 			})
 		}
 

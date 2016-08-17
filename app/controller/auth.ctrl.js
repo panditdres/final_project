@@ -15,7 +15,7 @@
 		authVm.adminLogin = adminLogin;
 
 		function register(){
-			authSrv.register(authVm.firstName,authVm.lastName,authVm.email,authVm.password,authVm.passwordRedo)
+			authSrv.register(authVm.firstName,authVm.lastName,authVm.username,authVm.email,authVm.password,authVm.passwordRedo)
 		}
 
 		function authenticate(){
@@ -28,17 +28,6 @@
 			authSrv.adminLogin(authVm.email,authVm.password)
 		}
 
-		function formCheck(){
-			if (authVm.firstName = ''){
-				toastr.error("Please fill in your first name","Error")
-			} else if (authVm.lastName = ''){
-				toastr.error("Please fill in your last name","Error")
-			} else if (authVm.email = ''){
-				toastr.error("Please fill in your email","Error")
-			} else if (authVm.password != authVm.passwordRedo){
-				toastr.error("Passwords are not matching","Error")
-			}
-		}
 	}
 
 })();

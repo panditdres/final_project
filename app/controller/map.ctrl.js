@@ -3,34 +3,94 @@
 		.module('mapApp')
 		.controller('mapCtrl',mapCtrl)
 
-	function mapCtrl($scope, $geolocation, uiGmapGoogleMapApi, user, mapSrv) {
+	function mapCtrl($scope, $geolocation, uiGmapGoogleMapApi, user, locations, mapSrv, adminSrv) {
 		var mapVm = this;
 
+		// From resolve
 		mapVm.userData = user;
-		console.log("USER",mapVm.userData)
+		mapVm.locations = locations;
+
+		// Function binding
+		mapVm.editUser = editUser;
+		mapVm.profile  = profile;
+		mapVm.settings = settings;
+		mapVm.defaultView  = defaultView;
+		mapVm.populateMarkers = populateMarkers;
+
+
 		mapVm.checkMsg = mapSrv.checkMsg();
 		mapVm.interact = mapSrv.interact;
 		mapVm.userCheck = mapSrv.userCheck;
-		//mapVm.GeolocationMarker = GeolocationMarker;
 
-		mapVm.profile = profile;
-		mapVm.settings = settings;
+		// Renders the form inside the setting for user update
+		mapVm.firstName = mapVm.userData.firstName;
+		mapVm.lastName = mapVm.userData.lastName;
+		mapVm.userName = mapVm.userData.username;
+		mapVm.email = mapVm.userData.email;
+		mapVm.userId = mapVm.userData.id;
+		console.log("ID",mapVm.userId)
 
-		mapVm.showDefault = true;
-		mapVm.showProfile = false;
-		mapVm.showSettings = false;
+		// Default values for ng-show in the template
+		mapVm.showDefault = mapSrv.showDefault;
+		mapVm.showProfile = mapSrv.showProfile;
+		mapVm.showSettings = mapSrv.showSettings;
+		console.log( "SHHW DEF",mapVm.showDefault )
+
+		// Runs the default view function
+		mapVm.defaultView();
+		console.log(mapVm.locations[0])
+
+		function defaultView(){
+			console.log("defaultView")
+			mapSrv.defaultView();
+			mapVm.showDefault = mapSrv.showDefault;
+			mapVm.showProfile = mapSrv.showProfile;
+			mapVm.showSettings = mapSrv.showSettings;
+		}
 
 		function profile(){
-			mapVm.showProfile = true;
-			mapVm.showDefault = false;
-			mapVm.showSettings = false;
+		console.log("profile")
+			mapSrv.profile();
+			mapVm.showDefault = mapSrv.showDefault;
+			mapVm.showProfile = mapSrv.showProfile;
+			mapVm.showSettings = mapSrv.showSettings;
 		}
 
 		function settings(){
-			mapVm.showSettings = true;
-			mapVm.showDefault = false;
-			mapVm.showProfile = false;
+			mapSrv.settings();
+			mapVm.showDefault = mapSrv.showDefault;
+			mapVm.showProfile = mapSrv.showProfile;
+			mapVm.showSettings = mapSrv.showSettings;
 		}
+
+		function editUser(userId) {
+			console.log("UPDATE USER")
+			var updatedUser = {
+				firstName: mapVm.firstName,
+				lastName: mapVm.lastName,
+				username: mapVm.userName,
+				email: mapVm.email,
+				oldPassword: mapVm.oldPassword,
+				newPassword: mapVm.newPassword
+			}
+			console.log(updatedUser)
+			mapSrv.updateUser(updatedUser, userId)
+			mapVm.defaultView();
+		}
+
+		function populateMarkers(){
+			for (var i = 0; i < mapVm.locations.length; i++){
+				marker = {
+					id: mapVm.locations[i].id,
+					latitude: mapVm.locations[i].latitude,
+					longitude: mapVm.locations[i].longitude,
+					name: mapVm.locations[i].name,
+					type: mapVm.locations[i].type
+				}
+				mapVm.map.markers.push(marker);
+			}
+		}
+
 
 		mapVm.map = {
 			center: { latitude: 43.6532, longitude: -79.3832 },
@@ -67,8 +127,7 @@
 					            },
 					            events: {
 							    	click: function(marker, window, model){
-					          			console.log("marker clicked");
-					          			
+					          			console.log("marker clicked");	
 					          			mapVm.map.window.show  = true;
 					          			console.log("Window",mapVm.map.window)
 					          			mapVm.map.window.model = model;	
@@ -99,93 +158,7 @@
 	      //     		}
 			    // }
 			},
-			markers: [
-				{
-					id:0,				
-				    latitude: 43.639110,
-				    longitude: -79.423277				
-				}, {
-					id:1,
-					latitude: 43.638582,
-				    longitude: -79.396627					
-				}, {
-					id:2,
-					latitude: 43.634576,
-				    longitude: -79.398215					
-				}, {
-					id:3,
-					latitude: 43.664758,
-				    longitude: -79.421217					
-				}, {
-					id:4,
-					latitude: 43.661730,
-				    longitude: -79.395345					
-				}, {
-					id:5,
-					latitude: 43.663024,
-				    longitude: -79.317180					
-				}, {
-					id:6,
-					latitude: 43.665089,
-				    longitude: -79.313425					
-				}, {
-					id:7,
-					latitude: 43.668483,
-				    longitude: -79.328558					
-				}, {
-					id:8,
-					latitude: 43.672927,
-				    longitude: -79.450840					
-				}, {
-					id:9,
-					latitude: 43.674727,
-				    longitude: -79.452578					
-				}, {
-					id:10,
-					latitude: 43.649435,
-				    longitude: -79.467217			
-				}, {
-					id:11,
-					latitude: 43.683629,
-				    longitude: -79.408638					
-				}, {
-					id:12,
-					latitude: 43.667970,
-				    longitude: -79.479781					
-				}, {
-					id:13,
-					latitude: 43.662403,
-				    longitude: -79.409469					
-				}, {
-					id:14,
-					latitude: 43.660867,
-				    longitude: -79.418696					
-				}, {
-					id:15,
-					latitude: 43.652361,
-				    longitude: -79.420236					
-				}, {
-					id:16,
-					latitude: 43.652292,
-				    longitude: -79.421255					
-				}, {
-					id:17,
-					latitude: 43.655103,
-				    longitude: -79.371543					
-				}, {
-					id:18,
-					latitude: 43.665752,
-				    longitude: -79.358969					
-				}, {
-					id:19,
-					latitude: 43.686226,
-				    longitude: -79.388452					
-				}, {
-					id:20,
-					latitude: 43.641710,
-				    longitude: -79.408751					
-				}
-			],
+			markers: [],
 			markersEvents: {
 				click: function(marker, window, model){
 	          			console.log("marker clicked MARKERS", marker);
@@ -193,7 +166,9 @@
 	          			var window_model = {
 	          				id: marker.key,
 	          				latitude: marker.position.lat(),
-	          				longitude: marker.position.lng()
+	          				longitude: marker.position.lng(),
+	          				name: marker.model.name,
+	          				type: marker.model.type
 	          			}
 	          			console.log("MARKERS MODEL",window_model)
 	          	}
@@ -243,13 +218,11 @@
 		    	latitude: pos.coords.latitude,
 		    	longitude: pos.coords.longitude
 		    };
-		    mapVm.map.circle = {
-
-		    }
 		    mapVm.map.zoom = 16;
 		    $scope.$apply();
 		});
 
+		mapVm.populateMarkers();
 		//var geoMarker = new GeolocationMarker(mapVm.map)
 
 		uiGmapGoogleMapApi.then(function(maps) {
