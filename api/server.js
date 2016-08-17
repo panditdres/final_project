@@ -15,8 +15,8 @@ var authentication = require('./middleware/auth')
 var auth_route  = require('./routes/auth');
 var users_route = require('./routes/users');
 var admin_route = require('./routes/admin');
-var location_route = require('./routes/location')
-var history_route = require('./routes/history')
+var location_route = require('./routes/location');
+var history_route = require('./routes/history');
 
 // Use app for the proper route
 app.use('/api/auth',auth_route);

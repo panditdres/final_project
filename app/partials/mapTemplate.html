@@ -11,6 +11,7 @@
         <li class="dropdown">
           <a class="dropbtn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ctrl.userData.firstName}} <span class="caret"></span></a>
           <ul class="dropdown-content">
+          <li><a ng-click="ctrl.defaultView()">Home</a></li>
             <li><a ng-click="ctrl.profile()">Profile</a></li>
             <li><a ng-click="ctrl.settings()">Settings</a></li>
             <li role="separator" class="divider"></li>
@@ -21,6 +22,20 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<script type="text/ng-template" id="myModalContent.html" ng-repeat="locations in ctrl.locations">
+    <div class="modal-header">
+        <h3 class="modal-title">Name: {{locationName}}</h3>
+    </div>
+    <div class="modal-body">
+        <h5>Type of field: {{locationType}}</h5>
+        <h5>Number of players: {{counter}}</h5>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="go(); incrementCounter(locationId,locationCounter)">Go</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
 
 <!-- make each button toggle -->
 <div ng-show="ctrl.showDefault">

@@ -6,7 +6,7 @@
 
 	angular
 		.module('mapApp')
-		.config(function(uiGmapGoogleMapApiProvider,$stateProvider, $httpProvider, $urlRouterProvider, $log, $$uibModal) {
+		.config(function(uiGmapGoogleMapApiProvider,$stateProvider, $httpProvider, $urlRouterProvider) {
 		    uiGmapGoogleMapApiProvider.configure({
 		        //    key: 'your api key',
 		        v: '3.20', //defaults to latest 3.X anyhow

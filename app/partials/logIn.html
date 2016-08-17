@@ -1,8 +1,8 @@
 <div>
-<section class="content bgcolor-4 auth">
+  <section class="content bgcolor-4 auth">
   
     <h2 class="center">Log In</h2>
-    <form method="post" class="stacked-form" ng-submit="ctrl.authenticate()">
+    <form method="post" class="stacked-form center" ng-submit="ctrl.authenticate()">
       <span class="input input--ruri">
         <input class="input__field input__field--ruri" type="text" name="EmailAddress" value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.email"  id="input-28" />
         <label class="input__label input__label--ruri" for="input-28">
@@ -18,11 +18,14 @@
         <span class="input input--ruri">
           <input class="input__field input__field--ruri btn btn-primary" type="submit" value="Log In" id="input-31" />
         </span>
+    </form>
+
+    <div class="center">
       <span class="input input--ruri">
         <p id="register">No account? No problem, create one here</p>
         <input class="input__field input__field--ruri btn btn-primary" ui-sref="register" value="Register" id="input-31" />
       </span>
-    </form>
-
-</section>
+    </div>
+  </section>
 </div>
+

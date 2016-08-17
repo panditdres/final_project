@@ -8,14 +8,16 @@
 		var self = this;
 		console.log("Map service loading")
 
-		self.getUser = getUser;
-		self.userCheck = userCheck;
-		self.checkMsg = checkMsg;
-		self.interact = interact;
-		self.updateUser = updateUser;
-		self.profile = profile;
-		self.settings = settings;
-		self.defaultView = defaultView;
+		self.getUser 		= getUser;
+		self.userCheck 		= userCheck;
+		self.checkMsg 		= checkMsg;
+		self.interact 		= interact;
+		self.updateUser 	= updateUser;
+		self.profile 		= profile;
+		self.settings 		= settings;
+		self.defaultView 	= defaultView;
+		self.getCapacity 	= getCapacity;
+		self.updateCapacity = updateCapacity;
 
 		self.message;
 		self.userData;
@@ -69,6 +71,23 @@
 
 		function updateUser(user, userId){
 			return api.request('/users/update/'+userId,user,'PUT')
+			.then(function(res){
+				console.log(res)
+				if(res.status === 200){
+					self.profile();
+				}
+			})
+		}
+
+		function getCapacity() {
+			return api.request('/location/capacity',{},'GET')
+			.then(function(res){
+				console.log("GET CAPACITY",res.data)
+			})
+		}
+
+		function updateCapacity(locationId, capacity){
+			return api.request('/location/capacity/'+locationId,{capacity},'PUT')
 			.then(function(res){
 				console.log(res)
 				if(res.status === 200){

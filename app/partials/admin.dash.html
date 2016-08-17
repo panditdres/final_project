@@ -1,135 +1,91 @@
 <body class="skin-black">
 
         <div class="wrapper row-offcanvas row-offcanvas-left">
-            <!-- Left side column. contains the logo and sidebar -->
-            <!-- Right side column. Contains the navbar and content of the page -->
             <h1>Welcome back Pandit</h1>
 
-                <section class="content">
-                   <!--  <div class="row">
-                        <div class="col-md-12">
-                         
-                            <ul class="breadcrumb">
-                                <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                                <li><a href="#">Dashboard</a></li>
-                                <li class="active">Current page</li>
-                            </ul>
-                            
-                        </div>
-                    </div> -->
-                    <div class="row">
-                         <div class="col-md-3">
-                            <div class="stat">
-                                <div class="stat-icon" style="color:#fa8564;">
-                                    <i class="fa fa-plus fa-3x stat-elem" aria-hidden="true" ui-sref="admin.addLocation" ng-click=""></i>
-                                </div>
-                                <h5 class="stat-info" ui-sref="admin.addLocation" ng-click="">Add Location</h5>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="stat">
-                                <div class="stat-icon" style="color:#45cf95;">
-                                    <i class="fa fa-user fa-3x stat-elem" ui-sref="admin.allUsers" ng-click=""></i>
-                                </div>
-                                <h5 class="stat-info" ui-sref="admin.allUsers" ng-click="">All Users</h5>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="stat">
-                                <div class="stat-icon" style="color:#AC75F0">
-                                    <i class="fa fa-map-marker fa-3x stat-elem" ui-sref="admin.allLocation" ng-click=""></i>
-                                </div>
-                                <h5 class="stat-info" ui-sref="admin.allLocation" ng-click="">View All Locations</h5>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="stat">
-                                <div class="stat-icon" style="color:#30383D">
-                                    <i class="fa fa-sign-out fa-3x stat-elem" ng-click="ctrl.logout()"></i>
-                                </div>
-                                <h5 class="stat-info" ng-click="ctrl.logout()">Log Out</h5>
-                            </div>
-                        </div>
-
+            <section class="content">
+               <!--  <div class="row">
+                    <div class="col-md-12">
+                     
+                        <ul class="breadcrumb">
+                            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                            <li><a href="#">Dashboard</a></li>
+                            <li class="active">Current page</li>
+                        </ul>
+                        
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="row center">
-                                <div class="col-md-12">
-                                    <!--progress bar start-->
-                                    <section class="panel">
-                                        <header class="panel-heading">
-                                            All Users
-                                        </header>
-                                        <div class="panel-body">
-                                            <h5>Total amount of users: {{ctrl.users.length}}</h5>
-                                        </div>
-                                    </section>
-                                    <!--progress bar end-->
-                                </div>
+                </div> -->
+                <div class="row">
+                     <div class="col-md-3">
+                        <div class="stat">
+                            <div class="stat-icon" style="color:#fa8564;">
+                                <i class="fa fa-plus fa-3x stat-elem" aria-hidden="true" ui-sref="admin.addLocation" ng-click=""></i>
                             </div>
-
-                            <div class="row center">
-                                <div class="col-md-12">
-                                    <!--tooltips start-->
-                                    <section class="panel">
-                                        <header class="panel-heading">
-                                            All Locations
-                                        </header>
-                                        <div class="panel-body">
-                                            <h5>Total amount of locations: {{ctrl.locations.length}}</h5>
-                                        </div>
-                                    </section>
-                                    <!--tooltips end-->
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <!--pagination start-->
-                                    <section class="panel">
-                                        <header class="panel-heading">
-                                            Pagination
-                                        </header>
-                                    
-                                        <h3>Default Example</h3>
-                                        <nav>
-                                          <ul class="pager">
-                                            <li><a href="#">Previous</a></li>
-                                            <li><a href="#">Next</a></li>
-                                          </ul>
-                                        </nav>
-                                        <h3>Aligned links</h3>
-                                        <nav>
-                                          <ul class="pager">
-                                            <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
-                                            <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
-                                          </ul>
-                                        </nav>
-                                    </section>
-                                    <!--pagination end-->
-                                </div>
-                            </div>
-
+                            <h5 class="stat-info" ui-sref="admin.addLocation" ng-click="">Add Location</h5>
                         </div>
-
-
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat">
+                            <div class="stat-icon" style="color:#45cf95;">
+                                <i class="fa fa-user fa-3x stat-elem" ui-sref="admin.allUsers" ng-click=""></i>
+                            </div>
+                            <h5 class="stat-info" ui-sref="admin.allUsers" ng-click="">All Users</h5>
                         </div>
-
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat">
+                            <div class="stat-icon" style="color:#AC75F0">
+                                <i class="fa fa-map-marker fa-3x stat-elem" ui-sref="admin.allLocation" ng-click=""></i>
+                            </div>
+                            <h5 class="stat-info" ui-sref="admin.allLocation" ng-click="">View All Locations</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat">
+                            <div class="stat-icon" style="color:#30383D">
+                                <i class="fa fa-sign-out fa-3x stat-elem" ng-click="ctrl.logout()"></i>
+                            </div>
+                            <h5 class="stat-info" ng-click="ctrl.logout()">Log Out</h5>
+                        </div>
                     </div>
 
-                </section>
-          
-            <div class="footer-main">
-                Copyright &copy Director, 2014
-            </div>
-        </div><!-- ./wrapper -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row center">
+                            <div class="col-md-12">
+                                <section class="panel">
+                                    <header class="panel-heading">
+                                        All Users
+                                    </header>
+                                    <div class="panel-body">
+                                        <h5>Total amount of users: {{ctrl.users.length}}</h5>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                        <div class="row center">
+                            <div class="col-md-12">
+                                <section class="panel">
+                                    <header class="panel-heading">
+                                        All Locations
+                                    </header>
+                                    <div class="panel-body">
+                                        <h5>Total amount of locations: {{ctrl.locations.length}}</h5>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
 
         <!-- jQuery 2.0.2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script src="js/jquery.min.js" type="text/javascript"></script>
-
         <!-- Bootstrap -->
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <!-- Director App -->

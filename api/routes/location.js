@@ -11,6 +11,31 @@ router.get('/', function(req,res){
 	})
 })
 
+router.get('/capacity', function(req,res){
+	console.log("CAPACITY",req.body)
+	models.Location.findAll()
+	.then(function(locations){
+		//console.log("LOCATIONS",locations)
+		res.json({locations:locations})
+	})
+})
+
+router.put('/capacity/:locationId', function(req,res){
+	console.log("capacity ID",req.params.locationId)
+	var where = {where:{id:req.params.locationId}}
+	var __location = req.body;
+	console.log("CAPACITY LOCATION",__location.capacity)
+	models.Location.find(where).then(function(location){
+		location.updateAttributes({
+			currCapacity: __location.capacity
+		});
+		//__location.id = req.params.locationId;
+		res.json({
+			location:__location
+		})
+	})
+})
+
 // get one location - works
 router.get('/:locationId', function(req,res){
 	console.log("GET ONE LOCATION",req.params);
@@ -38,9 +63,7 @@ router.post('/', function(req,res){
 // editing location - works
 router.put('/update/:locationId', function(req,res){
 	console.log("Edit Location")
-	console.log(req.params)
 	var where = {where:{id:req.params.locationId}}
-	console.log(where)
 	var __location = req.body;
 	console.log("__LOCATION", req.body)
 	models.Location.find(where).then(function(location){
@@ -52,7 +75,7 @@ router.put('/update/:locationId', function(req,res){
 			type: __location.type,
 			maxCapacity: __location.maxCapacity
 		});
-		__location.id = req.params.locationId
+		__location.id = req.params.locationId;
 		res.json({
 			location:__location
 		})

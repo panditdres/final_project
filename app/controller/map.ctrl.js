@@ -3,7 +3,7 @@
 		.module('mapApp')
 		.controller('mapCtrl',mapCtrl)
 
-	function mapCtrl($scope, $geolocation, uiGmapGoogleMapApi, user, locations, mapSrv, adminSrv) {
+	function mapCtrl($scope, $geolocation, uiGmapGoogleMapApi, user, locations, mapSrv, adminSrv, $log, $uibModal) {
 		var mapVm = this;
 
 		// From resolve
@@ -16,7 +16,8 @@
 		mapVm.settings = settings;
 		mapVm.defaultView  = defaultView;
 		mapVm.populateMarkers = populateMarkers;
-
+		mapVm.openModal = openModal;
+		mapVm.toggleAnimations = toggleAnimations;
 
 		mapVm.checkMsg = mapSrv.checkMsg();
 		mapVm.interact = mapSrv.interact;
@@ -39,6 +40,41 @@
 		// Runs the default view function
 		mapVm.defaultView();
 		console.log(mapVm.locations[0])
+
+		mapVm.animationsEnabled = true;
+
+		function openModal(size,name,type,id,capacity){
+			var modalInstance = $uibModal.open({
+		      	animation: mapVm.animationsEnabled,
+		      	templateUrl: 'myModalContent.html',
+		      	controller: 'ModalInstanceCtrl',
+		      	size: size,
+		      	resolve: {
+		      		locations: function(adminSrv){
+		      			return adminSrv.getLocations();
+		      		}, 
+		      		locationCapacity: function(){
+		      			return capacity;
+		      		},
+		        	locationName: function () {
+		          		return name;
+		        	}, locationType: function(){
+		        		return type;
+		        	},  locationId: function(){
+		        		return id;
+		        	}
+		      	}
+		    });
+		    modalInstance.result.then(function (selectedItem) {
+		      	mapVm.selected = selectedItem;
+		    },function () {
+		      	$log.info('Modal dismissed at: ' + new Date());
+		    });  
+		}
+
+		function toggleAnimations(){
+			mapVm.animationsEnabled = !mapVm.animationsEnabled;
+		}
 
 		function defaultView(){
 			console.log("defaultView")
@@ -85,7 +121,8 @@
 					latitude: mapVm.locations[i].latitude,
 					longitude: mapVm.locations[i].longitude,
 					name: mapVm.locations[i].name,
-					type: mapVm.locations[i].type
+					type: mapVm.locations[i].type,
+					capacity: mapVm.locations[i].capacity
 				}
 				mapVm.map.markers.push(marker);
 			}
@@ -168,8 +205,10 @@
 	          				latitude: marker.position.lat(),
 	          				longitude: marker.position.lng(),
 	          				name: marker.model.name,
-	          				type: marker.model.type
+	          				type: marker.model.type,
+	          				capacity: marker.model.capacity
 	          			}
+	          			mapVm.openModal('sm',window_model.name,window_model.type,window_model.id,window_model.capacity)
 	          			console.log("MARKERS MODEL",window_model)
 	          	}
 			}

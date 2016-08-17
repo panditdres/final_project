@@ -11,6 +11,7 @@
         <th>Latitude</th>
         <th>Longitude</th>
         <th>Type</th>
+        <th>Current Capacity</th>
         <th>Maximum Capacity</th>
         <th></th>
         <th></th>
@@ -22,6 +23,7 @@
     		<td>{{locations.latitude}}</td>
     		<td>{{locations.longitude}}</td>
     		<td>{{locations.type}}</td>
+            <td>{{locations.currCapacity}}</td>
     		<td>{{locations.maxCapacity}}</td>
     		<td><i class="fa fa-pencil" aria-hidden="true" ng-click="ctrl.editLocation(locations); ctrl.getLocation(locations.id)"></i></td>
     		<td><i class="fa fa-trash" aria-hidden="true" ng-click="ctrl.deleteLocation(locations.id)"></i></td>
