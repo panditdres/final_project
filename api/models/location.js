@@ -5,6 +5,8 @@ module.exports = function(sequelize, DataTypes) {
     latitude: DataTypes.FLOAT,
     longitude: DataTypes.FLOAT,
     type: DataTypes.STRING,
+    players: DataTypes.ARRAY(DataTypes.STRING),
+    address: DataTypes.STRING,
     currCapacity: DataTypes.INTEGER,
     maxCapacity: DataTypes.INTEGER
   }, {

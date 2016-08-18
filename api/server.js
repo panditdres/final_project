@@ -4,7 +4,7 @@ var express  	= require('express'),
   	bodyParser  = require('body-parser'),
 	app 	 	= express();
 
-// Load the movie challenge on the server
+// Load the app on the server
 app.use(express.static(__dirname + './../app/'));
 app.use(bodyParser.json());
 
@@ -17,6 +17,7 @@ var users_route = require('./routes/users');
 var admin_route = require('./routes/admin');
 var location_route = require('./routes/location');
 var history_route = require('./routes/history');
+var upload_route = require('./routes/upload');
 
 // Use app for the proper route
 app.use('/api/auth',auth_route);
@@ -24,6 +25,7 @@ app.use('/api/users',authentication,users_route);
 app.use('/api/admin',authentication,admin_route);
 app.use('/api/location',location_route);
 app.use('/api/history',history_route);
+app.use('/api/upload',upload_route);
 
 models.sequelize.sync().then(function(){
 	app.listen(8092, function(){

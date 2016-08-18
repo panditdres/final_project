@@ -3,6 +3,8 @@ var models = require('./../models'),
 	jwt		= require('jsonwebtoken'),
 	router = require('express').Router();
 
+console.log("loading user route")
+
 //get all users - works
 router.get('/',function(req,res){
 	models.Users.findAll()

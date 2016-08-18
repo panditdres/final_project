@@ -3,6 +3,8 @@ var models = require('../models'),
 	jwt		= require('jsonwebtoken'),
 	router = require('express').Router();
 
+console.log("loading admin route");
+
 router.get('/',function(req,res){
 	//check if admin user exists
 	var where = {where:{email:'admin@map.com'}};

@@ -25,14 +25,28 @@ router.put('/capacity/:locationId', function(req,res){
 	console.log(req.params)
 	var where = {where:{id:req.params.locationId}}
 	var __location = req.body;
-	console.log("CAPACITY LOCATION",__location)
 	models.Location.find(where).then(function(location){
 		location.updateAttributes({
 			currCapacity: __location.capacity
 		});
 		res.json({
 			location:__location
-		})
+		});
+	})
+})
+
+router.put('/player/:locationId', function(req,res){
+	console.log("ADDING PLAYER TO LOCATION",req.params)
+	var where = {where:{id:req.params.locationId}}
+	var __location = req.body;
+	console.log("PLAYER NAME",__location)
+	models.Location.find(where).then(function(location){
+		location.updateAttributes({
+			players: __location
+		});
+		res.json({
+			location:__location
+		});
 	})
 })
 
@@ -73,6 +87,7 @@ router.put('/update/:locationId', function(req,res){
 			latitude: __location.latitude,
 			longitude: __location.longitude,
 			type: __location.type,
+			address: __location.address,
 			maxCapacity: __location.maxCapacity
 		});
 		__location.id = req.params.locationId;
