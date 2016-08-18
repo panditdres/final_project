@@ -25,6 +25,9 @@
 				resolve:{
 					user: function(mapSrv){
 						return mapSrv.getUser();
+					}, 
+					users: function(adminSrv){
+						return adminSrv.getUsers();
 					},
 					locations: function(adminSrv){
 						return adminSrv.getLocations();
@@ -40,6 +43,9 @@
 				resolve:{
 					user: function(mapSrv){
 						return mapSrv.getUser();
+					}, 
+					users: function(adminSrv){
+						return adminSrv.getUsers();
 					},
 					locations: function(adminSrv){
 						return adminSrv.getLocations();
@@ -59,6 +65,24 @@
 				templateUrl:'/partials/register.html',
 				authenticate:false,
 				controller:'authCtrl as ctrl'
+			})
+
+			.state('friends', {
+				url:'/friends',
+				templateUrl:'/partials/find.friends.html',
+				authenticate:true,
+				controller:'mapCtrl as ctrl',
+				resolve:{
+					user: function(mapSrv){
+						return mapSrv.getUser();
+					}, 
+					users: function(adminSrv){
+						return adminSrv.getUsers();
+					},
+					locations: function(adminSrv){
+						return adminSrv.getLocations();
+					}
+				}
 			})
 
 			.state('adminAuth', {

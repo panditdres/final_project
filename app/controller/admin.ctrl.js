@@ -19,7 +19,7 @@
 
 		adminVm.location   = adminSrv.location;
 		adminVm.locationId = $stateParams.locationId;
-		console.log(adminVm.locationId)
+		console.log(locations)
 
 		if($stateParams.locationId != undefined){
 			adminSrv.getLocation($stateParams.locationId)
@@ -28,6 +28,7 @@
 				adminVm.placeName  = res.location.name;
 				adminVm.latitude   = res.location.latitude;
 				adminVm.longitude  = res.location.longitude;
+				adminVm.address    = res.location.address;
 				adminVm.type	   = res.location.type;	
 				adminVm.capacity   = res.location.maxCapacity;
 			}, function(err){
@@ -56,6 +57,7 @@
 				"name": adminVm.placeName,
 				"latitude": adminVm.latitude,
 				"longitude": adminVm.longitude,
+				"address": adminVm.address,
 				"type": adminVm.type,
 				"maxCapacity": adminVm.capacity
 			}
@@ -75,6 +77,7 @@
 				"name": adminVm.placeName,
 				"latitude": adminVm.latitude,
 				"longitude": adminVm.longitude,
+				"address": adminVm.address,
 				"type": adminVm.type,
 				"maxCapacity": adminVm.capacity
 			}

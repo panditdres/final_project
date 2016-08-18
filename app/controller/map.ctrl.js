@@ -3,11 +3,12 @@
 		.module('mapApp')
 		.controller('mapCtrl',mapCtrl)
 
-	function mapCtrl($scope, $geolocation, uiGmapGoogleMapApi, user, locations, mapSrv, adminSrv, $log, $uibModal) {
+	function mapCtrl($scope, $geolocation, uiGmapGoogleMapApi, user, users, locations, mapSrv, adminSrv, $log, $uibModal) {
 		var mapVm = this;
 
 		// From resolve
 		mapVm.userData = user;
+		mapVm.allUsers = users
 		mapVm.locations = locations;
 
 		// Function binding
@@ -43,21 +44,33 @@
 
 		mapVm.animationsEnabled = true;
 
-		function openModal(size,name,type,id,capacity,max){
+		function openModal(size,name,type,id,capacity,max,address,players){
 			var modalInstance = $uibModal.open({
 		      	animation: mapVm.animationsEnabled,
 		      	templateUrl: 'myModalContent.html',
 		      	controller: 'ModalInstanceCtrl as ctrl',
 		      	size: size,
 		      	resolve: {
+		      		user: function(){
+		      			return mapVm.userData;
+		      		},
+		      		users: function(adminSrv){
+		      			return adminSrv.getUsers();
+		      		},
 		      		locations: function(adminSrv){
 		      			return adminSrv.getLocations();
 		      		}, 
+		      		locationAddress: function(){
+		      			return address;
+		      		},
 		      		locationCapacity: function(){
 		      			return capacity;
 		      		},
 		      		maxCapacity: function(){
 		      			return max;
+		      		},
+		      		locationPlayers: function(){
+		      			return players
 		      		},
 		        	locationName: function () {
 		          		return name;
@@ -124,7 +137,9 @@
 					latitude: mapVm.locations[i].latitude,
 					longitude: mapVm.locations[i].longitude,
 					name: mapVm.locations[i].name,
+					address: mapVm.locations[i].address,
 					type: mapVm.locations[i].type,
+					players: mapVm.locations[i].players,
 					capacity: mapVm.locations[i].currCapacity,
 					maxCapacity: mapVm.locations[i].maxCapacity
 				}
@@ -209,12 +224,14 @@
 	          				latitude: marker.position.lat(),
 	          				longitude: marker.position.lng(),
 	          				name: marker.model.name,
+	          				address: marker.model.address,
 	          				type: marker.model.type,
+	          				players: marker.model.players,
 	          				capacity: marker.model.capacity,
 	          				maxCapacity: marker.model.maxCapacity
 	          			}
-	          			mapVm.openModal('sm',window_model.name,window_model.type,window_model.id,window_model.capacity,window_model.maxCapacity)
-	          			console.log("MARKERS MODEL",window_model)
+	          			mapVm.openModal('sm',window_model.name,window_model.type,window_model.id,window_model.capacity,window_model.maxCapacity,window_model.address,window_model.players);
+	          			console.log("MARKERS MODEL",window_model);
 	          	}
 			}
 		};

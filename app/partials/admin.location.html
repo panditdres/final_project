@@ -10,7 +10,9 @@
         <th>Name</th>
         <th>Latitude</th>
         <th>Longitude</th>
+        <th>Address</th>
         <th>Type</th>
+        <th>Players</th>
         <th>Current Capacity</th>
         <th>Maximum Capacity</th>
         <th></th>
@@ -22,7 +24,9 @@
     		<td>{{locations.name}}</td>
     		<td>{{locations.latitude}}</td>
     		<td>{{locations.longitude}}</td>
+            <td>{{locations.address}}</td>
     		<td>{{locations.type}}</td>
+            <td>{{locations.players}}</td>
             <td>{{locations.currCapacity}}</td>
     		<td>{{locations.maxCapacity}}</td>
     		<td><i class="fa fa-pencil" aria-hidden="true" ng-click="ctrl.editLocation(locations); ctrl.getLocation(locations.id)"></i></td>

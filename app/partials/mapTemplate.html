@@ -28,11 +28,14 @@
         <h3 class="modal-title">Name: {{ctrl.locationName}}</h3>
     </div>
     <div class="modal-body">
+        <h4>Address: {{ctrl.locationAddress}}</h4>
         <h5>Type of field: {{ctrl.locationType}}</h5>
         <h5>Number of players: {{ctrl.capacity}}</h5>
+        <h5>players going: </h5>
+        <h5 ng-repeat="players in ctrl.locationPlayers">{{players}}</h5>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="ctrl.incrementCounter(ctrl.locationId,ctrl.locationCounter)" ng-disabled="ctrl.goBtn">Go</button>
+        <button class="btn btn-primary" type="button" ng-click="ctrl.incrementCounter(ctrl.locationId,ctrl.locationCounter); ctrl.addPlayer(ctrl.locationId,ctrl.user)" ng-disabled="ctrl.goBtn">Go</button>
         <button class="btn btn-warning" type="button" ng-click="ctrl.cancel(ctrl.locationId,ctrl.locationCounter)" ng-disabled="ctrl.cancelBtn">Cancel</button>
     </div>
 </script>
@@ -59,6 +62,12 @@
   </h2>
 
   <div class="panel-body">
+
+      <form method="post" action="path/to/api" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">upload file</button>
+      </form>
+
       <form role="form" ng-submit="ctrl.editUser(ctrl.userId)">
           <div class="form-group">
               <label for="firstName">First Name</label>

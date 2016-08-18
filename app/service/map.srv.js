@@ -18,6 +18,7 @@
 		self.defaultView 	= defaultView;
 		self.getCapacity 	= getCapacity;
 		self.updateCapacity = updateCapacity;
+		self.addPlayer      = addPlayer;
 
 		self.message;
 		self.userData;
@@ -89,6 +90,17 @@
 		function updateCapacity(locationId, capacity){
 			console.log("UPDATE SRV",locationId)
 			return api.request('/location/capacity/'+locationId,{capacity},'PUT')
+			.then(function(res){
+				console.log(res)
+				if(res.status === 200){
+					self.profile();
+				}
+			})
+		}
+
+		function addPlayer(locationId,players){
+			console.log("ADD player to location")
+			return api.request('/location/player/'+locationId,players,'PUT')
 			.then(function(res){
 				console.log(res)
 				if(res.status === 200){
