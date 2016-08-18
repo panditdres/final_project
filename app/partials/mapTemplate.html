@@ -25,15 +25,15 @@
 
 <script type="text/ng-template" id="myModalContent.html" ng-repeat="locations in ctrl.locations">
     <div class="modal-header">
-        <h3 class="modal-title">Name: {{locationName}}</h3>
+        <h3 class="modal-title">Name: {{ctrl.locationName}}</h3>
     </div>
     <div class="modal-body">
-        <h5>Type of field: {{locationType}}</h5>
-        <h5>Number of players: {{counter}}</h5>
+        <h5>Type of field: {{ctrl.locationType}}</h5>
+        <h5>Number of players: {{ctrl.capacity}}</h5>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="go(); incrementCounter(locationId,locationCounter)">Go</button>
-        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-primary" type="button" ng-click="ctrl.incrementCounter(ctrl.locationId,ctrl.locationCounter)" ng-disabled="ctrl.goBtn">Go</button>
+        <button class="btn btn-warning" type="button" ng-click="ctrl.cancel(ctrl.locationId,ctrl.locationCounter)" ng-disabled="ctrl.cancelBtn">Cancel</button>
     </div>
 </script>
 

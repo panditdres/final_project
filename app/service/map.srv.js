@@ -87,6 +87,7 @@
 		}
 
 		function updateCapacity(locationId, capacity){
+			console.log("UPDATE SRV",locationId)
 			return api.request('/location/capacity/'+locationId,{capacity},'PUT')
 			.then(function(res){
 				console.log(res)

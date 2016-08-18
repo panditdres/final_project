@@ -43,11 +43,11 @@
 
 		mapVm.animationsEnabled = true;
 
-		function openModal(size,name,type,id,capacity){
+		function openModal(size,name,type,id,capacity,max){
 			var modalInstance = $uibModal.open({
 		      	animation: mapVm.animationsEnabled,
 		      	templateUrl: 'myModalContent.html',
-		      	controller: 'ModalInstanceCtrl',
+		      	controller: 'ModalInstanceCtrl as ctrl',
 		      	size: size,
 		      	resolve: {
 		      		locations: function(adminSrv){
@@ -55,6 +55,9 @@
 		      		}, 
 		      		locationCapacity: function(){
 		      			return capacity;
+		      		},
+		      		maxCapacity: function(){
+		      			return max;
 		      		},
 		        	locationName: function () {
 		          		return name;
@@ -122,7 +125,8 @@
 					longitude: mapVm.locations[i].longitude,
 					name: mapVm.locations[i].name,
 					type: mapVm.locations[i].type,
-					capacity: mapVm.locations[i].capacity
+					capacity: mapVm.locations[i].currCapacity,
+					maxCapacity: mapVm.locations[i].maxCapacity
 				}
 				mapVm.map.markers.push(marker);
 			}
@@ -206,9 +210,10 @@
 	          				longitude: marker.position.lng(),
 	          				name: marker.model.name,
 	          				type: marker.model.type,
-	          				capacity: marker.model.capacity
+	          				capacity: marker.model.capacity,
+	          				maxCapacity: marker.model.maxCapacity
 	          			}
-	          			mapVm.openModal('sm',window_model.name,window_model.type,window_model.id,window_model.capacity)
+	          			mapVm.openModal('sm',window_model.name,window_model.type,window_model.id,window_model.capacity,window_model.maxCapacity)
 	          			console.log("MARKERS MODEL",window_model)
 	          	}
 			}

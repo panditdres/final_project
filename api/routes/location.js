@@ -21,15 +21,15 @@ router.get('/capacity', function(req,res){
 })
 
 router.put('/capacity/:locationId', function(req,res){
-	console.log("capacity ID",req.params.locationId)
+	console.log(req.params.locationId)
+	console.log(req.params)
 	var where = {where:{id:req.params.locationId}}
 	var __location = req.body;
-	console.log("CAPACITY LOCATION",__location.capacity)
+	console.log("CAPACITY LOCATION",__location)
 	models.Location.find(where).then(function(location){
 		location.updateAttributes({
 			currCapacity: __location.capacity
 		});
-		//__location.id = req.params.locationId;
 		res.json({
 			location:__location
 		})

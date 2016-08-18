@@ -1,28 +1,38 @@
 angular.module('mapApp')
-  .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, adminSrv, locations, locationType, locationName, locationId, locationCapacity, mapSrv) {
+  .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, adminSrv, locations, locationType, locationName, locationId, locationCapacity, maxCapacity, mapSrv, toastr) {
 
-  $scope.locationName = locationName;
-  $scope.locationType = locationType;
-  $scope.locationId   = locationId;
-  $scope.capacity = locationCapacity;
-  $scope.locations = locations;
-  console.log(locationCapacity)
+  modalVm = this;
 
-  $scope.incrementCounter = incrementCounter;
+  modalVm.locationName = locationName;
+  modalVm.locationType = locationType;
+  modalVm.locationId   = locationId;
+  modalVm.capacity = locationCapacity;
+  modalVm.maxCapacity = maxCapacity;
+  modalVm.locations = locations;
+  console.log(maxCapacity)
 
-  function incrementCounter(locationId, counter){
-    console.log($scope.capacity)   
-    mapSrv.updateCapacity(locationId,$scope.counter)
-    return $scope.counter;
+  modalVm.incrementCounter = incrementCounter;
+  modalVm.cancel = cancel;
+
+  modalVm.goBtn = false;
+  modalVm.cancelBtn = true;
+
+  function incrementCounter(locationId, counter){ 
+    if(modalVm.capacity > modalVm.maxCapacity - 1){
+      toastr.error('There are no more spots', 'Error')
+    } else {
+      modalVm.capacity++;
+      modalVm.goBtn = true;
+      modalVm.cancelBtn = false;
+      mapSrv.updateCapacity(locationId,modalVm.capacity)
+    }
   }
 
-  function getCounter(locationId){
-    //locations.location
-  }
-
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
+  function cancel(locationId, counter) {
+    modalVm.capacity--;
+    modalVm.cancelBtn = true;
+    modalVm.goBtn = false;
+    mapSrv.updateCapacity(locationId,modalVm.capacity)
   };
-
 
 });
