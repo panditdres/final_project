@@ -25,8 +25,10 @@
 </nav>
 
 <script type="text/ng-template" id="myModalContent.html" ng-repeat="locations in ctrl.locations">
+  <div class="location-info" ng-show="ctrl.locationInfo">
     <div class="modal-header">
         <h3 class="modal-title">Name: {{ctrl.locationName}}</h3>
+        <button class="btn btn-primary" type="button" ng-click="ctrl.showInvite()">Invite Friends</button>
     </div>
     <div class="modal-body">
         <h4>Address: {{ctrl.locationAddress}}</h4>
@@ -39,6 +41,32 @@
         <button class="btn btn-primary" type="button" ng-click="ctrl.incrementCounter(ctrl.locationId,ctrl.locationCounter); ctrl.addPlayer(ctrl.locationId,ctrl.user)" ng-disabled="ctrl.goBtn">Go</button>
         <button class="btn btn-warning" type="button" ng-click="ctrl.cancel(ctrl.locationId,ctrl.locationCounter); ctrl.removePlayer(ctrl.locationId,ctrl.user)" ng-disabled="ctrl.cancelBtn">Cancel</button>
     </div>
+  </div>
+
+  <div class="invite-info" ng-show="ctrl.inviteInfo">
+    <div class="modal-header">
+        <h3 class="modal-title">Send Invitation</h3>
+    </div>
+    <div class="modal-body">
+        <form ng-submit="ctrl.sendInvite()">
+          <div class="form-group">
+              <label for="Date">Date</label>
+              <md-datepicker ng-model="ctrl.eventDate" md-placeholder="Enter date"></md-datepicker>
+          </div>
+          <div class="form-group">
+            <label for="Friends">Include your friends</label>
+            <div>
+              <button class="btn btn-primary gap" ng-repeat="friends in ctrl.friendData" ng-click="ctrl.invite(friends.id)" ng-class="{'btn-danger': ctrl.invitation.includes(friends.id)}">
+                {{friends.firstName}} <i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
+            </div>     
+          </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="" ng-disabled="">Send</button>
+    </div>
+  </div>
 </script>
 
 
@@ -55,7 +83,11 @@
 
 <div class="friends move" ng-show="ctrl.show" ng-click="ctrl.hideSide()" ng-class="{'move': ctrl.show}">
   <h1 class="center">Showing all friends</h1>
-  <div ng-repeat="friends in ctrl.friends">{{friends}}</div>
+  <hr>
+  <div ng-repeat="friends in ctrl.friendData">
+    {{friends.firstName}} {{friends.lastName}} 
+    <hr>
+  </div>
 </div>
 
 
@@ -91,7 +123,7 @@
       </form>
 
       <form role="form" ng-submit="ctrl.editUser(ctrl.userId)">
-          <div class="form-group">
+        <div class="form-group">
               <label for="firstName">First Name</label>
               <input type="text" class="form-control" id="nameOfLocation" ng-model="ctrl.firstName" required>
         </div>

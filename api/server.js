@@ -12,12 +12,12 @@ app.use(bodyParser.json());
 var authentication = require('./middleware/auth')
 
 // Applying the proper routes
-var auth_route  = require('./routes/auth');
-var users_route = require('./routes/users');
-var admin_route = require('./routes/admin');
-var location_route = require('./routes/location');
-var history_route = require('./routes/history');
-var upload_route = require('./routes/upload');
+var auth_route  	= require('./routes/auth');
+var users_route 	= require('./routes/users');
+var admin_route 	= require('./routes/admin');
+var location_route 	= require('./routes/location');
+var history_route 	= require('./routes/history');
+var upload_route 	= require('./routes/upload');
 
 // Use app for the proper route
 app.use('/api/auth',auth_route);

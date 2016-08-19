@@ -21,13 +21,13 @@
 		self.addPlayer      = addPlayer;
 		self.addFriend      = addFriend;
 		self.getFriend		= getFriend;
+		self.sendInvite     = sendInvite;
 
 		self.message;
 		self.userData;
 		self.logInInfo;
 		self.userId;
 
-		self.friendData = [];
 		self.friendDone = false;
 
 		function defaultView(){
@@ -42,7 +42,6 @@
 			self.showDefault = false;
 			self.showSettings = false;
 		}
-		console.log("SHOW PRO", self.showProfile)
 
 		function settings(){
 			self.showSettings = true;
@@ -73,7 +72,6 @@
 				console.log("ERROR MESSAGE")
 			}
 		}
-		console.log("USERID", self.userId)
 
 		function updateUser(user, userId){
 			return api.request('/users/update/'+userId,user,'PUT')
@@ -123,6 +121,7 @@
 		}
 
 		function getFriend(friendId){
+			self.friendData = [];
 			console.log("BEFORE",self.friendData)
 			return api.request('/users/'+friendId,{},'GET')
 			.then(function(res){
@@ -132,6 +131,18 @@
 				console.log(self.friendData)
 				return self.friendData;
 			})
+		}
+
+		function sendInvite(locationId,userId,invitation){
+			var invite = {
+				locationId: locationId,
+				userId: userId,
+				invitation: invitation
+			}
+			return api.request('/location/invite/'+locationId,invite,'POST')
+			.then(function(res){
+				console.log(res)
+			})	
 		}
 
 		function userCheck() {
@@ -176,8 +187,6 @@
 			}
 			return self.message;
 		}
-
-
 	}
 })();
 

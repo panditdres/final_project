@@ -53,8 +53,6 @@
 		}
 
 		function deleteUser(userId){
-			console.log("DELETE USER")
-			console.log(userId)
 			return api.request('/users/'+userId,{},'DEL')
 			.then(function(res){
 				console.log(res)

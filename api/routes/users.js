@@ -41,7 +41,6 @@ router.delete('/:userId', function(req,res){
 router.put('/friends/:userId',function(req,res){
 	console.log("adding friends, initial array is 0")
 	var __user = req.body;
-	console.log(typeof __user)
 	var where = {where:{id:req.params.userId}}
 	models.Users.find(where).then(function(user){
 		console.log("found user")

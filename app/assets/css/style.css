@@ -87,6 +87,17 @@ p .register {
   padding: 0px;
 }
 
+/*Date picker*/
+.datepickerdemoBasicUsage {
+  /** Demo styles for mdCalendar. */ }
+  .datepickerdemoBasicUsage md-content {
+    padding-bottom: 200px; }
+  .datepickerdemoBasicUsage .validation-messages {
+    font-size: 12px;
+    color: #dd2c00;
+    margin-left: 15px; }
+
+
 /*UNIVERSAL/GLOBAL STYLES MADE BY US*/
 /* there is a global _ui.css but that is their original
 let's try to edit this one for global in case anything breaks!

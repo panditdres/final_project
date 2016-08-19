@@ -7,9 +7,9 @@
 	function authSrv($http, $state, api, mapSrv, toastr){
 		var self = this;
 
-		self.register = register;
+		self.register 	  = register;
 		self.authenticate = authenticate;
-		self.adminLogin = adminLogin;
+		self.adminLogin   = adminLogin;
 
 		function register(firstName,lastName,userName,email,password,passwordRedo){
 			//check passwords

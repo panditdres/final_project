@@ -7,39 +7,37 @@
 		var mapVm = this;
 
 		// From resolve
-		mapVm.userData = user;
-		mapVm.allUsers = users;
+		mapVm.userData 	= user;
+		mapVm.allUsers 	= users;
 		mapVm.locations = locations;
-		mapVm.friends = user.friends;
-		//mapVm.obj = JSON.parse(user.friends[0])
-		//console.log("USER FRIENDS",mapVm.obj)
-		console.log("USER FRIENDS", mapSrv.friendData)
-		// Function binding
-		mapVm.editUser = editUser;
-		mapVm.profile  = profile;
-		mapVm.settings = settings;
-		mapVm.defaultView  = defaultView;
-		mapVm.populateMarkers = populateMarkers;
-		mapVm.openModal = openModal;
-		mapVm.toggleAnimations = toggleAnimations;
-		mapVm.addFriend = addFriend;
-		mapVm.getFriend = getFriend;
+		mapVm.friends 	= user.friends;
 
-		mapVm.checkMsg = mapSrv.checkMsg();
-		mapVm.interact = mapSrv.interact;
+		// Function binding
+		mapVm.editUser 			= editUser;
+		mapVm.profile  			= profile;
+		mapVm.settings 			= settings;
+		mapVm.defaultView  		= defaultView;
+		mapVm.populateMarkers 	= populateMarkers;
+		mapVm.openModal 		= openModal;
+		mapVm.toggleAnimations 	= toggleAnimations;
+		mapVm.addFriend 		= addFriend;
+		mapVm.getFriend 		= getFriend;
+
+		mapVm.checkMsg  = mapSrv.checkMsg();
+		mapVm.interact  = mapSrv.interact;
 		mapVm.userCheck = mapSrv.userCheck;
 
 		// Renders the form inside the setting for user update
 		mapVm.firstName = mapVm.userData.firstName;
-		mapVm.lastName = mapVm.userData.lastName;
-		mapVm.userName = mapVm.userData.username;
-		mapVm.email = mapVm.userData.email;
-		mapVm.userId = mapVm.userData.id;
+		mapVm.lastName 	= mapVm.userData.lastName;
+		mapVm.userName 	= mapVm.userData.username;
+		mapVm.email 	= mapVm.userData.email;
+		mapVm.userId 	= mapVm.userData.id;
 		//console.log("ID",mapVm.userId)
 
 		// Default values for ng-show in the template
-		mapVm.showDefault = mapSrv.showDefault;
-		mapVm.showProfile = mapSrv.showProfile;
+		mapVm.showDefault  = mapSrv.showDefault;
+		mapVm.showProfile  = mapSrv.showProfile;
 		mapVm.showSettings = mapSrv.showSettings;
 		//console.log( "SHHW DEF",mapVm.showDefault )
 		mapVm.show = false;
@@ -50,6 +48,10 @@
 		mapVm.hideSide = hideSide;
 
 		mapVm.animationsEnabled = true;
+
+		if($state.current.name == 'home.map'){
+			mapVm.getFriend();
+		}
 
 		function showSide(){
 			mapVm.show = true;
@@ -68,6 +70,9 @@
 		      	resolve: {
 		      		user: function(){
 		      			return mapVm.userData;
+		      		},
+		      		friends: function(){
+		      			return mapVm.friendData;
 		      		},
 		      		users: function(adminSrv){
 		      			return adminSrv.getUsers();
@@ -112,23 +117,23 @@
 		function defaultView(){
 			console.log("defaultView")
 			mapSrv.defaultView();
-			mapVm.showDefault = mapSrv.showDefault;
-			mapVm.showProfile = mapSrv.showProfile;
+			mapVm.showDefault  = mapSrv.showDefault;
+			mapVm.showProfile  = mapSrv.showProfile;
 			mapVm.showSettings = mapSrv.showSettings;
 		}
 
 		function profile(){
 		console.log("profile")
 			mapSrv.profile();
-			mapVm.showDefault = mapSrv.showDefault;
-			mapVm.showProfile = mapSrv.showProfile;
+			mapVm.showDefault  = mapSrv.showDefault;
+			mapVm.showProfile  = mapSrv.showProfile;
 			mapVm.showSettings = mapSrv.showSettings;
 		}
 
 		function settings(){
 			mapSrv.settings();
-			mapVm.showDefault = mapSrv.showDefault;
-			mapVm.showProfile = mapSrv.showProfile;
+			mapVm.showDefault  = mapSrv.showDefault;
+			mapVm.showProfile  = mapSrv.showProfile;
 			mapVm.showSettings = mapSrv.showSettings;
 		}
 
@@ -148,12 +153,14 @@
 			if(!mapSrv.friendDone){
 				for(var i = 0; i < mapVm.friends.length; i++){
 					mapSrv.getFriend(mapVm.friends[i])
+					.then(function(res){
+						if(i == (mapVm.friends.length)){
+							mapVm.friendData = res;
+							console.log(mapVm.friendData)
+						}				
+					})
 				}
 			}
-		}
-		
-		if($state.current.name == 'home.map'){
-			mapVm.getFriend();
 		}
 
 		function editUser(userId) {
@@ -310,7 +317,6 @@
 		});
 
 		mapVm.populateMarkers();
-		//var geoMarker = new GeolocationMarker(mapVm.map)
 
 		uiGmapGoogleMapApi.then(function(maps) {
 			maps.visualRefresh = true;

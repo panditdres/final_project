@@ -11,6 +11,7 @@ router.get('/', function(req,res){
 	})
 })
 
+// get all capacity
 router.get('/capacity', function(req,res){
 	console.log("CAPACITY",req.body)
 	models.Location.findAll()
@@ -20,6 +21,7 @@ router.get('/capacity', function(req,res){
 	})
 })
 
+// Unpate the capacity of the location
 router.put('/capacity/:locationId', function(req,res){
 	console.log(req.params.locationId)
 	console.log(req.params)
@@ -35,6 +37,14 @@ router.put('/capacity/:locationId', function(req,res){
 	})
 })
 
+// Send an invite to a location
+router.post('/invite/:locationId', function(req,res){
+	console.log(req.params)
+	console.log(req.body)
+	console.log(res.body)
+})
+
+// Add players to a location
 router.put('/player/:locationId', function(req,res){
 	console.log("ADDING PLAYER TO LOCATION",req.params)
 	var where = {where:{id:req.params.locationId}}
