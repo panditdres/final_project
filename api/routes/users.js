@@ -3,7 +3,7 @@ var models = require('./../models'),
 	jwt		= require('jsonwebtoken'),
 	router = require('express').Router();
 
-console.log("loading user route")
+console.log("loading users route")
 
 //get all users - works
 router.get('/',function(req,res){
@@ -36,6 +36,24 @@ router.delete('/:userId', function(req,res){
 		})
 	})
 })
+
+// add friend
+router.put('/friends/:userId',function(req,res){
+	console.log("adding friends, initial array is 0")
+	var __user = req.body;
+	console.log(typeof __user)
+	var where = {where:{id:req.params.userId}}
+	models.Users.find(where).then(function(user){
+		console.log("found user")
+		user.updateAttributes({
+			friends: __user
+		});
+		res.json({
+			user:__user
+		});
+	})
+})
+
 
 // update users
 router.put('/update/:userId', function(req,res){

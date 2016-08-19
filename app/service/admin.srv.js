@@ -26,15 +26,15 @@
 		self.location;
 		self.user;
 
-		console.log("LOCATIONS ARRAY",self.locations)
+		//console.log("LOCATIONS ARRAY",self.locations)
 
 		function getUsers(){
 			return api.request('/users',{},'GET')
 			.then(function(res){
 				//success callback
-				console.log(res.data);
+				//console.log(res.data);
 				self.users = res.data.users;
-				console.log(self.users)
+				//console.log(self.users)
 				return self.users;
 			},function(err){
 				//error callback
@@ -80,9 +80,9 @@
 		function getLocations(){
 			return api.request('/location',{},'GET')
 			.then(function(res){
-				console.log("GET LOCATION",res.data)
+				//console.log("GET LOCATION",res.data)
 				self.locations = res.data.locations;
-				console.log(self.locations)
+				//console.log(self.locations)
 				return self.locations;
 			}, function(err){
 				console.log(err)

@@ -155,33 +155,21 @@
 				controller:'adminCtrl as ctrl',
 				resolve:{
 					users: function(adminSrv){
-						//console.log("State Params:",$stateParams.userId)
 						return adminSrv.getUsers();
 					}
 				}
 			})
 
-			// .state('admin.editUsers', {
-			// 	url:'/edit/users/:userId',
-			// 	templateUrl:'/partials/admin.edit.user.html',
-			// 	authenticate:true,
-			// 	controller:'adminCtrl as ctrl'
-			// })
-
 			$httpProvider.interceptors.push(function(jwtHelper){
 				return {
 					request:function(config){
-						console.log('Requests');
-						console.log(config);
 						if(localStorage.authToken != undefined){
 							config.headers.authentication = localStorage.authToken;
 						}
 						return config;
 					},
 					response:function(response){
-						console.log('Response');
 						var auth_token = response.headers('authentication');
-						console.log(auth_token);
 						if(auth_token){
 							var decrypt_token = jwtHelper.decodeToken(auth_token);
 							console.log(decrypt_token);

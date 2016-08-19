@@ -1,5 +1,8 @@
 .container-map { height: 400px; }
 
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
 .angular-google-map-container { height: 100vh; }
 
 .google-search {
@@ -198,13 +201,6 @@ p.company {
 	margin-bottom: 50px;
 }
 
-.cart-num { 
-	width: 15px;
-	height: 15px;
-	border: 1px solid #2C3539;
-	border-radius: 2px;
-	display: inline-block;
-} 
 #tablefont {
 	text-align: center;
 }
@@ -303,7 +299,7 @@ footer {
 
   /* Button */
 
-  .bs-form__button.stacked-input-box {
+.bs-form__button.stacked-input-box {
     margin-bottom: 20px;
 }
 

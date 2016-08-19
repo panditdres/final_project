@@ -19,8 +19,6 @@
 		}
 
 		function authenticate(){
-			console.log(authVm.email)
-			console.log(authVm.password)
 			authSrv.authenticate(authVm.email,authVm.password)
 		}
 

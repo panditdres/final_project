@@ -65,12 +65,11 @@
 			}
 			user = JSON.stringify(user);
 			$http.post('/api/auth/authenticate',user)
-			.then(function(res){
-				console.log("RESPONSE",res);		
-				//mapSrv.logInInfo = res.data;
+			.then(function(res){	
+				console.log(res.data)	
 				localStorage.loginId = res.data.id;
+				//localStorage.username = res.data;
 				localStorage.loginEmail = email;
-				//authVm.logInBtn = res.data.msg;
 				mapSrv.checkMsg();
 				$state.go('home.map')
 			})
@@ -84,8 +83,7 @@
 			//make api call
 			admin = JSON.stringify(admin);
 			$http.post('/api/auth/authenticate',admin)
-			.then(function(res){
-				console.log("RESPONSE",res);		
+			.then(function(res){		
 				localStorage.loginId = res.data.id;
 				localStorage.loginEmail = email;
 				$state.go('admin.dash')

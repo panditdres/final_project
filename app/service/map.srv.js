@@ -19,6 +19,7 @@
 		self.getCapacity 	= getCapacity;
 		self.updateCapacity = updateCapacity;
 		self.addPlayer      = addPlayer;
+		self.addFriend      = addFriend;
 
 		self.message;
 		self.userData;
@@ -106,6 +107,14 @@
 				if(res.status === 200){
 					self.profile();
 				}
+			})
+		}
+
+		function addFriend(userId, friendArray){
+			console.log("Add friend service")
+			return api.request('/users/friends/'+userId,friendArray,'PUT')
+			.then(function(res){
+				console.log(res)
 			})
 		}
 

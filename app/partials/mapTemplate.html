@@ -13,6 +13,7 @@
           <ul class="dropdown-content">
           <li><a ng-click="ctrl.defaultView()">Home</a></li>
             <li><a ng-click="ctrl.profile()">Profile</a></li>
+            <li><a ng-click="ctrl.profile()">Friends</a></li>
             <li><a ng-click="ctrl.settings()">Settings</a></li>
             <li role="separator" class="divider"></li>
             <li><a ui-sref="login" ng-click="ctrl.interact()">{{ctrl.checkMsg}}</a></li>
@@ -36,7 +37,7 @@
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" type="button" ng-click="ctrl.incrementCounter(ctrl.locationId,ctrl.locationCounter); ctrl.addPlayer(ctrl.locationId,ctrl.user)" ng-disabled="ctrl.goBtn">Go</button>
-        <button class="btn btn-warning" type="button" ng-click="ctrl.cancel(ctrl.locationId,ctrl.locationCounter)" ng-disabled="ctrl.cancelBtn">Cancel</button>
+        <button class="btn btn-warning" type="button" ng-click="ctrl.cancel(ctrl.locationId,ctrl.locationCounter); ctrl.removePlayer(ctrl.locationId,ctrl.user)" ng-disabled="ctrl.cancelBtn">Cancel</button>
     </div>
 </script>
 

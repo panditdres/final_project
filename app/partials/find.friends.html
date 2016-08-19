@@ -1,3 +1,16 @@
-<div class="container">
-	<h1>Find Friends</h1>
+<div class="admin">	
+	<div class="container">
+		<h1>Find Friends</h1>
+
+		<div ng-repeat="users in ctrl.allUsers">
+			<div>
+				<h4>{{users.firstName}} {{users.lastName}}</h4>
+				<button class="btn" ng-click="ctrl.addFriend(users,users.id)">
+					Add Friend<i class="material-icons">person_add</i>
+				</button>
+				
+			</div>
+			<hr>
+		</div>
+	</div>
 </div>

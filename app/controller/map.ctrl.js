@@ -8,8 +8,10 @@
 
 		// From resolve
 		mapVm.userData = user;
-		mapVm.allUsers = users
+		mapVm.allUsers = users;
 		mapVm.locations = locations;
+		mapVm.friends = user.friends;
+		console.log("USER FRIENDS",user.friends)
 
 		// Function binding
 		mapVm.editUser = editUser;
@@ -19,6 +21,7 @@
 		mapVm.populateMarkers = populateMarkers;
 		mapVm.openModal = openModal;
 		mapVm.toggleAnimations = toggleAnimations;
+		mapVm.addFriend = addFriend;
 
 		mapVm.checkMsg = mapSrv.checkMsg();
 		mapVm.interact = mapSrv.interact;
@@ -30,17 +33,17 @@
 		mapVm.userName = mapVm.userData.username;
 		mapVm.email = mapVm.userData.email;
 		mapVm.userId = mapVm.userData.id;
-		console.log("ID",mapVm.userId)
+		//console.log("ID",mapVm.userId)
 
 		// Default values for ng-show in the template
 		mapVm.showDefault = mapSrv.showDefault;
 		mapVm.showProfile = mapSrv.showProfile;
 		mapVm.showSettings = mapSrv.showSettings;
-		console.log( "SHHW DEF",mapVm.showDefault )
+		//console.log( "SHHW DEF",mapVm.showDefault )
 
 		// Runs the default view function
 		mapVm.defaultView();
-		console.log(mapVm.locations[0])
+		//console.log(mapVm.locations[0])
 
 		mapVm.animationsEnabled = true;
 
@@ -74,9 +77,11 @@
 		      		},
 		        	locationName: function () {
 		          		return name;
-		        	}, locationType: function(){
+		        	}, 
+		        	locationType: function(){
 		        		return type;
-		        	},  locationId: function(){
+		        	},  
+		        	locationId: function(){
 		        		return id;
 		        	}
 		      	}
@@ -113,6 +118,14 @@
 			mapVm.showDefault = mapSrv.showDefault;
 			mapVm.showProfile = mapSrv.showProfile;
 			mapVm.showSettings = mapSrv.showSettings;
+		}
+
+		function addFriend(friendInfo){
+			console.log("user's ID",localStorage.loginId) 
+			console.log("Add friend's ID",friendInfo) 
+			console.log("Array friends",mapVm.friends)
+			mapVm.friends.push(JSON.stringify(friendInfo))
+			mapSrv.addFriend(localStorage.loginId, mapVm.friends)
 		}
 
 		function editUser(userId) {
@@ -197,22 +210,7 @@
 	        },
 			marker : {
 			    id: 0,
-			    coords: {
-			        latitude: 43.646708,
-			        longitude: -79.413697
-			    },
 			    options: { draggable: true },
-			    
-			    // events: {
-			    // 	click: function(marker, window, model){
-	      //     			console.log("MARKER show clicked",marker);
-	      //     			console.log("before",mapVm.map.window.show)
-	      //     			mapVm.map.window.show  = true;
-	      //     			console.log("after",mapVm.map.window.show)
-	      //     			mapVm.map.window.model = model;	
-	      //     			console.log("MODEL",model)
-	      //     		}
-			    // }
 			},
 			markers: [],
 			markersEvents: {

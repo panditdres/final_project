@@ -11,8 +11,11 @@ angular.module('mapApp')
   modalVm.maxCapacity = maxCapacity;
 
   modalVm.addPlayer = addPlayer;
+  modalVm.removePlayer = removePlayer;
   modalVm.locationPlayers = locationPlayers;
-  console.log(locationPlayers)
+  modalVm.checkPlayer = checkPlayer;
+  modalVm.checkPlayer();
+  console.log(modalVm.locationPlayers)
 
   modalVm.locations = locations;
   modalVm.users = users;
@@ -22,8 +25,24 @@ angular.module('mapApp')
   modalVm.incrementCounter = incrementCounter;
   modalVm.cancel = cancel;
 
-  modalVm.goBtn = false;
-  modalVm.cancelBtn = true;
+
+
+  function checkPlayer(){
+    console.log("check player running") 
+    console.log("username no JSON", user.firstName + ' ' + user.lastName + ' - ' + user.username)
+    console.log("username", JSON.stringify(user.firstName + ' ' + user.lastName + ' - ' + user.username))
+    console.log("CHECK",modalVm.locationPlayers.includes(user.firstName + ' ' + user.lastName + ' - ' + user.username))
+
+    if(modalVm.locationPlayers.includes(user.firstName + ' ' + user.lastName + ' - ' + user.username) == true) {
+      console.log("HELLO THIS RUNS")
+      modalVm.goBtn = true;
+      modalVm.cancelBtn = false;
+    } else {
+      modalVm.goBtn = false;
+      modalVm.cancelBtn = true;
+    }
+
+  }
 
   function addPlayer(locationId,playerInfo){
     console.log(playerInfo);
@@ -31,8 +50,19 @@ angular.module('mapApp')
     if(modalVm.locationPlayers.length > 30) {
       toastr.error('There are no more spots', 'Error')
     }else{
-      modalVm.locationPlayers.push(playerInfo.firstName + ' ' + playerInfo.lastName);
+      modalVm.locationPlayers.push(playerInfo.firstName + ' ' + playerInfo.lastName + ' - ' + playerInfo.username);
       mapSrv.addPlayer(locationId,modalVm.locationPlayers);
+    }
+  }
+
+  function removePlayer(locationId,playerInfo){
+    console.log(modalVm.locationPlayers)
+    console.log(locationId)
+    console.log(playerInfo)
+    for(var i = 0; i < modalVm.locationPlayers.length; i++){
+      if(modalVm.locationPlayers[i].includes(modalVm.user.username)){
+        modalVm.locationPlayers.splice(i,1)
+      }
     }
   }
 
