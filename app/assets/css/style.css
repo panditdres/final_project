@@ -13,10 +13,22 @@
   top: 0px;
   right: -300px;
   transition: all 1s ease;
+  padding:30px;
 }
 
 .move {
   transform: translateX(-300px);
+}
+
+.friend-button {
+  position: fixed;
+  height:50px;
+  width: 50px;
+  margin: 0;
+  vertical-align: middle;
+  text-align: center;
+  right:20px;
+  top: 20px;
 }
 
 .google-search {

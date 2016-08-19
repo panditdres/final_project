@@ -20,11 +20,15 @@
 		self.updateCapacity = updateCapacity;
 		self.addPlayer      = addPlayer;
 		self.addFriend      = addFriend;
+		self.getFriend		= getFriend;
 
 		self.message;
 		self.userData;
 		self.logInInfo;
 		self.userId;
+
+		self.friendData = [];
+		self.friendDone = false;
 
 		function defaultView(){
 			self.showDefault = true;
@@ -51,9 +55,9 @@
 			if(localStorage.authToken){
 				return $http.get('/api/users/'+localStorage.loginId)
 				.success(function(data,status){
-				console.log("localStorage ID",localStorage.loginId)
-				console.log("DATA RETRIEVE")
-				console.log(data)
+				//console.log("localStorage ID",localStorage.loginId)
+				//console.log("DATA RETRIEVE")
+				//console.log(data)
 			})
 				.then(function(res,err){
 					console.log(res.data)
@@ -118,9 +122,21 @@
 			})
 		}
 
+		function getFriend(friendId){
+			console.log("BEFORE",self.friendData)
+			return api.request('/users/'+friendId,{},'GET')
+			.then(function(res){
+				self.friendDone = true;
+				console.log("serv friend",self.friendDone)
+				self.friendData.push(res.data);
+				console.log(self.friendData)
+				return self.friendData;
+			})
+		}
+
 		function userCheck() {
-			console.log("check running");
-			console.log(localStorage.loginId)
+			//console.log("check running");
+			//console.log(localStorage.loginId)
 			if(localStorage.loginId){
 				$state.go('home.map')
 			} else {
@@ -129,13 +145,13 @@
 		}
 
 		function checkMsg() {
-			console.log(localStorage.authToken)
+			//console.log(localStorage.authToken)
 			if(localStorage.authToken) {
 				self.message = "Logout";		
 			} else {
 				self.message = "Login";				
 			}
-			console.log(self.message)
+			//console.log(self.message)
 			return self.message;
 		}
 

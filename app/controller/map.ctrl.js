@@ -3,7 +3,7 @@
 		.module('mapApp')
 		.controller('mapCtrl',mapCtrl)
 
-	function mapCtrl($scope, $geolocation, uiGmapGoogleMapApi, user, users, locations, mapSrv, adminSrv, $log, $uibModal) {
+	function mapCtrl($scope, $state, $geolocation, uiGmapGoogleMapApi, user, users, locations, mapSrv, adminSrv, $log, $uibModal) {
 		var mapVm = this;
 
 		// From resolve
@@ -11,8 +11,9 @@
 		mapVm.allUsers = users;
 		mapVm.locations = locations;
 		mapVm.friends = user.friends;
-		console.log("USER FRIENDS",user.friends)
-
+		//mapVm.obj = JSON.parse(user.friends[0])
+		//console.log("USER FRIENDS",mapVm.obj)
+		console.log("USER FRIENDS", mapSrv.friendData)
 		// Function binding
 		mapVm.editUser = editUser;
 		mapVm.profile  = profile;
@@ -22,6 +23,7 @@
 		mapVm.openModal = openModal;
 		mapVm.toggleAnimations = toggleAnimations;
 		mapVm.addFriend = addFriend;
+		mapVm.getFriend = getFriend;
 
 		mapVm.checkMsg = mapSrv.checkMsg();
 		mapVm.interact = mapSrv.interact;
@@ -40,12 +42,22 @@
 		mapVm.showProfile = mapSrv.showProfile;
 		mapVm.showSettings = mapSrv.showSettings;
 		//console.log( "SHHW DEF",mapVm.showDefault )
-		mapVm.showFriend = false;
+		mapVm.show = false;
 		// Runs the default view function
 		mapVm.defaultView();
 		//console.log(mapVm.locations[0])
+		mapVm.showSide = showSide;
+		mapVm.hideSide = hideSide;
 
 		mapVm.animationsEnabled = true;
+
+		function showSide(){
+			mapVm.show = true;
+		}
+
+		function hideSide(){
+			mapVm.show = false;
+		}
 
 		function openModal(size,name,type,id,capacity,max,address,players){
 			var modalInstance = $uibModal.open({
@@ -122,10 +134,26 @@
 
 		function addFriend(friendInfo){
 			console.log("user's ID",localStorage.loginId) 
-			console.log("Add friend's ID",friendInfo) 
+			console.log("Add friend's ID",friendInfo.id) 
 			console.log("Array friends",mapVm.friends)
-			mapVm.friends.push(JSON.stringify(friendInfo))
+			mapVm.friends.push(friendInfo.id)
 			mapSrv.addFriend(localStorage.loginId, mapVm.friends)
+		}
+
+		function getFriend(){
+			console.log("get friend")
+			console.log(mapVm.friends)
+			console.log(mapSrv.friendDone)
+			console.log(mapSrv.friendData)
+			if(!mapSrv.friendDone){
+				for(var i = 0; i < mapVm.friends.length; i++){
+					mapSrv.getFriend(mapVm.friends[i])
+				}
+			}
+		}
+		
+		if($state.current.name == 'home.map'){
+			mapVm.getFriend();
 		}
 
 		function editUser(userId) {

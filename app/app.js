@@ -38,7 +38,7 @@
 			.state('home.map', {
 				url:'/map',
 				templateUrl:'/partials/mapTemplate.html', 
-				controller:'mapCtrl as ctrl',
+				//controller:'mapCtrl as ctrl',
 				authenticate:true,
 				resolve:{
 					user: function(mapSrv){
