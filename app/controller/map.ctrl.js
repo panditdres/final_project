@@ -40,7 +40,7 @@
 		mapVm.showProfile = mapSrv.showProfile;
 		mapVm.showSettings = mapSrv.showSettings;
 		//console.log( "SHHW DEF",mapVm.showDefault )
-
+		mapVm.showFriend = false;
 		// Runs the default view function
 		mapVm.defaultView();
 		//console.log(mapVm.locations[0])

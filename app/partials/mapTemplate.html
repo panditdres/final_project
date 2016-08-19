@@ -31,7 +31,7 @@
     <div class="modal-body">
         <h4>Address: {{ctrl.locationAddress}}</h4>
         <h5>Type of field: {{ctrl.locationType}}</h5>
-        <h5>Number of players: {{ctrl.capacity}}</h5>
+        <h5>Number of players: {{ctrl.locationPlayers.length}}</h5>
         <h5>players going: </h5>
         <h5 ng-repeat="players in ctrl.locationPlayers">{{players}}</h5>
     </div>
@@ -41,6 +41,9 @@
     </div>
 </script>
 
+<div class="friends move" ng-click="ctrl.showFriend = !ctrl.showFriend" ng-class="{'move': ctrl.showFriend}">
+  
+</div>
 <!-- make each button toggle -->
 <div ng-show="ctrl.showDefault">
   <h2>Default view</h2>

@@ -28,10 +28,10 @@ angular.module('mapApp')
 
 
   function checkPlayer(){
-    console.log("check player running") 
-    console.log("username no JSON", user.firstName + ' ' + user.lastName + ' - ' + user.username)
-    console.log("username", JSON.stringify(user.firstName + ' ' + user.lastName + ' - ' + user.username))
-    console.log("CHECK",modalVm.locationPlayers.includes(user.firstName + ' ' + user.lastName + ' - ' + user.username))
+    // console.log("check player running") 
+    // console.log("username no JSON", user.firstName + ' ' + user.lastName + ' - ' + user.username)
+    // console.log("username", JSON.stringify(user.firstName + ' ' + user.lastName + ' - ' + user.username))
+    // console.log("CHECK",modalVm.locationPlayers.includes(user.firstName + ' ' + user.lastName + ' - ' + user.username))
 
     if(modalVm.locationPlayers.includes(user.firstName + ' ' + user.lastName + ' - ' + user.username) == true) {
       console.log("HELLO THIS RUNS")
