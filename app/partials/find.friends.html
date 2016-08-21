@@ -1,14 +1,16 @@
 <div class="admin">	
 	<div class="container">
 		<h1>Find Friends</h1>
-
-		<div ng-repeat="users in ctrl.allUsers">
+		<input ng-model="ctrl.search" type="text" class="form-control" id="search" placeholder="Search Friends">
+		<button class="btn btn-primary" ui-sref="home.map">
+			Back
+		</button>
+		<div ng-repeat="users in ctrl.allUsers | filter:{firstName:ctrl.search}">
 			<div>
 				<h4>{{users.firstName}} {{users.lastName}}</h4>
 				<button class="btn" ng-click="ctrl.addFriend(users,users.id)">
 					Add Friend<i class="material-icons">person_add</i>
 				</button>
-				
 			</div>
 			<hr>
 		</div>

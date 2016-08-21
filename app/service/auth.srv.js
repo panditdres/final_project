@@ -32,7 +32,9 @@
 						if(res.data.error.errors[0].message == "username must be unique"){
 							toastr.error("Please have a unique Username","Error")
 						} else {
-							toastr.error("Please have a unique E-Mail","Error")
+							toastr.error("Please have a unique E-Mail","Error",{
+								closeButton: true
+							})
 						}
 						$state.go('register');
 					} else {

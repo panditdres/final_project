@@ -21,7 +21,9 @@
 		self.addPlayer      = addPlayer;
 		self.addFriend      = addFriend;
 		self.getFriend		= getFriend;
+		self.getLocation    = getLocation;
 		self.sendInvite     = sendInvite;
+		self.addPlayingLocation = addPlayingLocation;
 
 		self.message;
 		self.userData;
@@ -54,18 +56,12 @@
 			if(localStorage.authToken){
 				return $http.get('/api/users/'+localStorage.loginId)
 				.success(function(data,status){
-				//console.log("localStorage ID",localStorage.loginId)
-				//console.log("DATA RETRIEVE")
-				//console.log(data)
 			})
 				.then(function(res,err){
 					console.log(res.data)
 					self.userData = res.data;
 					self.userId = res.data.id;
 					self.token = res.config.headers.authentication;
-					// localStorage.setItem("token",self.token);
-					// localStorage.setItem("UserId",id)
-					console.log(res)
 					return self.userData;
 				})
 			} else {
@@ -112,6 +108,17 @@
 			})
 		}
 
+		function addPlayingLocation(userId,userPlaying){
+			console.log("ADD location to user")
+			return api.request('/users/location/'+userId,userPlaying,'PUT')
+			.then(function(res){
+				console.log(res)
+				if(res.status === 200){
+					self.profile();
+				}
+			})
+		}
+
 		function addFriend(userId, friendArray){
 			console.log("Add friend service")
 			return api.request('/users/friends/'+userId,friendArray,'PUT')
@@ -122,32 +129,31 @@
 
 		function getFriend(friendId){
 			self.friendData = [];
-			console.log("BEFORE",self.friendData)
 			return api.request('/users/'+friendId,{},'GET')
 			.then(function(res){
 				self.friendDone = true;
-				console.log("serv friend",self.friendDone)
 				self.friendData.push(res.data);
-				console.log(self.friendData)
 				return self.friendData;
 			})
 		}
 
+		function getLocation(locationId){
+			self.locationData = []
+			return api.request('/location/'+locationId,{},'GET')
+			.then(function(res){
+				self.locationData.push(res.data);
+				return self.locationData;
+			})
+		}
+
 		function sendInvite(locationId,userId,invitation){
-			var invite = {
-				locationId: locationId,
-				userId: userId,
-				invitation: invitation
-			}
-			return api.request('/location/invite/'+locationId,invite,'POST')
+			return api.request('/location/invite/'+locationId,invitation,'POST')
 			.then(function(res){
 				console.log(res)
 			})	
 		}
 
 		function userCheck() {
-			//console.log("check running");
-			//console.log(localStorage.loginId)
 			if(localStorage.loginId){
 				$state.go('home.map')
 			} else {
@@ -156,13 +162,11 @@
 		}
 
 		function checkMsg() {
-			//console.log(localStorage.authToken)
 			if(localStorage.authToken) {
 				self.message = "Logout";		
 			} else {
 				self.message = "Login";				
 			}
-			//console.log(self.message)
 			return self.message;
 		}
 
@@ -176,14 +180,12 @@
 				self.message = "Login";
 				self.userId = ''
 				$state.go('home.map');
-				//$state.reload();
 			} else {
 				console.log("ELSE");
 				// Login
 				self.message = "Logout";
 				$state.go('login');
 				self.userId = "hello"
-				//$state.reload();
 			}
 			return self.message;
 		}

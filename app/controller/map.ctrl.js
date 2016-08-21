@@ -11,6 +11,7 @@
 		mapVm.allUsers 	= users;
 		mapVm.locations = locations;
 		mapVm.friends 	= user.friends;
+		mapVm.playingAt = user.playing;
 
 		// Function binding
 		mapVm.editUser 			= editUser;
@@ -22,6 +23,7 @@
 		mapVm.toggleAnimations 	= toggleAnimations;
 		mapVm.addFriend 		= addFriend;
 		mapVm.getFriend 		= getFriend;
+		mapVm.getLocation       = getLocation;
 
 		mapVm.checkMsg  = mapSrv.checkMsg();
 		mapVm.interact  = mapSrv.interact;
@@ -50,8 +52,19 @@
 		mapVm.animationsEnabled = true;
 
 		if($state.current.name == 'home.map'){
-			mapVm.getFriend();
+			if(mapVm.friends != null){
+				console.log("getFriend()")
+				mapVm.getFriend();
+			} 
+			if(mapVm.playingAt != null){
+				console.log("getLocation()")
+				mapVm.getLocation();
+			} else {
+				console.log("you have no friends nor locations")
+			}
 		}
+
+
 
 		function showSide(){
 			mapVm.show = true;
@@ -106,6 +119,8 @@
 		    modalInstance.result.then(function (selectedItem) {
 		      	mapVm.selected = selectedItem;
 		    },function () {
+		    	console.log(mapVm.playingAt)
+		    	mapVm.getLocation()
 		      	$log.info('Modal dismissed at: ' + new Date());
 		    });  
 		}
@@ -138,28 +153,34 @@
 		}
 
 		function addFriend(friendInfo){
-			console.log("user's ID",localStorage.loginId) 
-			console.log("Add friend's ID",friendInfo.id) 
-			console.log("Array friends",mapVm.friends)
 			mapVm.friends.push(friendInfo.id)
 			mapSrv.addFriend(localStorage.loginId, mapVm.friends)
 		}
 
 		function getFriend(){
 			console.log("get friend")
-			console.log(mapVm.friends)
-			console.log(mapSrv.friendDone)
-			console.log(mapSrv.friendData)
 			if(!mapSrv.friendDone){
 				for(var i = 0; i < mapVm.friends.length; i++){
 					mapSrv.getFriend(mapVm.friends[i])
 					.then(function(res){
 						if(i == (mapVm.friends.length)){
 							mapVm.friendData = res;
-							console.log(mapVm.friendData)
 						}				
 					})
 				}
+			}
+		}
+
+		function getLocation(){
+			console.log("get location")
+			for(var i = 0; i < mapVm.playingAt.length; i++){
+				mapSrv.getLocation(mapVm.playingAt[i])
+				.then(function(res){
+					console.log(res)
+					if(i == mapVm.playingAt.length){
+						mapVm.locationData = res;
+					}
+				})
 			}
 		}
 
@@ -269,43 +290,6 @@
 			}
 		};
 		
-		// mapVm.drawingManagerOptions = {
-		//     drawingMode: google.maps.drawing.OverlayType.MARKER,
-		//     drawingControl: true,
-		//     drawingControlOptions: {
-		//       position: google.maps.ControlPosition.TOP_CENTER,
-		//         drawingModes: [
-		//           google.maps.drawing.OverlayType.MARKER,
-		//           google.maps.drawing.OverlayType.CIRCLE,
-		//           google.maps.drawing.OverlayType.POLYGON,
-		//           google.maps.drawing.OverlayType.POLYLINE,
-		//           google.maps.drawing.OverlayType.RECTANGLE
-		//         ]
-		//     },
-		//     circleOptions: {
-		//       fillColor: '#ffff00',
-		//         fillOpacity: 1,
-		//         strokeWeight: 5,
-		//         clickable: false,
-		//         editable: true,
-		//         zIndex: 1
-		//       }
-		//     };
-		// mapVm.markersAndCircleFlag = true;
-		// mapVm.drawingManagerControl = {};
-
-		// $scope.$watch('markersAndCircleFlag', function() {
-		//     if (!mapVm.drawingManagerControl.getDrawingManager) {
-		//       return;
-		//     }
-		//     var controlOptions = angular.copy(mapVm.drawingManagerOptions);
-		//     if (!mapVm.markersAndCircleFlag) {
-		//       controlOptions.drawingControlOptions.drawingModes.shift();
-		//       controlOptions.drawingControlOptions.drawingModes.shift();
-		//     }
-		//     mapVm.drawingManagerControl.getDrawingManager().setOptions(controlOptions);
-		//   });
-
 		navigator.geolocation.getCurrentPosition(function(pos) {
 			console.log("POSITION", pos.coords)
 		    mapVm.map.center = {

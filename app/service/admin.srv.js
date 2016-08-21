@@ -26,18 +26,12 @@
 		self.location;
 		self.user;
 
-		//console.log("LOCATIONS ARRAY",self.locations)
-
 		function getUsers(){
 			return api.request('/users',{},'GET')
 			.then(function(res){
-				//success callback
-				//console.log(res.data);
 				self.users = res.data.users;
-				//console.log(self.users)
 				return self.users;
 			},function(err){
-				//error callback
 				console.log(err);
 				return;
 			})

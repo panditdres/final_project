@@ -12,14 +12,17 @@ angular.module('mapApp')
   modalVm.maxCapacity     = maxCapacity;
 
   //modalVm.sendInvite      = sendInvite;
-  modalVm.addPlayer       = addPlayer;
-  modalVm.removePlayer    = removePlayer;
-  modalVm.locationPlayers = locationPlayers;
-  modalVm.checkPlayer     = checkPlayer;
-  modalVm.showInvite      = showInvite;
-  modalVm.invite   = invite;
-  modalVm.addInvite = addInvite;
-  modalVm.subInvite = subInvite
+  modalVm.addPlayer             = addPlayer;
+  modalVm.removePlayer          = removePlayer;
+  modalVm.addPlayingLocation    = addPlayingLocation;
+  modalVm.removePlayingLocation = removePlayingLocation;
+  modalVm.locationPlayers       = locationPlayers;
+  modalVm.checkPlayer           = checkPlayer;
+  modalVm.showInvite            = showInvite;
+  modalVm.invite                = invite;
+  modalVm.addInvite             = addInvite;
+  modalVm.subInvite             = subInvite;
+  modalVm.sendInvite            = sendInvite;
 
   modalVm.checkPlayer();
 
@@ -31,6 +34,7 @@ angular.module('mapApp')
   modalVm.cancel           = cancel;
 
   modalVm.invitation = [];
+  modalVm.userPlaying = user.playing;
 
   modalVm.inviteInfo = false;
   modalVm.locationInfo = true;
@@ -70,18 +74,28 @@ angular.module('mapApp')
 
   function subInvite(friendId){
     console.log("remove invite")
-    for(var i = 0; modalVm.invitation.length; i++){
-      if(modalVm.invitation[i]==friendId){
+    for(var i = 0; i < modalVm.invitation.length; i++){
+      if(modalVm.invitation[i] == friendId){
         modalVm.invitation.splice(i,1);
       }
     }
     console.log(modalVm.invitation)
   }
 
-  // function sendInvite(locationId, userId){
-  //   modalVm.invitation.push()
-  //   mapSrv.sendInvite(locationId,userId,modalVm.invitation)
-  // }
+  function sendInvite(locationId, user){
+    console.log(modalVm.invitation)
+    console.log(locationId)
+    //console.log(userId)
+    console.log(modalVm.eventDate)
+    var invite = {
+      "userId": user.id,
+      "locationId": locationId,
+      "date": modalVm.eventDate,
+      "invited": modalVm.invitation
+    }
+    $uibModalInstance.close()
+    mapSrv.sendInvite(locationId,user.id,invite)
+  }
 
   function addPlayer(locationId,playerInfo){
     // console.log(playerInfo);
@@ -102,6 +116,28 @@ angular.module('mapApp')
       if(modalVm.locationPlayers[i].includes(modalVm.user.username)){
         modalVm.locationPlayers.splice(i,1)
         mapSrv.addPlayer(locationId,modalVm.locationPlayers)
+      }
+    }
+  }
+
+  function addPlayingLocation(userId,locationId){
+    console.log("addplaying location")
+    if(modalVm.userPlaying == null){
+      modalVm.userPlaying = [];
+      modalVm.userPlaying.push(locationId);
+      mapSrv.addPlayingLocation(userId,modalVm.userPlaying)
+    } else {
+      modalVm.userPlaying.push(locationId);
+      mapSrv.addPlayingLocation(userId,modalVm.userPlaying)
+    }
+    //mapSrv.addPlayingLocation(userId,modalVm.userPlaying)
+  }
+
+  function removePlayingLocation(userId,locationId){
+    for(var i = 0; i < modalVm.userPlaying.length; i++){
+      if(modalVm.userPlaying[i].includes(locationId)){
+        modalVm.userPlaying.splice(i, 1);
+        mapSrv.addPlayingLocation(userId,modalVm.userPlaying);
       }
     }
   }

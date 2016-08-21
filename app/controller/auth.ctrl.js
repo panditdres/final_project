@@ -10,9 +10,9 @@
 		authVm.signUpBtn   = 'Sign up';	
 		authVm.logInBtn	   = 'Log In';
 
-		authVm.register = register;
+		authVm.register 	= register;
 		authVm.authenticate = authenticate;
-		authVm.adminLogin = adminLogin;
+		authVm.adminLogin 	= adminLogin;
 
 		function register(){
 			authSrv.register(authVm.firstName,authVm.lastName,authVm.username,authVm.email,authVm.password,authVm.passwordRedo)

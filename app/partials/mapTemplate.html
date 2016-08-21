@@ -13,7 +13,7 @@
           <ul class="dropdown-content">
           <li><a ng-click="ctrl.defaultView()">Home</a></li>
             <li><a ng-click="ctrl.profile()">Profile</a></li>
-            <li><a ui-sref="friends">Friends</a></li>
+            <li><a ui-sref="friends">Find Friends</a></li>
             <li><a ng-click="ctrl.settings()">Settings</a></li>
             <li role="separator" class="divider"></li>
             <li><a ui-sref="login" ng-click="ctrl.interact()">{{ctrl.checkMsg}}</a></li>
@@ -38,8 +38,8 @@
         <h5 ng-repeat="players in ctrl.locationPlayers">{{players}}</h5>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="ctrl.incrementCounter(ctrl.locationId,ctrl.locationCounter); ctrl.addPlayer(ctrl.locationId,ctrl.user)" ng-disabled="ctrl.goBtn">Go</button>
-        <button class="btn btn-warning" type="button" ng-click="ctrl.cancel(ctrl.locationId,ctrl.locationCounter); ctrl.removePlayer(ctrl.locationId,ctrl.user)" ng-disabled="ctrl.cancelBtn">Cancel</button>
+        <button class="btn btn-primary" type="button" ng-click="ctrl.incrementCounter(ctrl.locationId,ctrl.locationCounter); ctrl.addPlayer(ctrl.locationId,ctrl.user); ctrl.addPlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.goBtn">Go</button>
+        <button class="btn btn-warning" type="button" ng-click="ctrl.cancel(ctrl.locationId,ctrl.locationCounter); ctrl.removePlayer(ctrl.locationId,ctrl.user); ctrl.removePlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.cancelBtn">Cancel</button>
     </div>
   </div>
 
@@ -48,10 +48,11 @@
         <h3 class="modal-title">Send Invitation</h3>
     </div>
     <div class="modal-body">
-        <form ng-submit="ctrl.sendInvite()">
+        
           <div class="form-group">
               <label for="Date">Date</label>
-              <md-datepicker ng-model="ctrl.eventDate" md-placeholder="Enter date"></md-datepicker>
+              <!-- <md-datepicker ng-model="ctrl.eventDate" md-placeholder="Enter date"></md-datepicker> -->
+              <input type="date" name="eventDate" class="form-control" ng-model="ctrl.eventDate">
           </div>
           <div class="form-group">
             <label for="Friends">Include your friends</label>
@@ -61,30 +62,27 @@
               </button>
             </div>     
           </div>
-        </form>
+        
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="" ng-disabled="">Send</button>
+        <button class="btn btn-primary" type="button" ng-click="ctrl.sendInvite(ctrl.locationId,ctrl.user)" ng-disabled="">Send</button>
     </div>
   </div>
 </script>
 
+<!-- NEW SECTION -->
+<button class="btn btn-primary friend-button" ng-click="ctrl.showSide()">
+  <i class="fa fa-bars" aria-hidden="true"></i>
+</button>
 
-  <button class="btn btn-primary friend-button" ng-click="ctrl.showSide()">
+<div class="friends move" ng-show="ctrl.show" ng-class="{'move': ctrl.show}">
+  <button class="btn btn-primary friend-button" ng-click="ctrl.hideSide()"">
     <i class="fa fa-bars" aria-hidden="true"></i>
   </button>
-   <!--  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button> -->
-
-
-<div class="friends move" ng-show="ctrl.show" ng-click="ctrl.hideSide()" ng-class="{'move': ctrl.show}">
   <h1 class="center">Showing all friends</h1>
+  <input ng-model="ctrl.search" type="text" class="form-control" id="search" placeholder="Search Friends">
   <hr>
-  <div ng-repeat="friends in ctrl.friendData">
+  <div ng-repeat="friends in ctrl.friendData | filter:{firstName:ctrl.search}">
     {{friends.firstName}} {{friends.lastName}} 
     <hr>
   </div>
@@ -92,14 +90,12 @@
 
 
 
-
-
 <!-- make each button toggle -->
 <div ng-show="ctrl.showDefault">
   <h2>Default view</h2>
-  <div style="overflow:hidden">
-    <img src="https://media.giphy.com/media/3HAYjf3I1OVLXb3W036/giphy.gif">
-  </div>
+  <h4>You are playing at:</h4>
+  <h5 ng-repeat="locations in ctrl.locationData">Location: {{locations.location.name}}</h5>
+  <hr>
 </div>
 
 <div ng-show="ctrl.showProfile" ng-click="ctrl.profile">

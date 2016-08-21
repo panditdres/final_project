@@ -21,7 +21,7 @@ router.get('/capacity', function(req,res){
 	})
 })
 
-// Unpate the capacity of the location
+// Update the capacity of the location
 router.put('/capacity/:locationId', function(req,res){
 	console.log(req.params.locationId)
 	console.log(req.params)
@@ -41,7 +41,14 @@ router.put('/capacity/:locationId', function(req,res){
 router.post('/invite/:locationId', function(req,res){
 	console.log(req.params)
 	console.log(req.body)
-	console.log(res.body)
+	var invite = req.body;
+	models.Invites.create(invite)
+	.then(function(invite){
+		console.log(invite)
+		res.json({
+			invite: invite
+		})
+	})
 })
 
 // Add players to a location

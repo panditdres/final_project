@@ -80,7 +80,6 @@
 				"type": adminVm.type,
 				"maxCapacity": adminVm.capacity
 			}
-			//console.log("LOCATION",location)
 			adminSrv.addLocation(location)
 		}
 	}

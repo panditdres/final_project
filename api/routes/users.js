@@ -53,6 +53,24 @@ router.put('/friends/:userId',function(req,res){
 	})
 })
 
+// add location playing
+router.put('/location/:userId',function(req,res){
+	console.log("ADD LOCATION TO PLAYER",req.body)
+	console.log("USER ID ->",req.params.userId)
+	var __user = req.body
+	var where = {where:{id:req.params.userId}}
+	models.Users.find(where).then(function(user){
+		console.log("USER",user)
+		console.log("ADDING LOCATION TO USER")
+		user.updateAttributes({
+			playing: __user
+		});
+		res.json({
+			user:__user
+		});
+	})
+})
+
 
 // update users
 router.put('/update/:userId', function(req,res){
