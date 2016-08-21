@@ -6,6 +6,18 @@
 	function mapCtrl($scope, $state, $geolocation, uiGmapGoogleMapApi, user, users, locations, mapSrv, adminSrv, $log, $uibModal) {
 		var mapVm = this;
 
+		console.log(mapVm.mytime)
+		mapVm.mytime = new Date();
+
+  		mapVm.hstep = 1;
+  		mapVm.mstep = 15;
+
+  		mapVm.ismeridian = true
+
+  		  $scope.changed = function () {
+    $log.log('Time changed to: ' + $scope.mytime);
+  };
+
 		// From resolve
 		mapVm.userData 	= user;
 		mapVm.allUsers 	= users;

@@ -68,12 +68,19 @@
 			user = JSON.stringify(user);
 			$http.post('/api/auth/authenticate',user)
 			.then(function(res){	
-				console.log(res.data)	
+				console.log(res.data.error)	
 				localStorage.loginId = res.data.id;
 				//localStorage.username = res.data;
 				localStorage.loginEmail = email;
 				mapSrv.checkMsg();
 				$state.go('home.map')
+			},function(err){
+				console.log(err)
+				if(err.data.err == 'wrong password'){
+					toastr.error("Incorrect Password", "Error")
+				} else if (err.data.err == 'wrong email'){
+					toastr.error("Incorrect Email Address", "Error")
+				}
 			})
 		}
 

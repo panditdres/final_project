@@ -44,7 +44,7 @@ router.post('/authenticate',function(req,res){
 		console.log("auth user")
 		if(user == null) {
 			res.status(403)
-		    .json({err:'unauhthorized'});
+		    .json({err:'wrong email'});
 		}	
 		bcrypt.compare(__user.password, user.password, function(err, result) {
 		    // res == true 
@@ -69,7 +69,7 @@ router.post('/authenticate',function(req,res){
 		    }
 		    else{
 		    	res.status(403)
-		    		.json({err:'unauhthorized'});
+		    		.json({err:'wrong password'});
 		    }
 		});
 		

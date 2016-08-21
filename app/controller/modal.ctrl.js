@@ -41,6 +41,11 @@ angular.module('mapApp')
 
   modalVm.inviteBtn = false;
 
+  modalVm.mytime      = new Date();
+  modalVm.hstep       = 1;
+  modalVm.mstep       = 15;
+  modalVm.ismeridian  = true;
+
   function showInvite(){
     modalVm.inviteInfo = true;
     modalVm.locationInfo = false;
@@ -98,7 +103,7 @@ angular.module('mapApp')
   }
 
   function addPlayer(locationId,playerInfo){
-    // console.log(playerInfo);
+      console.log(modalVm.mytime)
     // console.log(locationId);
     if(modalVm.locationPlayers.length > 30) {
       toastr.error('There are no more spots', 'Error')
@@ -130,10 +135,13 @@ angular.module('mapApp')
       modalVm.userPlaying.push(locationId);
       mapSrv.addPlayingLocation(userId,modalVm.userPlaying)
     }
-    //mapSrv.addPlayingLocation(userId,modalVm.userPlaying)
   }
 
+  // MYSTERY FUNCTION - ERROR STATES THAT modalVm.userPlaying[i].includes IS NOT A f(x)
   function removePlayingLocation(userId,locationId){
+    console.log(locationId)
+    console.log(modalVm.userPlaying)
+    console.log(modalVm.userPlaying[4])
     for(var i = 0; i < modalVm.userPlaying.length; i++){
       if(modalVm.userPlaying[i].includes(locationId)){
         modalVm.userPlaying.splice(i, 1);
