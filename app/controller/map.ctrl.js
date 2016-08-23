@@ -110,14 +110,22 @@
 		function accept(inviteId){
 			console.log(inviteId)
 			for(var i = 0; i < mapVm.allInvites.invites.length; i++){
-				console.log("ID",mapVm.allInvites.invites[i].id)
+				console.log("ARRAY",mapVm.allInvites.invites)
 				if(mapVm.allInvites.invites[i].id === inviteId){
 					mapVm.allInvites.invites[i].accepted.push(user.id)
 					var index = mapVm.allInvites.invites[i].invited.indexOf(user.id);
 					mapVm.allInvites.invites[i].invited.splice(index,1);
 					console.log("ALL INVITES ACCEPT",mapVm.allInvites.invites[i])
-					mapSrv.updateInvitation(inviteId,mapVm.allInvites.invites[i]);
-					mapVm.checkInvited();
+					mapSrv.updateInvitation(inviteId,mapVm.allInvites.invites[i])
+					.then(function(res){
+						//update array
+						return mapSrv.getInvite(inviteId)
+					}).then(function(res){
+						console.log(res)
+						mapVm.allInvites.invites.push(res.invite);
+						mapVm.checkAccepted();
+						mapVm.checkInvited();
+					})
 				}
 			}
 		}
@@ -130,14 +138,16 @@
 					var index = mapVm.allInvites.invites[i].invited.indexOf(user.id);
 					mapVm.allInvites.invites[i].invited.splice(index,1);
 					console.log("ALL INVITES REJECT",mapVm.allInvites.invites[i])
-					mapSrv.updateInvitation(inviteId,mapVm.allInvites.invites[i]);
-					mapVm.checkInvited();
+					mapSrv.updateInvitation(inviteId,mapVm.allInvites.invites[i])
+					.then(function(res){
+						mapVm.checkInvited();
+					})		
 				}
 			}
 		}
 		mapVm.events = [];
 		function checkAccepted(){
-			console.log("checkAccepted")
+			console.log("checkAccepted RUNNING")
 			for(var i = 0; i < mapVm.allInvites.invites.length; i++) {
 				console.log("check accept",mapVm.allInvites.invites[i])
 				if(mapVm.allInvites.invites[i].accepted.length != 0){
@@ -154,20 +164,10 @@
 							return mapSrv.getUserNameAccept(response,response.hostId,response.event)
 						}).then(function(res2){
 							console.log(res2);
-							var eventInfo = {
-								response: res2
-							}							
-							mapVm.events.push(eventInfo)
+							var eventInfo = res2;					
+							mapVm.events.push(eventInfo);
 							console.log(mapVm.events)
 						})
-							// mapVm.locationInfo = res.location;
-							// console.log(mapVm.locationInfo)
-							// mapVm.locationObject = {
-							// 	name: mapVm.locationInfo.name,
-							// 	organiser: 
-							// }
-							// mapVm.events = mapVm.allInvites.invites[i]
-	
 					}
 				}
 			}
@@ -264,7 +264,6 @@
 		}
 
 		function defaultView(){
-			console.log("defaultView")
 			mapSrv.defaultView();
 			mapVm.showDefault  = mapSrv.showDefault;
 			mapVm.showProfile  = mapSrv.showProfile;
@@ -272,7 +271,6 @@
 		}
 
 		function profile(){
-		console.log("profile")
 			mapSrv.profile();
 			mapVm.showDefault  = mapSrv.showDefault;
 			mapVm.showProfile  = mapSrv.showProfile;
@@ -426,7 +424,7 @@
 		};
 		
 		navigator.geolocation.getCurrentPosition(function(pos) {
-			console.log("POSITION", pos.coords)
+			// console.log("POSITION", pos.coords)
 		    mapVm.map.center = {
 		    	latitude: pos.coords.latitude,
 		    	longitude: pos.coords.longitude
@@ -439,8 +437,8 @@
 
 		uiGmapGoogleMapApi.then(function(maps) {
 			maps.visualRefresh = true;
-			console.log("map ready");
-			console.log(mapVm.map);	
+			//console.log("map ready");
+			//console.log(mapVm.map);	
     	});
 
 	}

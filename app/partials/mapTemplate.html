@@ -33,12 +33,12 @@
         <h4>Address: {{ctrl.locationAddress}}</h4>
         <h5>Type of field: {{ctrl.locationType}}</h5>
         <h5>Number of players: {{ctrl.locationPlayers.length}}</h5>
-        <h5>players going: </h5>
+        <h5>Players going today: </h5>
         <h5 ng-repeat="players in ctrl.locationPlayers">{{players}}</h5>
     </div>
     <div class="modal-footer">
 
-        <div uib-timepicker ng-model="ctrl.mytime" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></div>
+       <!--  <div uib-timepicker ng-model="ctrl.mytime" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></div> -->
 
         <button class="btn btn-primary" type="button" ng-click="ctrl.incrementCounter(ctrl.locationId,ctrl.locationCounter); ctrl.addPlayer(ctrl.locationId,ctrl.user); ctrl.addPlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.goBtn">Go</button>
         <button class="btn btn-warning" type="button" ng-click="ctrl.cancel(ctrl.locationId,ctrl.locationCounter); ctrl.removePlayer(ctrl.locationId,ctrl.user); ctrl.removePlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.cancelBtn">Cancel</button>
@@ -53,7 +53,6 @@
         
           <div class="form-group">
               <label for="Date">Date</label>
-              <!-- <md-datepicker ng-model="ctrl.eventDate" md-placeholder="Enter date"></md-datepicker> -->
               <input type="date" name="eventDate" class="form-control" ng-model="ctrl.eventDate">
           </div>
           <div class="form-group">
@@ -129,10 +128,10 @@
 <div class="home-view" ng-show="ctrl.showDefault">
   <h2>Hello {{ctrl.userData.firstName}}</h2>
   <h4>You are playing at:</h4>
-  <h5 ng-repeat="locations in ctrl.locationData">Location: {{locations.location.name}}</h5>
+  <h5 ng-repeat="locations in ctrl.locationData">{{locations.location.name}}</h5>
   <hr>
   <h3>Events</h3>
-  <h5 ng-repeat="events in ctrl.events">{{events.response.data.data.location.name}} with {{events.response.user.firstName}} {{events.response.user.lastName}} on {{events.response.event.date | date:longDate}}</h5>
+  <h5 ng-repeat="events in ctrl.events">{{events.data.data.location.name}} with {{events.user.firstName}} {{events.user.lastName}} on {{events.event.date | date:longDate}}</h5>
 </div>
 
 <div class="home-view" ng-show="ctrl.showProfile" ng-click="ctrl.profile">

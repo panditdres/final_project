@@ -25,6 +25,7 @@
 		self.sendInvite     	= sendInvite;
 		self.addPlayingLocation = addPlayingLocation;
 		self.allInvites			= allInvites;
+		self.getInvite 			= getInvite;
 		self.getUserInvite		= getUserInvite;
 		self.getLocationInvite	= getLocationInvite;
 		self.getLocationNameAccept  = getLocationNameAccept;
@@ -109,6 +110,7 @@
 			return api.request('/invites/'+inviteId,invitations,'PUT')
 			.then(function(res){
 				console.log(res)
+				return res;
 			})
 		}
 
@@ -128,6 +130,15 @@
 				console.log("Get invites",res.data)
 				self.invites = res.data;
 				return self.invites;
+			})
+		}
+
+		function getInvite(inviteId){
+			return api.request('/invites/'+inviteId,{},'GET')
+			.then(function(res){
+				console.log("Get SINGLE INVITE",res.data)
+				self.invite = res.data;
+				return self.invite;
 			})
 		}
 
