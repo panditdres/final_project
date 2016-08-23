@@ -46,7 +46,8 @@
 								title: "Hey!",   
 								text: "Welcome to Kick App!",   
 								type: "success",   
-								confirmButtonText: "Get Started" });
+								confirmButtonText: "Get Started"
+							});
 							localStorage.loginId = res.data.id;
 							localStorage.loginEmail = email;
 							toastr.success("Account created","Success")

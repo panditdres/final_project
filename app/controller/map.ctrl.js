@@ -26,7 +26,6 @@
 
 		// Function binding
 		mapVm.editUser 			= editUser;
-		mapVm.profile  			= profile;
 		mapVm.settings 			= settings;
 		mapVm.defaultView  		= defaultView;
 		mapVm.populateMarkers 	= populateMarkers;
@@ -37,7 +36,7 @@
 		mapVm.getFriend 		= getFriend;
 		mapVm.getLocation       = getLocation;
 		mapVm.checkInvited		= checkInvited;
-		//mapVm.checkFriend       = checkFriend;
+		mapVm.checkFriends      = checkFriends;
 
 		mapVm.checkMsg  = mapSrv.checkMsg();
 		mapVm.interact  = mapSrv.interact;
@@ -53,7 +52,6 @@
 
 		// Default values for ng-show in the template
 		mapVm.showDefault  = mapSrv.showDefault;
-		mapVm.showProfile  = mapSrv.showProfile;
 		mapVm.showSettings = mapSrv.showSettings;
 		//console.log( "SHHW DEF",mapVm.showDefault )
 		mapVm.show = false;
@@ -77,6 +75,12 @@
 		mapVm.status = 'friends';
 
 		mapVm.friendMessage = "Add Friend"
+
+		
+		mapVm.eventShow = true;
+
+			
+
 
 		mapVm.getFriend();
 		mapVm.getLocation();
@@ -157,9 +161,13 @@
 						}).then(function(res2){
 							var eventInfo = res2;			
 							mapVm.events.push(eventInfo);
+							mapVm.eventShow = false;
 						})
 					}
 				}
+			}
+			if(mapVm.events.length == 0){
+				mapVm.eventShow = true;
 			}
 		}
 
@@ -193,6 +201,11 @@
 			mapVm.notificationLogo = true;
 		}
 				
+		function checkFriends(){
+			mapVm.nonFriends = [];
+
+		}
+
 		function openModal(size,name,type,id,capacity,max,address,players){
 			var modalInstance = $uibModal.open({
 		      	animation: mapVm.animationsEnabled,
@@ -251,21 +264,12 @@
 		function defaultView(){
 			mapSrv.defaultView();
 			mapVm.showDefault  = mapSrv.showDefault;
-			mapVm.showProfile  = mapSrv.showProfile;
-			mapVm.showSettings = mapSrv.showSettings;
-		}
-
-		function profile(){
-			mapSrv.profile();
-			mapVm.showDefault  = mapSrv.showDefault;
-			mapVm.showProfile  = mapSrv.showProfile;
 			mapVm.showSettings = mapSrv.showSettings;
 		}
 
 		function settings(){
 			mapSrv.settings();
 			mapVm.showDefault  = mapSrv.showDefault;
-			mapVm.showProfile  = mapSrv.showProfile;
 			mapVm.showSettings = mapSrv.showSettings;
 		}
 
@@ -428,6 +432,8 @@
 
 		introJs().start();
 
+		mapVm.CallMe = authSrv.CallMe
+
 	    $scope.CompletedEvent = function () {
         	console.log("Completed Event called");
 	    };
@@ -460,12 +466,12 @@
 	        },
 	        {
 	            element: '#step2',
-	            intro: "This button are will let you know where you decided to play after pressing GO at a particular location",
+	            intro: "This area will show you the events that you have accepted from your friends' invitations. It will also let you know where you decided to play after pressing GO at a particular location",
 	            position: 'right'
 	        },
 	        {
 	            element: '#step3',
-	            intro: "This area will show you the events that you have accepted from your friends' invitations",
+	            intro: "Geolocate will allow you to see the nearest fields to you no matter your current location",
 	            position: 'right'
 	        },
 	        {

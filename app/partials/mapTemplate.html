@@ -4,10 +4,10 @@
      ng-intro-onchange="ChangeEvent" ng-intro-onbeforechange="BeforeChangeEvent"
      ng-intro-autostart="false">
 
-<nav class="navbar navbar-default" id="step1">
+<nav class="navbar navbar-default" id="step1" style="border:none">
   <div class="container-fluid">
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background-color: #262526; border-radius: 5px; border: 0">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background-color: #262526; border-radius: 5px 5px 0 0; border-bottom: 1px solid white">
       <ul class="nav navbar-nav">
         <li><a class="no-pad" ng-click="ctrl.defaultView()" style="color: white;">Home</a></li>
         <li><a class="no-pad" ui-sref="friends" style="color: white;">Find Friends</a></li>
@@ -16,7 +16,6 @@
         <li class="dropdown">
           <a class="dropbtn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white;">{{ctrl.userData.firstName}} <span class="caret"></span></a>
           <ul class="dropdown-content">
-            <li><a ng-click="ctrl.profile()">Profile</a></li>
             <li><a ng-click="ctrl.settings()">Settings</a></li>
             <li role="separator" class="divider"></li>
             <li><a ui-sref="login" ng-click="ctrl.interact()">{{ctrl.checkMsg}}</a></li>
@@ -127,72 +126,66 @@
 </div>
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxx -->
 
-
+<button ng-click="CallMe()" id="demo" class="btn btn-primary">Demo</button>
 <!-- make each button toggle -->
-<div class="home-view" ng-show="ctrl.showDefault">
-  <div id="step2">
-    <h2>Hello {{ctrl.userData.firstName}}</h2>
-    <button ng-click="CallMe()" class="btn">Demo</button>
-    <h4>You are playing at:</h4>
-    <h5 ng-repeat="locations in ctrl.locationData">{{locations.location.name}}</h5>
-    <hr>
+<div>
+  <div class="home-view" ng-show="ctrl.showDefault">
+    <div>
+      <h2>Hello {{ctrl.userData.firstName}}</h2>
+
+      <h4>You are playing at:</h4>
+      <h5 ng-repeat="locations in ctrl.locationData">{{locations.location.name}}</h5>
+      <hr>
+    </div>
+
+    <div>
+      <h3>Events</h3>
+      <h5 ng-show="ctrl.eventShow">You have no events yet</h5>
+      <h5 ng-repeat="events in ctrl.events">{{events.data.data.location.name}} with {{events.user.firstName}} {{events.user.lastName}} on {{events.event.date | date:longDate}}</h5>
+    </div>
   </div>
 
-  <div id="step3">
-    <h3>Events</h3>
-    <h5 ng-repeat="events in ctrl.events">{{events.data.data.location.name}} with {{events.user.firstName}} {{events.user.lastName}} on {{events.event.date | date:longDate}}</h5>
-  </div>
-</div>
+  <div ng-show="ctrl.showSettings" ng-click="ctrl.settings">
+    <h2>
+      Settings
+    </h2>
 
-<div class="home-view" ng-show="ctrl.showProfile" ng-click="ctrl.profile">
-  <h2>{{ctrl.userData.firstName}} {{ctrl.userData.lastName}}</h2>
-  <h5>{{ctrl.userData.username}}</h5>
-  <div>
-    <h4>Your history</h4>
-  </div>
-</div>
+    <div class="panel-body">
 
+        <form method="post" action="path/to/api" enctype="multipart/form-data">
+          <input type="file" name="file">
+          <button type="submit">upload file</button>
+        </form>
 
-<div ng-show="ctrl.showSettings" ng-click="ctrl.settings">
-  <h2>
-    Settings
-  </h2>
+        <form role="form" ng-submit="ctrl.editUser(ctrl.userId)">
+          <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" id="nameOfLocation" ng-model="ctrl.firstName" required>
+          </div>
+          <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="Latitude" ng-model="ctrl.lastName" required>
+          </div>
+          <div class="form-group">
+                <label for="userName">Username</label>
+                <input type="text" class="form-control" id="Latitude" ng-model="ctrl.userName" required>
+          </div>
+          <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="Longitude" ng-model="ctrl.email" required>
+          </div>
+          <div class="form-group">
+                <label for="oldPassword">Old Password</label>
+                <input type="password" class="form-control" id="Longitude" placeholder="Enter Old Password" ng-model="ctrl.oldPassword" required>
+          </div>
+          <div class="form-group">
+                <label for="newPassword">New Password</label>
+                <input type="password" class="form-control" id="Longitude" placeholder="Enter New Password" ng-model="ctrl.newPassword" required>
+          </div>
 
-  <div class="panel-body">
-
-      <form method="post" action="path/to/api" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <button type="submit">upload file</button>
+          <button type="submit" class="btn btn-info">Submit</button>
       </form>
-
-      <form role="form" ng-submit="ctrl.editUser(ctrl.userId)">
-        <div class="form-group">
-              <label for="firstName">First Name</label>
-              <input type="text" class="form-control" id="nameOfLocation" ng-model="ctrl.firstName" required>
-        </div>
-        <div class="form-group">
-              <label for="lastName">Last Name</label>
-              <input type="text" class="form-control" id="Latitude" ng-model="ctrl.lastName" required>
-        </div>
-        <div class="form-group">
-              <label for="userName">Username</label>
-              <input type="text" class="form-control" id="Latitude" ng-model="ctrl.userName" required>
-        </div>
-        <div class="form-group">
-              <label for="email">Email</label>
-              <input type="text" class="form-control" id="Longitude" ng-model="ctrl.email" required>
-        </div>
-        <div class="form-group">
-              <label for="oldPassword">Old Password</label>
-              <input type="password" class="form-control" id="Longitude" placeholder="Enter Old Password" ng-model="ctrl.oldPassword" required>
-        </div>
-        <div class="form-group">
-              <label for="newPassword">New Password</label>
-              <input type="password" class="form-control" id="Longitude" placeholder="Enter New Password" ng-model="ctrl.newPassword" required>
-        </div>
-
-        <button type="submit" class="btn btn-info">Submit</button>
-    </form>
+    </div>
   </div>
 </div>
 </div>

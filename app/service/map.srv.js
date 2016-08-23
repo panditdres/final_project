@@ -13,7 +13,6 @@
 		self.checkMsg 			= checkMsg;
 		self.interact 			= interact;
 		self.updateUser 		= updateUser;
-		self.profile 			= profile;
 		self.settings 			= settings;
 		self.defaultView 		= defaultView;
 		self.getCapacity 		= getCapacity;
@@ -43,21 +42,12 @@
 
 		function defaultView(){
 			self.showDefault = true;
-			self.showProfile = false;
-			self.showSettings = false;
-		}
-
-		function profile(){
-			console.log("profile")
-			self.showProfile = true;
-			self.showDefault = false;
 			self.showSettings = false;
 		}
 
 		function settings(){
 			self.showSettings = true;
 			self.showDefault = false;
-			self.showProfile = false;
 		}
 
 		function getUser() {
@@ -121,7 +111,7 @@
 			.then(function(res){
 				console.log(res)
 				if(res.status === 200){
-					self.profile();
+					self.defaultView();
 				}
 			})
 		}
@@ -181,7 +171,7 @@
 			.then(function(res){
 				console.log(res)
 				if(res.status === 200){
-					self.profile();
+					self.defaultView();
 				}
 			})
 		}
@@ -192,7 +182,7 @@
 			.then(function(res){
 				console.log(res)
 				if(res.status === 200){
-					self.profile();
+					self.defaultView();
 				}
 			})
 		}
@@ -203,7 +193,7 @@
 			.then(function(res){
 				console.log(res)
 				if(res.status === 200){
-					self.profile();
+					self.defaultView();
 				}
 			})
 		}
