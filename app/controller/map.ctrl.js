@@ -3,27 +3,17 @@
 		.module('mapApp')
 		.controller('mapCtrl',mapCtrl)
 
-	function mapCtrl($scope, $state, $geolocation, uiGmapGoogleMapApi, user, users, locations, mapSrv, adminSrv, $log, $uibModal) {
+	function mapCtrl($scope, $state, $geolocation, uiGmapGoogleMapApi, user, users, locations, invites, mapSrv, adminSrv, $log, $uibModal, toastr) {
 		var mapVm = this;
 
-		console.log(mapVm.mytime)
-		mapVm.mytime = new Date();
-
-  		mapVm.hstep = 1;
-  		mapVm.mstep = 15;
-
-  		mapVm.ismeridian = true
-
-  		  $scope.changed = function () {
-    $log.log('Time changed to: ' + $scope.mytime);
-  };
-
 		// From resolve
-		mapVm.userData 	= user;
-		mapVm.allUsers 	= users;
-		mapVm.locations = locations;
-		mapVm.friends 	= user.friends;
-		mapVm.playingAt = user.playing;
+		mapVm.userData 	 = user;
+		mapVm.allUsers 	 = users;
+		mapVm.locations  = locations;
+		mapVm.friends 	 = user.friends;
+		mapVm.playingAt  = user.playing;
+		mapVm.allInvites = invites;
+		console.log(mapVm.friends)
 
 		// Function binding
 		mapVm.editUser 			= editUser;
@@ -36,6 +26,11 @@
 		mapVm.addFriend 		= addFriend;
 		mapVm.getFriend 		= getFriend;
 		mapVm.getLocation       = getLocation;
+		mapVm.checkInvited		= checkInvited;
+
+		if($state.includes('friends') == false){
+			mapVm.checkInvited();
+		}
 
 		mapVm.checkMsg  = mapSrv.checkMsg();
 		mapVm.interact  = mapSrv.interact;
@@ -60,32 +55,159 @@
 		//console.log(mapVm.locations[0])
 		mapVm.showSide = showSide;
 		mapVm.hideSide = hideSide;
+		mapVm.friendsView = friendsView;
+		mapVm.notificationsView = notificationsView;
 
+		mapVm.accept 		= accept;
+		mapVm.reject 		= reject;
+		mapVm.checkAccepted = checkAccepted;
+		
 		mapVm.animationsEnabled = true;
+		mapVm.notificationLogo = false;
 
-		if($state.current.name == 'home.map'){
-			if(mapVm.friends != null){
-				console.log("getFriend()")
-				mapVm.getFriend();
-			} 
-			if(mapVm.playingAt != null){
-				console.log("getLocation()")
-				mapVm.getLocation();
-			} else {
-				console.log("you have no friends nor locations")
-			}
-		}
+		mapVm.allFriends = true;
+		mapVm.notificationShow = false;
+		mapVm.status = 'friends';
 
+		mapVm.getFriend();
+		mapVm.getLocation();
+		mapVm.checkAccepted();
 
+		// if($state.current.name == 'home.map'){
+		// 	if(mapVm.friends != null){
+		// 		console.log("getFriend()")
+		// 		mapVm.getFriend();
+		// 	} 
+		// 	if(mapVm.playingAt != null){
+		// 		console.log("getLocation()")
+		// 		mapVm.getLocation();
+		// 	} else {
+		// 		console.log("you have no friends nor locations")
+		// 	}
+		// }
 
 		function showSide(){
 			mapVm.show = true;
+			mapVm.notificationLogo = false;
 		}
 
 		function hideSide(){
 			mapVm.show = false;
 		}
 
+		function friendsView(){
+			mapVm.status = 'friends';
+			mapVm.allFriends = true;
+			mapVm.notificationShow = false;
+		}
+
+		function notificationsView(){
+			mapVm.status = 'notifications';
+			mapVm.allFriends = false;
+			mapVm.notificationShow = true;
+		}
+
+		function accept(inviteId){
+			console.log(inviteId)
+			for(var i = 0; i < mapVm.allInvites.invites.length; i++){
+				console.log("ID",mapVm.allInvites.invites[i].id)
+				if(mapVm.allInvites.invites[i].id === inviteId){
+					mapVm.allInvites.invites[i].accepted.push(user.id)
+					var index = mapVm.allInvites.invites[i].invited.indexOf(user.id);
+					mapVm.allInvites.invites[i].invited.splice(index,1);
+					console.log("ALL INVITES ACCEPT",mapVm.allInvites.invites[i])
+					mapSrv.updateInvitation(inviteId,mapVm.allInvites.invites[i]);
+					mapVm.checkInvited();
+				}
+			}
+		}
+
+		function reject(inviteId){
+			console.log(inviteId)
+			for(var i = 0; i < mapVm.allInvites.invites.length; i++){
+				if(mapVm.allInvites.invites[i].id === inviteId){					
+					mapVm.allInvites.invites[i].rejected.push(user.id);
+					var index = mapVm.allInvites.invites[i].invited.indexOf(user.id);
+					mapVm.allInvites.invites[i].invited.splice(index,1);
+					console.log("ALL INVITES REJECT",mapVm.allInvites.invites[i])
+					mapSrv.updateInvitation(inviteId,mapVm.allInvites.invites[i]);
+					mapVm.checkInvited();
+				}
+			}
+		}
+		mapVm.events = [];
+		function checkAccepted(){
+			console.log("checkAccepted")
+			for(var i = 0; i < mapVm.allInvites.invites.length; i++) {
+				console.log("check accept",mapVm.allInvites.invites[i])
+				if(mapVm.allInvites.invites[i].accepted.length != 0){
+					console.log("Hello", i)
+					console.log(mapVm.allInvites.invites[i].accepted)
+					if(mapVm.allInvites.invites[i].accepted.includes(user.id.toString())){
+						console.log("hello")
+						console.log(mapVm.allInvites.invites[i])
+						mapSrv.getLocationNameAccept(mapVm.allInvites.invites[i].locationId,mapVm.allInvites.invites[i].userId,mapVm.allInvites.invites[i])
+						.then(function(res){
+							return res;
+						}).then(function(response){
+							console.log(response);
+							return mapSrv.getUserNameAccept(response,response.hostId,response.event)
+						}).then(function(res2){
+							console.log(res2);
+							var eventInfo = {
+								response: res2
+							}							
+							mapVm.events.push(eventInfo)
+							console.log(mapVm.events)
+						})
+							// mapVm.locationInfo = res.location;
+							// console.log(mapVm.locationInfo)
+							// mapVm.locationObject = {
+							// 	name: mapVm.locationInfo.name,
+							// 	organiser: 
+							// }
+							// mapVm.events = mapVm.allInvites.invites[i]
+	
+					}
+				}
+			}
+		}
+
+		function checkInvited(){
+			mapVm.notificationData = []
+			mapVm.notifications = 0;
+			for(var i = 0; i < mapVm.allInvites.invites.length; i++){
+				if(mapVm.allInvites.invites[i].invited.includes(user.id)){
+					console.log(mapVm.allInvites.invites[i])
+					mapVm.notifications++
+					mapSrv.getUserInvite(mapVm.allInvites.invites[i].userId,i,mapVm.allInvites.invites[i].date,mapVm.allInvites.invites[i].id)
+					.then(function(res){
+						return res;
+					}).then(function(response){
+						// console.log(response)
+						return mapSrv.getLocationInvite(response.data.firstName,response.data.lastName,mapVm.allInvites.invites[response.index].locationId,response.date,response.inviteId)			
+					}).then(function(res2){
+						// console.log(res2)
+						var data = {
+							firstname: res2.firstName,
+							lastname: res2.lastName,
+							location: res2.location,
+							date: res2.date,
+							inviteId: res2.inviteId
+						}
+						// console.log(data)
+						mapVm.notificationData.push(data);
+						// console.log(mapVm.notificationData);
+						toastr.info("You have a new invitation from "+ res2.firstName + ' ' + res2.lastName + ' to play at ' + res2.location.name, "Notification")
+					})
+				}
+			}
+		}
+
+		if(mapVm.notifications != 0) {
+			mapVm.notificationLogo = true;
+		}
+				
 		function openModal(size,name,type,id,capacity,max,address,players){
 			var modalInstance = $uibModal.open({
 		      	animation: mapVm.animationsEnabled,
@@ -170,26 +292,28 @@
 		}
 
 		function getFriend(){
-			console.log("get friend")
-			if(!mapSrv.friendDone){
-				for(var i = 0; i < mapVm.friends.length; i++){
-					mapSrv.getFriend(mapVm.friends[i])
-					.then(function(res){
-						if(i == (mapVm.friends.length)){
-							mapVm.friendData = res;
-						}				
-					})
-				}
+			//console.log("GET FRIEND")
+			//console.log(mapVm.friends)
+			for(var i = 0; i < mapVm.friends.length; i++){
+				//console.log("FOR LOOP")
+				mapSrv.getFriend(mapVm.friends[i])
+				.then(function(res){
+					if(i == (mapVm.friends.length)){
+						//console.log(res)
+						mapVm.friendData = res;
+					}				
+				})
 			}
+			
 		}
 
 		function getLocation(){
-			console.log("get location")
 			for(var i = 0; i < mapVm.playingAt.length; i++){
 				mapSrv.getLocation(mapVm.playingAt[i])
 				.then(function(res){
-					console.log(res)
+					//console.log(res)
 					if(i == mapVm.playingAt.length){
+						//console.log(res)
 						mapVm.locationData = res;
 					}
 				})
@@ -227,7 +351,6 @@
 				mapVm.map.markers.push(marker);
 			}
 		}
-
 
 		mapVm.map = {
 			center: { latitude: 43.6532, longitude: -79.3832 },

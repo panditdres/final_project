@@ -15,21 +15,18 @@ router.get('/',function(req,res){
 
 // get one user - works
 router.get('/:userId', function(req,res){
-	console.log(req.params);
 	var where = {where:{id:req.params.userId}}
 	models.Users.find(where).then(function(user){
-		console.log(user)
+		console.log("GET USER",user)
 		res.send(user);
 	})
 })
 
 // delete account with click - works
 router.delete('/:userId', function(req,res){
-	console.log("DELETE USER")
-	console.log(req.params)
 	var where = {where:{id:req.params.userId}}
 	models.Users.find(where).then(function(user){
-		console.log("USER", user)
+		//console.log("USER", user)
 		user.destroy();
 		res.json({
 			deleted: true
@@ -39,11 +36,10 @@ router.delete('/:userId', function(req,res){
 
 // add friend
 router.put('/friends/:userId',function(req,res){
-	console.log("adding friends, initial array is 0")
 	var __user = req.body;
 	var where = {where:{id:req.params.userId}}
 	models.Users.find(where).then(function(user){
-		console.log("found user")
+		//console.log("found user")
 		user.updateAttributes({
 			friends: __user
 		});
@@ -55,13 +51,11 @@ router.put('/friends/:userId',function(req,res){
 
 // add location playing
 router.put('/location/:userId',function(req,res){
-	console.log("ADD LOCATION TO PLAYER",req.body)
-	console.log("USER ID ->",req.params.userId)
 	var __user = req.body
 	var where = {where:{id:req.params.userId}}
 	models.Users.find(where).then(function(user){
-		console.log("USER",user)
-		console.log("ADDING LOCATION TO USER")
+		//console.log("USER",user)
+		//console.log("ADDING LOCATION TO USER")
 		user.updateAttributes({
 			playing: __user
 		});
@@ -74,7 +68,6 @@ router.put('/location/:userId',function(req,res){
 
 // update users
 router.put('/update/:userId', function(req,res){
-	console.log("UPDATE USER REQ body", req.body)
 	var __user = req.body;
 	var where = {where:{id:req.params.userId}}
 	models.Users.find(where).then(function(user){

@@ -137,13 +137,12 @@ angular.module('mapApp')
     }
   }
 
-  // MYSTERY FUNCTION - ERROR STATES THAT modalVm.userPlaying[i].includes IS NOT A f(x)
   function removePlayingLocation(userId,locationId){
     console.log(locationId)
     console.log(modalVm.userPlaying)
     console.log(modalVm.userPlaying[4])
     for(var i = 0; i < modalVm.userPlaying.length; i++){
-      if(modalVm.userPlaying[i].includes(locationId)){
+      if(modalVm.userPlaying.includes(locationId)){
         modalVm.userPlaying.splice(i, 1);
         mapSrv.addPlayingLocation(userId,modalVm.userPlaying);
       }

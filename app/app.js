@@ -26,6 +26,9 @@
 					user: function(mapSrv){
 						return mapSrv.getUser();
 					}, 
+					invites: function(mapSrv){
+						return mapSrv.allInvites()
+					},
 					users: function(adminSrv){
 						return adminSrv.getUsers();
 					},
@@ -44,6 +47,9 @@
 					user: function(mapSrv){
 						return mapSrv.getUser();
 					}, 
+					invites: function(mapSrv){
+						return mapSrv.allInvites()
+					},
 					users: function(adminSrv){
 						return adminSrv.getUsers();
 					},
@@ -67,6 +73,12 @@
 				controller:'authCtrl as ctrl'
 			})
 
+			.state('tutorial', {
+				url:'/tutorial',
+				templateUrl:'/partials/tutorial.html',
+				authenticate:true,
+			})
+
 			.state('friends', {
 				url:'/friends',
 				templateUrl:'/partials/find.friends.html',
@@ -78,6 +90,9 @@
 					}, 
 					users: function(adminSrv){
 						return adminSrv.getUsers();
+					},
+					invites: function(mapSrv){
+						return mapSrv.allInvites()
 					},
 					locations: function(adminSrv){
 						return adminSrv.getLocations();

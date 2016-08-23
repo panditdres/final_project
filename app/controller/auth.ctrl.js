@@ -25,7 +25,5 @@
 		function adminLogin(){
 			authSrv.adminLogin(authVm.email,authVm.password)
 		}
-
 	}
-
 })();

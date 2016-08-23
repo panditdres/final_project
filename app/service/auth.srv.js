@@ -38,9 +38,18 @@
 						}
 						$state.go('register');
 					} else {
-						toastr.success("Account created","Success")
-						mapSrv.checkMsg();
-						$state.go('login');
+						$http.post('/api/auth/authenticate',user)
+						.then(function(res){	
+							console.log(res.data.error)	
+							localStorage.loginId = res.data.id;
+							//localStorage.username = res.data;
+							localStorage.loginEmail = email;
+							toastr.success("Account created","Success")
+							mapSrv.checkMsg();
+							$state.go('tutorial');
+						},function(err){
+							console.log(err)
+						})
 					}
 				})
 			} else if (firstName = ''){

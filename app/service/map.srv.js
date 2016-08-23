@@ -8,29 +8,35 @@
 		var self = this;
 		console.log("Map service loading")
 
-		self.getUser 		= getUser;
-		self.userCheck 		= userCheck;
-		self.checkMsg 		= checkMsg;
-		self.interact 		= interact;
-		self.updateUser 	= updateUser;
-		self.profile 		= profile;
-		self.settings 		= settings;
-		self.defaultView 	= defaultView;
-		self.getCapacity 	= getCapacity;
-		self.updateCapacity = updateCapacity;
-		self.addPlayer      = addPlayer;
-		self.addFriend      = addFriend;
-		self.getFriend		= getFriend;
-		self.getLocation    = getLocation;
-		self.sendInvite     = sendInvite;
+		self.getUser 			= getUser;
+		self.userCheck 			= userCheck;
+		self.checkMsg 			= checkMsg;
+		self.interact 			= interact;
+		self.updateUser 		= updateUser;
+		self.profile 			= profile;
+		self.settings 			= settings;
+		self.defaultView 		= defaultView;
+		self.getCapacity 		= getCapacity;
+		self.updateCapacity 	= updateCapacity;
+		self.addPlayer      	= addPlayer;
+		self.addFriend      	= addFriend;
+		self.getFriend			= getFriend;
+		self.getLocation    	= getLocation;
+		self.sendInvite     	= sendInvite;
 		self.addPlayingLocation = addPlayingLocation;
+		self.allInvites			= allInvites;
+		self.getUserInvite		= getUserInvite;
+		self.getLocationInvite	= getLocationInvite;
+		self.getLocationNameAccept  = getLocationNameAccept;
+		self.getUserNameAccept      = getUserNameAccept;
+		// self.accept 			= accept;
+		// self.reject 			= reject;
+		self.updateInvitation   = updateInvitation;
 
 		self.message;
 		self.userData;
 		self.logInInfo;
 		self.userId;
-
-		self.friendDone = false;
 
 		function defaultView(){
 			self.showDefault = true;
@@ -69,6 +75,43 @@
 			}
 		}
 
+		function getUserInvite(userId,index,date,inviteId){
+			return api.request('/users/'+userId,{},'GET')
+			.then(function(res){
+				self.userInviteData = {
+					data: res.data,
+					index: index,
+					date:date,
+					inviteId:inviteId
+				}
+				console.log(res.data)
+				return self.userInviteData
+			})
+		}
+
+		function getLocationInvite(firstName,lastName,locationId,date,inviteId){
+			return api.request('/location/'+locationId,{},'GET')
+			.then(function(res){
+				//console.log("INVTIE LOCATION",res)
+				self.locationInviteData = {
+					location: res.data.location,
+					firstName: firstName,
+					lastName: lastName,
+					date: date,
+					inviteId: inviteId
+				}
+				return self.locationInviteData
+			})
+		}
+
+		function updateInvitation(inviteId,invitations){
+			console.log("UPDATE INVITATIONS",invitations)
+			return api.request('/invites/'+inviteId,invitations,'PUT')
+			.then(function(res){
+				console.log(res)
+			})
+		}
+
 		function updateUser(user, userId){
 			return api.request('/users/update/'+userId,user,'PUT')
 			.then(function(res){
@@ -76,6 +119,39 @@
 				if(res.status === 200){
 					self.profile();
 				}
+			})
+		}
+
+		function allInvites(){
+			return api.request('/invites/',{},'GET')
+			.then(function(res){
+				console.log("Get invites",res.data)
+				self.invites = res.data;
+				return self.invites;
+			})
+		}
+
+		function getLocationNameAccept(locationId,hostId,event){
+			return api.request('/location/'+locationId,{},'GET')
+			.then(function(res){
+				self.locationData = {
+					data:res.data,
+					hostId: hostId,
+					event: event
+				}
+				return self.locationData;
+			})
+		}
+
+		function getUserNameAccept(data,userId,event){
+			return api.request('/users/'+userId,{},'GET')
+			.then(function(res){
+				self.userData = {
+					data:data,
+					user:res.data,
+					event:event
+				}
+				return self.userData;
 			})
 		}
 
@@ -131,7 +207,6 @@
 			self.friendData = [];
 			return api.request('/users/'+friendId,{},'GET')
 			.then(function(res){
-				self.friendDone = true;
 				self.friendData.push(res.data);
 				return self.friendData;
 			})
@@ -173,15 +248,14 @@
 		function interact() {
 			console.log("INTERACT")
 			if(localStorage.authToken) {
-				console.log("IF")
 				// Logout
 				localStorage.clear(localStorage.authToken);
+				localStorage.clear(localStorage.loginId);
 				console.log(localStorage)
 				self.message = "Login";
 				self.userId = ''
 				$state.go('home.map');
 			} else {
-				console.log("ELSE");
 				// Login
 				self.message = "Logout";
 				$state.go('login');

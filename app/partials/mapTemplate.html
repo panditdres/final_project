@@ -73,23 +73,56 @@
 </script>
 
 <!-- NEW SECTION -->
+<!-- SIDE FRIENDS BUTTON -->
 <button class="btn btn-primary friend-button" ng-click="ctrl.showSide()">
   <i class="fa fa-bars" aria-hidden="true"></i>
 </button>
+<div class="notification center" ng-show="ctrl.notificationLogo">
+  <p class="notification">{{ctrl.notifications}}<p>
+</div>
+
 
 <div class="friends move" ng-show="ctrl.show" ng-class="{'move': ctrl.show}">
   <button class="btn btn-primary friend-button" ng-click="ctrl.hideSide()"">
     <i class="fa fa-bars" aria-hidden="true"></i>
   </button>
-  <h1 class="center">Showing all friends</h1>
-  <input ng-model="ctrl.search" type="text" class="form-control" id="search" placeholder="Search Friends">
-  <hr>
-  <div ng-repeat="friends in ctrl.friendData | filter:{firstName:ctrl.search}">
-    {{friends.firstName}} {{friends.lastName}} 
+  <div>
+    <h1 class="center" style="color:white">Showing all {{ctrl.status}}</h1>
     <hr>
-  </div>
-</div>
+    <nav class="navbar navbar-default transparent">
+      <div class="container-fluid">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a class="no-pad" style="color:white; font-size:16px" ng-click="ctrl.friendsView()">All friends</a></li>
+            <li><a class="no-pad" style="color:white; font-size:16px" ng-click="ctrl.notificationsView()">Notifications</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <hr>
 
+    <div ng-show="ctrl.allFriends">
+      <input ng-model="ctrl.search" type="text" class="form-control" id="search" placeholder="Search Friends">
+      <hr>
+      <div style="color:white" ng-repeat="friends in ctrl.friendData | filter:{firstName:ctrl.search}">
+        {{friends.firstName}} {{friends.lastName}} 
+        <hr>
+      </div>
+    </div>
+
+    <div ng-show="ctrl.notificationShow">
+      <div ng-repeat="notifications in ctrl.notificationData">
+        <p style="color:white">{{notifications.firstname}}  {{notifications.lastname}} invited you to play at {{notifications.location.name}} on {{notifications.date | date:longDate}}</p>
+        <button class="btn btn-sm btn-primary" ng-click="ctrl.accept(notifications.inviteId)">Accept</button>
+        <button class="btn btn-sm btn-danger" ng-click="ctrl.reject(notifications.inviteId)" style="margin-left:10px; background-color:#F28679">Reject</button>
+        <hr>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxx -->
 
 
 <!-- make each button toggle -->
@@ -98,6 +131,8 @@
   <h4>You are playing at:</h4>
   <h5 ng-repeat="locations in ctrl.locationData">Location: {{locations.location.name}}</h5>
   <hr>
+  <h3>Events</h3>
+  <h5 ng-repeat="events in ctrl.events">{{events.response.data.data.location.name}} with {{events.response.user.firstName}} {{events.response.user.lastName}} on {{events.response.event.date | date:longDate}}</h5>
 </div>
 
 <div class="home-view" ng-show="ctrl.showProfile" ng-click="ctrl.profile">

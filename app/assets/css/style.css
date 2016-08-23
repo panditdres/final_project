@@ -9,11 +9,11 @@
   height: 100vh;
   width: 300px;
   position: fixed;
-  background-color: grey;
+  background-color: #48494A;
   top: 0px;
   right: -300px;
   transition: all 1s ease;
-  padding:30px;
+  padding:50px 30px 30px 30px;
 }
 
 .find-friends{
@@ -29,6 +29,27 @@ hr.style-two {
 
 button.transparent {
   background-color: transparent;
+}
+
+nav.transparent {
+  background-color: transparent;
+  border: 0;
+}
+
+div.notification {
+  background-color: red;
+  border-radius: 50%;
+  position: fixed;
+  float: right;
+  height: 20px;
+  width: 20px;
+  right: 10px;
+  top: 10px;
+  z-index: 99999;
+}
+
+p.notification {
+  color: white;
 }
 
 div.container-fluid {
