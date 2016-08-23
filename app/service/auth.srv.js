@@ -40,13 +40,18 @@
 					} else {
 						$http.post('/api/auth/authenticate',user)
 						.then(function(res){	
-							console.log(res.data.error)	
+							console.log("authenticate")
+							//introJs().start();
+							swal({   
+								title: "Hey!",   
+								text: "Welcome to Kick App!",   
+								type: "success",   
+								confirmButtonText: "Get Started" });
 							localStorage.loginId = res.data.id;
-							//localStorage.username = res.data;
 							localStorage.loginEmail = email;
 							toastr.success("Account created","Success")
 							mapSrv.checkMsg();
-							$state.go('tutorial');
+							$state.go('home.map');
 						},function(err){
 							console.log(err)
 						})
@@ -98,7 +103,6 @@
 				email:email,
 				password:password
 			}
-			//make api call
 			admin = JSON.stringify(admin);
 			$http.post('/api/auth/authenticate',admin)
 			.then(function(res){		
@@ -109,5 +113,6 @@
 				console.log(err)
 			})
 		}
+
 	}
 })();

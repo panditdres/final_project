@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('mapApp',['ui.router','uiGmapgoogle-maps','angular-jwt','ngGeolocation','ngAnimate','toastr','ui.bootstrap','ngMaterial']);
+		.module('mapApp',['ui.router','uiGmapgoogle-maps','angular-jwt','ngGeolocation','ngAnimate','toastr','ui.bootstrap','ngMaterial','angular-intro']);
 
 	angular
 		.module('mapApp')

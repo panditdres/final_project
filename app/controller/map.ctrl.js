@@ -3,8 +3,16 @@
 		.module('mapApp')
 		.controller('mapCtrl',mapCtrl)
 
-	function mapCtrl($scope, $state, $geolocation, uiGmapGoogleMapApi, user, users, locations, invites, mapSrv, adminSrv, $log, $uibModal, toastr) {
+	function mapCtrl($scope, $state, $geolocation, uiGmapGoogleMapApi, user, users, locations, invites, mapSrv, adminSrv, authSrv, $log, $uibModal, toastr) {
 		var mapVm = this;
+
+		mapVm.CompletedEvent = authSrv.CompletedEvent
+		mapVm.ExitEvent = authSrv.ExitEvent
+		mapVm.ChangeEvent  = authSrv.ChangeEvent
+		mapVm.BeforeChangeEnvent = authSrv.BeforeChangeEvent
+		mapVm.AfterChangeEvent = authSrv.AfterChangeEvent
+		mapVm.IntroOptions = authSrv.IntroOptions
+		mapVm.CallMe = authSrv.CallMe
 
 		// From resolve
 		mapVm.userData 	 = user;
@@ -29,10 +37,7 @@
 		mapVm.getFriend 		= getFriend;
 		mapVm.getLocation       = getLocation;
 		mapVm.checkInvited		= checkInvited;
-
-		if($state.includes('friends') == false){
-			mapVm.checkInvited();
-		}
+		//mapVm.checkFriend       = checkFriend;
 
 		mapVm.checkMsg  = mapSrv.checkMsg();
 		mapVm.interact  = mapSrv.interact;
@@ -71,9 +76,15 @@
 		mapVm.notificationShow = false;
 		mapVm.status = 'friends';
 
+		mapVm.friendMessage = "Add Friend"
+
 		mapVm.getFriend();
 		mapVm.getLocation();
-		mapVm.checkAccepted();
+		mapVm.checkAccepted();	
+
+		if($state.includes('friends') == false){
+			mapVm.checkInvited();
+		}
 
 		function showSide(){
 			mapVm.show = true;
@@ -259,6 +270,7 @@
 		}
 
 		function addFriend(friendInfo){
+			mapVm.friendMessage = 'Friend Added'
 			mapVm.friends.push(friendInfo.id)
 			mapSrv.addFriend(localStorage.loginId, mapVm.friends)
 		}
@@ -411,10 +423,71 @@
 		mapVm.populateMarkers();
 
 		uiGmapGoogleMapApi.then(function(maps) {
-			maps.visualRefresh = true;
-			//console.log("map ready");
-			//console.log(mapVm.map);	
+			maps.visualRefresh = true;	
     	});
+
+		introJs().start();
+
+	    $scope.CompletedEvent = function () {
+        	console.log("Completed Event called");
+	    };
+
+	    $scope.ExitEvent = function () {
+	        console.log("Exit Event called");
+	    };
+
+	    $scope.ChangeEvent = function (targetElement) {
+	        console.log("Change Event called");
+	        console.log(targetElement);
+	    };
+
+	    $scope.BeforeChangeEvent = function (targetElement) {
+	        console.log("Before Change Event called");
+	        console.log(targetElement);
+	    };
+
+	    $scope.AfterChangeEvent = function (targetElement) {
+	        console.log("After Change Event called");
+	        console.log(targetElement);
+	    };
+
+	    $scope.IntroOptions = {
+	        steps:[
+	        {
+	            element: '#step1',
+	            intro: "This is your navigation bar. You can start searching for friends and under your name, you can change your settings and log out",
+	        	position: 'right'
+	        },
+	        {
+	            element: '#step2',
+	            intro: "This button are will let you know where you decided to play after pressing GO at a particular location",
+	            position: 'right'
+	        },
+	        {
+	            element: '#step3',
+	            intro: "This area will show you the events that you have accepted from your friends' invitations",
+	            position: 'right'
+	        },
+	        {
+	            element: '#step4',
+	            intro: "This button allows you to see all your friends and new notifications that you may have missed while being away",
+	            position: 'left'
+	        },
+	        {
+	            element: '#step5',
+	            intro: 'You can start using the application by pressing one of the markers. It will allow you to see who is playing there, the type of field that it is and the address'
+	        }
+	        ],
+	        showStepNumbers: false,
+	        showBullets: false,
+	        exitOnOverlayClick: true,
+	        exitOnEsc:true,
+	        nextLabel: '<strong>NEXT!</strong>',
+	        prevLabel: '<span style="color:green">Previous</span>',
+	        skipLabel: 'Exit',
+	        doneLabel: 'Thanks'
+	    };
+
 
 	}
 

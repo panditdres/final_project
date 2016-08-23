@@ -92,26 +92,31 @@ div.home-view {
 .google-search {
 	width: 200px;
 	height: 33px;
-	margin-top: 60px;
+	margin-top: 10px;
 	border-radius: 5px;
 }
-.gmnoprint > .gm-style-mtc {
-  margin-top: 50px;
-}
+
 .map {
 	height:100%;
 }
 .center {
 	text-align: center;
 }
+
+div.introjs-tooltip{
+  font-family: 'Abel', sans-serif;
+}
+
 .absolute {
+  background-color: #48494A;
+  color: white;
   position: absolute;
+  border-radius: 5px;
   width: 300px;
   min-height: 400px;
   max-height: 800px;
-  border: 2px solid black;
   left:10px;
-  top: 100px;
+  top: 60px;
   font-family: 'Abel', sans-serif;
   font-weight: 400;
 }

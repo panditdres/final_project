@@ -37,7 +37,6 @@ router.post('/authenticate',function(req,res){
 	console.log('Authentication Endpoint');
 	var __user = req.body;
 	console.log(__user)
-
 	var where = {where:{email:__user.email}};
 	models.Users.find(where)
 	.then(function(user){
@@ -47,10 +46,6 @@ router.post('/authenticate',function(req,res){
 		    .json({err:'wrong email'});
 		}	
 		bcrypt.compare(__user.password, user.password, function(err, result) {
-		    // res == true 
-		    console.log("PASSWORD AFTER")
-			console.log(__user.password);
-			console.log(user.password);
 		    if(result==true){
 		    	user.password = '';
 		    	delete user.password;
@@ -63,9 +58,7 @@ router.post('/authenticate',function(req,res){
 					token: token
 				}
 				res.set('authentication',token);
-				//console.log('Authentication',res.set('authentication',token))
 		    	res.json(user_details)
-		    	//console.log("USER OBJ",res.json(user_obj))
 		    }
 		    else{
 		    	res.status(403)

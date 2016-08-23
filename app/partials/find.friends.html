@@ -10,7 +10,7 @@
 			<input ng-model="ctrl.search" type="text" class="form-control gap-bottom" id="search" placeholder="Search Friends">
 			<hr class="style-two">
 		</div>
-
+		{{ctrl.friendShow}}
 		<div ng-repeat="users in ctrl.allUsers | filter:{firstName:ctrl.search, lastName:ctrl.search, username:ctrl.search}">
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-xs-6">
@@ -18,8 +18,8 @@
 					<h6>{{users.username}}</h6>
 				</div>
 				<div class="col-lg-6 col-md-6 col-xs-6">
-					<button class="btn btn-primary right" ng-click="ctrl.friendRequest(users)">
-						Add Friend<i class="material-icons">person_add</i>
+					<button class="btn btn-primary right" ng-class="{'btn-danger': ctrl.friends.includes(friends.id)}" ng-click="ctrl.addFriend(users)">
+						{{ctrl.friendMessage}}<i class="material-icons">person_add</i>
 					</button>
 				</div>	
 			</div>
