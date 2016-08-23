@@ -108,6 +108,7 @@ div.home-view {
   position: absolute;
   width: 300px;
   min-height: 400px;
+  max-height: 800px;
   border: 2px solid black;
   left:10px;
   top: 100px;

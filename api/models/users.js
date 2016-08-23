@@ -6,6 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     email: {type:DataTypes.STRING, unique:true},
     username: {type:DataTypes.STRING, unique:true},
     friends: DataTypes.ARRAY(DataTypes.STRING),
+    friendRequestFrom: DataTypes.ARRAY(DataTypes.INTEGER),
     playing: DataTypes.ARRAY(DataTypes.INTEGER),
     password: DataTypes.STRING
   }, {

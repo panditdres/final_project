@@ -11,6 +11,7 @@
 		mapVm.allUsers 	 = users;
 		mapVm.locations  = locations;
 		mapVm.friends 	 = user.friends;
+		mapVm.friendRequestFrom = user.friendRequestFrom;
 		mapVm.playingAt  = user.playing;
 		mapVm.allInvites = invites;
 		console.log(mapVm.friends)
@@ -24,6 +25,7 @@
 		mapVm.openModal 		= openModal;
 		mapVm.toggleAnimations 	= toggleAnimations;
 		mapVm.addFriend 		= addFriend;
+		mapVm.friendRequest		= friendRequest
 		mapVm.getFriend 		= getFriend;
 		mapVm.getLocation       = getLocation;
 		mapVm.checkInvited		= checkInvited;
@@ -73,19 +75,6 @@
 		mapVm.getLocation();
 		mapVm.checkAccepted();
 
-		// if($state.current.name == 'home.map'){
-		// 	if(mapVm.friends != null){
-		// 		console.log("getFriend()")
-		// 		mapVm.getFriend();
-		// 	} 
-		// 	if(mapVm.playingAt != null){
-		// 		console.log("getLocation()")
-		// 		mapVm.getLocation();
-		// 	} else {
-		// 		console.log("you have no friends nor locations")
-		// 	}
-		// }
-
 		function showSide(){
 			mapVm.show = true;
 			mapVm.notificationLogo = false;
@@ -110,19 +99,17 @@
 		function accept(inviteId){
 			console.log(inviteId)
 			for(var i = 0; i < mapVm.allInvites.invites.length; i++){
-				console.log("ARRAY",mapVm.allInvites.invites)
 				if(mapVm.allInvites.invites[i].id === inviteId){
 					mapVm.allInvites.invites[i].accepted.push(user.id)
 					var index = mapVm.allInvites.invites[i].invited.indexOf(user.id);
 					mapVm.allInvites.invites[i].invited.splice(index,1);
-					console.log("ALL INVITES ACCEPT",mapVm.allInvites.invites[i])
 					mapSrv.updateInvitation(inviteId,mapVm.allInvites.invites[i])
 					.then(function(res){
-						//update array
-						return mapSrv.getInvite(inviteId)
+						return mapSrv.allInvites()
 					}).then(function(res){
 						console.log(res)
-						mapVm.allInvites.invites.push(res.invite);
+						console.log(mapVm.allInvites.invites)
+						mapVm.allInvites.invites = res.invites;
 						mapVm.checkAccepted();
 						mapVm.checkInvited();
 					})
@@ -137,7 +124,6 @@
 					mapVm.allInvites.invites[i].rejected.push(user.id);
 					var index = mapVm.allInvites.invites[i].invited.indexOf(user.id);
 					mapVm.allInvites.invites[i].invited.splice(index,1);
-					console.log("ALL INVITES REJECT",mapVm.allInvites.invites[i])
 					mapSrv.updateInvitation(inviteId,mapVm.allInvites.invites[i])
 					.then(function(res){
 						mapVm.checkInvited();
@@ -145,28 +131,21 @@
 				}
 			}
 		}
-		mapVm.events = [];
+		
 		function checkAccepted(){
-			console.log("checkAccepted RUNNING")
+			mapVm.events = [];
+			var counter = 0;
 			for(var i = 0; i < mapVm.allInvites.invites.length; i++) {
-				console.log("check accept",mapVm.allInvites.invites[i])
 				if(mapVm.allInvites.invites[i].accepted.length != 0){
-					console.log("Hello", i)
-					console.log(mapVm.allInvites.invites[i].accepted)
 					if(mapVm.allInvites.invites[i].accepted.includes(user.id.toString())){
-						console.log("hello")
-						console.log(mapVm.allInvites.invites[i])
 						mapSrv.getLocationNameAccept(mapVm.allInvites.invites[i].locationId,mapVm.allInvites.invites[i].userId,mapVm.allInvites.invites[i])
 						.then(function(res){
 							return res;
 						}).then(function(response){
-							console.log(response);
 							return mapSrv.getUserNameAccept(response,response.hostId,response.event)
 						}).then(function(res2){
-							console.log(res2);
-							var eventInfo = res2;					
+							var eventInfo = res2;			
 							mapVm.events.push(eventInfo);
-							console.log(mapVm.events)
 						})
 					}
 				}
@@ -178,16 +157,13 @@
 			mapVm.notifications = 0;
 			for(var i = 0; i < mapVm.allInvites.invites.length; i++){
 				if(mapVm.allInvites.invites[i].invited.includes(user.id)){
-					console.log(mapVm.allInvites.invites[i])
 					mapVm.notifications++
 					mapSrv.getUserInvite(mapVm.allInvites.invites[i].userId,i,mapVm.allInvites.invites[i].date,mapVm.allInvites.invites[i].id)
 					.then(function(res){
 						return res;
 					}).then(function(response){
-						// console.log(response)
 						return mapSrv.getLocationInvite(response.data.firstName,response.data.lastName,mapVm.allInvites.invites[response.index].locationId,response.date,response.inviteId)			
 					}).then(function(res2){
-						// console.log(res2)
 						var data = {
 							firstname: res2.firstName,
 							lastname: res2.lastName,
@@ -195,9 +171,7 @@
 							date: res2.date,
 							inviteId: res2.inviteId
 						}
-						// console.log(data)
 						mapVm.notificationData.push(data);
-						// console.log(mapVm.notificationData);
 						toastr.info("You have a new invitation from "+ res2.firstName + ' ' + res2.lastName + ' to play at ' + res2.location.name, "Notification")
 					})
 				}
@@ -289,29 +263,30 @@
 			mapSrv.addFriend(localStorage.loginId, mapVm.friends)
 		}
 
+		function friendRequest(friendInfo){
+			console.log("friend request")
+			console.log(mapVm.friendRequestFrom)
+			console.log(typeof friendInfo.id)
+			mapVm.friendRequestFrom.push(friendInfo.id)
+			mapSrv.friendRequest(localStorage.loginId, mapVm.friendRequestFrom)
+		}
+
 		function getFriend(){
-			//console.log("GET FRIEND")
-			//console.log(mapVm.friends)
 			for(var i = 0; i < mapVm.friends.length; i++){
-				//console.log("FOR LOOP")
 				mapSrv.getFriend(mapVm.friends[i])
 				.then(function(res){
 					if(i == (mapVm.friends.length)){
-						//console.log(res)
 						mapVm.friendData = res;
 					}				
 				})
-			}
-			
+			}	
 		}
 
 		function getLocation(){
 			for(var i = 0; i < mapVm.playingAt.length; i++){
 				mapSrv.getLocation(mapVm.playingAt[i])
 				.then(function(res){
-					//console.log(res)
 					if(i == mapVm.playingAt.length){
-						//console.log(res)
 						mapVm.locationData = res;
 					}
 				})

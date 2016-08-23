@@ -65,6 +65,21 @@ router.put('/location/:userId',function(req,res){
 	})
 })
 
+// update friend request
+router.put('/friendRequest/:userId', function(req,res){
+	console.log("FRIEND REQUEST",req.params)
+	var where = {where:{id:req.params.userId}}
+	var __user = req.body;
+	console.log("USER FRIEND REQUEST",__user)
+	models.Users.find(where).then(function(user){
+		user.updateAttributes({
+			friendRequestFrom: __user
+		});
+		res.json({
+			user:__user
+		});
+	})
+})
 
 // update users
 router.put('/update/:userId', function(req,res){

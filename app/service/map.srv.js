@@ -19,6 +19,7 @@
 		self.getCapacity 		= getCapacity;
 		self.updateCapacity 	= updateCapacity;
 		self.addPlayer      	= addPlayer;
+		self.friendRequest		= friendRequest;
 		self.addFriend      	= addFriend;
 		self.getFriend			= getFriend;
 		self.getLocation    	= getLocation;
@@ -33,6 +34,7 @@
 		// self.accept 			= accept;
 		// self.reject 			= reject;
 		self.updateInvitation   = updateInvitation;
+
 
 		self.message;
 		self.userData;
@@ -209,6 +211,13 @@
 		function addFriend(userId, friendArray){
 			console.log("Add friend service")
 			return api.request('/users/friends/'+userId,friendArray,'PUT')
+			.then(function(res){
+				console.log(res)
+			})
+		}
+
+		function friendRequest(userId, requestArray){
+			return api.request('/users/friendRequest/'+userId,requestArray,'PUT')
 			.then(function(res){
 				console.log(res)
 			})
