@@ -1,3 +1,4 @@
+<img src="Asset_1.png" class="myLogo">
 <!-- NAV BAR -->
 <div ng-intro-options="IntroOptions" ng-intro-method="CallMe"
      ng-intro-oncomplete="CompletedEvent" ng-intro-onexit="ExitEvent"
@@ -43,7 +44,7 @@
       </div>
       <div class="modal-footer">
 
-         <!--  <div uib-timepicker ng-model="ctrl.mytime" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></div> -->
+          <div uib-timepicker ng-model="ctrl.mytime" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></div>
 
           <button class="btn btn-primary" type="button" ng-click="ctrl.incrementCounter(ctrl.locationId,ctrl.locationCounter); ctrl.addPlayer(ctrl.locationId,ctrl.user); ctrl.addPlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.goBtn">Let's Play</button>
           <button class="btn btn-warning" type="button" ng-click="ctrl.cancel(ctrl.locationId,ctrl.locationCounter); ctrl.removePlayer(ctrl.locationId,ctrl.user); ctrl.removePlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.cancelBtn">Or Nah</button>
@@ -63,7 +64,7 @@
             <div class="form-group">
               <h4 for="Friends">Include your friends:</h4>
               <div>
-                <button class="btn btn-primary gap" ng-repeat="friends in ctrl.friendData" ng-click="ctrl.invite(friends.id)" ng-class="{'btn-danger': ctrl.invitation.includes(friends.id)}">
+                <button class="btn btn-default gap" ng-repeat="friends in ctrl.friendData" ng-click="ctrl.invite(friends.id)" ng-class="{'btn-primary': ctrl.invitation.includes(friends.id)}">
                   {{friends.firstName}} {{friends.lastName}}</i>
                 </button>
               </div>     
@@ -88,7 +89,7 @@
 
 <div class="friends move" ng-show="ctrl.show" ng-class="{'move': ctrl.show}">
   <button class="btn btn-primary friend-button" ng-click="ctrl.hideSide()"">
-    <i class="fa fa-bars" aria-hidden="true"></i>
+    <i class="fa fa-times" aria-hidden="true"></i>
   </button>
   <div>
     <h1 class="center" style="color:white">Showing all {{ctrl.status}}</h1>
@@ -146,7 +147,7 @@
     </div>
 
     <div class="events">
-      <h3>Events <i class="fa fa-calendar" aria-hidden="true"></i></h3>
+      <h3 class="events">Events <i class="fa fa-calendar" aria-hidden="true"></i></h3>
       <h5 ng-show="ctrl.eventShow">You have no events yet</h5>
       <h5 ng-repeat="events in ctrl.events">{{events.data.data.location.name}} with {{events.user.firstName}} {{events.user.lastName}} on {{events.event.date | date:longDate}}</h5>
     </div>

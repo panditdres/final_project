@@ -14,10 +14,6 @@
 		mapVm.friendRequestFrom = user.friendRequestFrom;
 		mapVm.playingAt  		= user.playing;
 		mapVm.allInvites 		= invites;
-		//console.log(mapVm.friends)
-
-		//console.log(mapVm.allInvites)
-		//finish function line 189
 
 		// Function binding
 		mapVm.upload 			= upload;
@@ -203,7 +199,7 @@
 		function checkFriends(){
 			mapVm.nonFriends = [];
 			for(var i = 0; i < users.length; i++){
-				if(!(user.friends.includes(users[i].id.toString()))){
+				if(!(user.friends.includes(users[i].id.toString()) || user.id == users[i].id )){
 					mapVm.nonFriends.push(users[i])
 				}
 			}
@@ -497,8 +493,6 @@
 	        skipLabel: 'Exit',
 	        doneLabel: 'Thanks'
 	    };
-
-
 	}
 
 })();

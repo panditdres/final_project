@@ -19,6 +19,8 @@
 .find-friends{
   margin-left: 200px;
   margin-right: 200px;
+  margin-top: 100px;
+  margin-bottom: 200px;
 }
 
 .profile-pic {
@@ -75,6 +77,19 @@ div.notification {
 div.events {
   max-height: 250px;
   overflow: scroll;
+  margin-bottom: 20px;
+}
+
+img.myLogo{
+  position: absolute;
+  height: 70px;
+  left: 58%;
+  top: 10px;
+  z-index: 100;
+}
+
+h3.events {
+  margin-top: 0px;
 }
 
 div.all-friends {
@@ -107,10 +122,8 @@ div.home-view {
 
 .right {
   background-color: #48494A;
-  right: 30px;
-  top: 28px;
+  margin-top: 30px;
   vertical-align: middle;
-  position: absolute;
 }
 
 .relative {
