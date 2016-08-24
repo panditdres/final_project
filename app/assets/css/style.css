@@ -21,6 +21,10 @@
   margin-right: 200px;
 }
 
+input.form-control{
+  width:300px;
+}
+
 hr.style-two {
     border: 0;
     height: 1px;
@@ -71,11 +75,24 @@ div.home-view {
 }
 
 .right {
-  float: right;
+  background-color: #48494A;
+  right: 30px;
+  top: 20px;
+  vertical-align: middle;
+  position: absolute;
+}
+
+.relative {
+  position: relative;
 }
 
 .move {
   transform: translateX(-300px);
+}
+
+.location-info, .invite-info{
+  color:white;
+  background-color: #48494A;
 }
 
 .friend-button {

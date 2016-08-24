@@ -27,51 +27,53 @@
 </nav>
 
 <script type="text/ng-template" id="myModalContent.html" ng-repeat="locations in ctrl.locations">
-  <div class="location-info" ng-show="ctrl.locationInfo">
-    <div class="modal-header">
-        <h3 class="modal-title">Name: {{ctrl.locationName}}</h3>
-        <button class="btn btn-primary" type="button" ng-click="ctrl.showInvite()">Invite Friends</button>
-    </div>
-    <div class="modal-body">
-        <h4>Address: {{ctrl.locationAddress}}</h4>
-        <h5>Type of field: {{ctrl.locationType}}</h5>
-        <h5>Number of players: {{ctrl.locationPlayers.length}}</h5>
-        <h5>Players going today: </h5>
-        <h5 ng-repeat="players in ctrl.locationPlayers">{{players}}</h5>
-    </div>
-    <div class="modal-footer">
+    <div class="location-info constant" ng-show="ctrl.locationInfo">
+      <div class="modal-header">
+          <h2 class="modal-title">Name: {{ctrl.locationName}}</h2>
+          <button class="btn btn-primary" type="button" ng-click="ctrl.showInvite()">Invite Friends</button>
+      </div>
+      <div class="modal-body">
+          <h3>Address: {{ctrl.locationAddress}}</h3>
+          <h4>Type of field: {{ctrl.locationType}}</h4>
+          <h4>Number of players: <span style="font-weight:bolder">{{ctrl.locationPlayers.length}}</span></h4>
+          <h4>Players going today: </h4>
+          <ul>
+            <li ng-repeat="players in ctrl.locationPlayers">{{players}}</li>
+          </ul>
+      </div>
+      <div class="modal-footer">
 
-       <!--  <div uib-timepicker ng-model="ctrl.mytime" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></div> -->
+         <!--  <div uib-timepicker ng-model="ctrl.mytime" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></div> -->
 
-        <button class="btn btn-primary" type="button" ng-click="ctrl.incrementCounter(ctrl.locationId,ctrl.locationCounter); ctrl.addPlayer(ctrl.locationId,ctrl.user); ctrl.addPlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.goBtn">Go</button>
-        <button class="btn btn-warning" type="button" ng-click="ctrl.cancel(ctrl.locationId,ctrl.locationCounter); ctrl.removePlayer(ctrl.locationId,ctrl.user); ctrl.removePlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.cancelBtn">Cancel</button>
+          <button class="btn btn-primary" type="button" ng-click="ctrl.incrementCounter(ctrl.locationId,ctrl.locationCounter); ctrl.addPlayer(ctrl.locationId,ctrl.user); ctrl.addPlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.goBtn">Let's Play</button>
+          <button class="btn btn-warning" type="button" ng-click="ctrl.cancel(ctrl.locationId,ctrl.locationCounter); ctrl.removePlayer(ctrl.locationId,ctrl.user); ctrl.removePlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.cancelBtn">Or Nah</button>
+      </div>
     </div>
-  </div>
 
-  <div class="invite-info" ng-show="ctrl.inviteInfo">
-    <div class="modal-header">
-        <h3 class="modal-title">Send Invitation</h3>
+    <div class="invite-info constant" ng-show="ctrl.inviteInfo">
+      <div class="modal-header">
+          <h3 class="modal-title">Send Invitation <i class="fa fa-envelope-o" aria-hidden="true"></i></h3>
+      </div>
+      <div class="modal-body">
+          
+            <div class="form-group">
+                <h4 for="Date">Date <i class="fa fa-calendar" aria-hidden="true"></i></h4>
+                <input type="date" name="eventDate" class="form-control" ng-model="ctrl.eventDate">
+            </div>
+            <div class="form-group">
+              <h4 for="Friends">Include your friends:</h4>
+              <div>
+                <button class="btn btn-primary gap" ng-repeat="friends in ctrl.friendData" ng-click="ctrl.invite(friends.id)" ng-class="{'btn-danger': ctrl.invitation.includes(friends.id)}">
+                  {{friends.firstName}} {{friends.lastName}}</i>
+                </button>
+              </div>     
+            </div>
+          
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-primary" type="button" ng-click="ctrl.sendInvite(ctrl.locationId,ctrl.user)" ng-disabled="">Send</button>
+      </div>
     </div>
-    <div class="modal-body">
-        
-          <div class="form-group">
-              <label for="Date">Date</label>
-              <input type="date" name="eventDate" class="form-control" ng-model="ctrl.eventDate">
-          </div>
-          <div class="form-group">
-            <label for="Friends">Include your friends</label>
-            <div>
-              <button class="btn btn-primary gap" ng-repeat="friends in ctrl.friendData" ng-click="ctrl.invite(friends.id)" ng-class="{'btn-danger': ctrl.invitation.includes(friends.id)}">
-                {{friends.firstName}} <i class="fa fa-plus" aria-hidden="true"></i>
-              </button>
-            </div>     
-          </div>
-        
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="ctrl.sendInvite(ctrl.locationId,ctrl.user)" ng-disabled="">Send</button>
-    </div>
-  </div>
 </script>
 
 <!-- NEW SECTION -->
@@ -139,7 +141,7 @@
     </div>
 
     <div>
-      <h3>Events</h3>
+      <h3>Events <i class="fa fa-calendar" aria-hidden="true"></i></h3>
       <h5 ng-show="ctrl.eventShow">You have no events yet</h5>
       <h5 ng-repeat="events in ctrl.events">{{events.data.data.location.name}} with {{events.user.firstName}} {{events.user.lastName}} on {{events.event.date | date:longDate}}</h5>
     </div>

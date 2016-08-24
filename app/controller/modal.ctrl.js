@@ -150,7 +150,7 @@ angular.module('mapApp')
   }
 
   function incrementCounter(locationId, counter){ 
-    if(modalVm.capacity > modalVm.maxCapacity - 1){
+    if(modalVm.locationPlayers.length > modalVm.maxCapacity - 1){
       toastr.error('There are no more spots', 'Error')
     } else {
       modalVm.capacity++;

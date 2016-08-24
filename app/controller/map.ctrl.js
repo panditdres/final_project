@@ -6,23 +6,18 @@
 	function mapCtrl($scope, $state, $geolocation, uiGmapGoogleMapApi, user, users, locations, invites, mapSrv, adminSrv, authSrv, $log, $uibModal, toastr) {
 		var mapVm = this;
 
-		mapVm.CompletedEvent = authSrv.CompletedEvent
-		mapVm.ExitEvent = authSrv.ExitEvent
-		mapVm.ChangeEvent  = authSrv.ChangeEvent
-		mapVm.BeforeChangeEnvent = authSrv.BeforeChangeEvent
-		mapVm.AfterChangeEvent = authSrv.AfterChangeEvent
-		mapVm.IntroOptions = authSrv.IntroOptions
-		mapVm.CallMe = authSrv.CallMe
-
 		// From resolve
-		mapVm.userData 	 = user;
-		mapVm.allUsers 	 = users;
-		mapVm.locations  = locations;
-		mapVm.friends 	 = user.friends;
+		mapVm.userData 	 		= user;
+		mapVm.allUsers 	 		= users;
+		mapVm.locations  		= locations;
+		mapVm.friends 	 		= user.friends;
 		mapVm.friendRequestFrom = user.friendRequestFrom;
-		mapVm.playingAt  = user.playing;
-		mapVm.allInvites = invites;
-		console.log(mapVm.friends)
+		mapVm.playingAt  		= user.playing;
+		mapVm.allInvites 		= invites;
+		//console.log(mapVm.friends)
+
+		//console.log(mapVm.allInvites)
+		//finish function line 189
 
 		// Function binding
 		mapVm.editUser 			= editUser;
@@ -48,16 +43,14 @@
 		mapVm.userName 	= mapVm.userData.username;
 		mapVm.email 	= mapVm.userData.email;
 		mapVm.userId 	= mapVm.userData.id;
-		//console.log("ID",mapVm.userId)
 
 		// Default values for ng-show in the template
 		mapVm.showDefault  = mapSrv.showDefault;
 		mapVm.showSettings = mapSrv.showSettings;
-		//console.log( "SHHW DEF",mapVm.showDefault )
 		mapVm.show = false;
 		// Runs the default view function
 		mapVm.defaultView();
-		//console.log(mapVm.locations[0])
+
 		mapVm.showSide = showSide;
 		mapVm.hideSide = hideSide;
 		mapVm.friendsView = friendsView;
@@ -75,12 +68,8 @@
 		mapVm.status = 'friends';
 
 		mapVm.friendMessage = "Add Friend"
-
 		
 		mapVm.eventShow = true;
-
-			
-
 
 		mapVm.getFriend();
 		mapVm.getLocation();
@@ -88,6 +77,10 @@
 
 		if($state.includes('friends') == false){
 			mapVm.checkInvited();
+		}
+
+		if($state.includes('friends') == true){
+			mapVm.checkFriends();
 		}
 
 		function showSide(){
@@ -203,7 +196,11 @@
 				
 		function checkFriends(){
 			mapVm.nonFriends = [];
-
+			for(var i = 0; i < users.length; i++){
+				if(!(user.friends.includes(users[i].id.toString()))){
+					mapVm.nonFriends.push(users[i])
+				}
+			}
 		}
 
 		function openModal(size,name,type,id,capacity,max,address,players){
@@ -274,9 +271,10 @@
 		}
 
 		function addFriend(friendInfo){
-			mapVm.friendMessage = 'Friend Added'
+			toastr.success("Nice! You have added a new friend","Success")
 			mapVm.friends.push(friendInfo.id)
 			mapSrv.addFriend(localStorage.loginId, mapVm.friends)
+			mapVm.checkFriends();
 		}
 
 		function friendRequest(friendInfo){

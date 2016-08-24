@@ -57,7 +57,7 @@
 				.success(function(data,status){
 			})
 				.then(function(res,err){
-					console.log(res.data)
+					//console.log(res.data)
 					self.userData = res.data;
 					self.userId = res.data.id;
 					self.token = res.config.headers.authentication;
@@ -119,7 +119,7 @@
 		function allInvites(){
 			return api.request('/invites/',{},'GET')
 			.then(function(res){
-				console.log("Get invites",res.data)
+				//console.log("Get invites",res.data)
 				self.invites = res.data;
 				return self.invites;
 			})
