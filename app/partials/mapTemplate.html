@@ -15,10 +15,10 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a class="dropbtn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white;">{{ctrl.userData.firstName}} <span class="caret"></span></a>
-          <ul class="dropdown-content">
-            <li><a ng-click="ctrl.settings()">Settings</a></li>
+          <ul class="dropdown-content z-index-high">
+            <li><a ng-click="ctrl.settings()">Settings <i class="fa fa-cogs" aria-hidden="true"></i></a></li>
             <li role="separator" class="divider"></li>
-            <li><a ui-sref="login" ng-click="ctrl.interact()">{{ctrl.checkMsg}}</a></li>
+            <li><a ui-sref="login" ng-click="ctrl.interact()">{{ctrl.checkMsg}} <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
           </ul>
         </li>
       </ul>
@@ -109,10 +109,14 @@
     <div ng-show="ctrl.allFriends">
       <input ng-model="ctrl.search" type="text" class="form-control" id="search" placeholder="Search Friends">
       <hr>
-      <div style="color:white" ng-repeat="friends in ctrl.friendData | filter:{firstName:ctrl.search}">
-        {{friends.firstName}} {{friends.lastName}} 
-        <hr>
+      <div class="all-friends" >
+        <div class="relative" ng-repeat="friends in ctrl.friendData | filter:{firstName:ctrl.search}">
+          {{friends.firstName}} {{friends.lastName}} 
+          <img class="profile-pic-all" ng-src="{{friends.profilePic}}">
+          <hr>
+        </div>
       </div>
+      
     </div>
 
     <div ng-show="ctrl.notificationShow">
@@ -133,14 +137,15 @@
 <div>
   <div class="home-view" ng-show="ctrl.showDefault">
     <div>
-      <h2>Hello {{ctrl.userData.firstName}}</h2>
-
+      <h2>Hello {{ctrl.userData.firstName}}
+        <img class="profile-pic" ng-src="{{ctrl.userData.profilePic}}">  
+      </h2>
       <h4>You are playing at:</h4>
-      <h5 ng-repeat="locations in ctrl.locationData">{{locations.location.name}}</h5>
+      <h5 ng-repeat="locations in ctrl.locationData" ng-click="ctrl.geolocate(locations.location.latitude,locations.location.longitude)">{{locations.location.name}}</h5>
       <hr>
     </div>
 
-    <div>
+    <div class="events">
       <h3>Events <i class="fa fa-calendar" aria-hidden="true"></i></h3>
       <h5 ng-show="ctrl.eventShow">You have no events yet</h5>
       <h5 ng-repeat="events in ctrl.events">{{events.data.data.location.name}} with {{events.user.firstName}} {{events.user.lastName}} on {{events.event.date | date:longDate}}</h5>
@@ -148,17 +153,19 @@
   </div>
 
   <div ng-show="ctrl.showSettings" ng-click="ctrl.settings">
-    <h2>
-      Settings
+
+    <h2 style="margin-left:15px">
+      Settings <i class="fa fa-cogs" aria-hidden="true"></i>
     </h2>
 
     <div class="panel-body">
 
-        <form method="post" action="path/to/api" enctype="multipart/form-data">
-          <input type="file" name="file">
-          <button type="submit">upload file</button>
+        <form ng-submit="ctrl.upload()" enctype="multipart/form-data">
+          <h4>Add a profile picture</h4>
+          <input file-model="ctrl.file" type="file" name="file">
+          <button class="btn-xs btn-primary " type="submit">upload file</button>
         </form>
-
+        <hr>
         <form role="form" ng-submit="ctrl.editUser(ctrl.userId)">
           <div class="form-group">
                 <label for="firstName">First Name</label>

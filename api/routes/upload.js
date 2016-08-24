@@ -6,7 +6,7 @@ console.log("loading upload route")
 
 var storage = multer.diskStorage({
 	destination: function(req, file, callback) {
-		callback(null, './uploads');
+		callback(null, '../app/uploads/');
 	},
 	filename: function(req, file, callback) {
 		var originalName = file.originalname;
@@ -20,13 +20,14 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage}).any();
 
 // set up API endpoint
-router.post('/upload', function(req, res) {
+router.post('/', function(req, res) {
 	upload(req, res, function(err) {
 		if (err) {
-			res.send(err);
+			res.status(500).send(err);
 			console.log(err);
+		} else {
+			res.json(req.files[0]);
 		}
-		res.send('File is uploaded');
 	});
 });
 

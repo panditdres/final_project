@@ -3,7 +3,7 @@
 		.module('mapApp')
 		.controller('mapCtrl',mapCtrl)
 
-	function mapCtrl($scope, $state, $geolocation, uiGmapGoogleMapApi, user, users, locations, invites, mapSrv, adminSrv, authSrv, $log, $uibModal, toastr) {
+	function mapCtrl($http, $scope, $state, $geolocation, uiGmapGoogleMapApi, user, users, locations, invites, mapSrv, adminSrv, authSrv, $log, $uibModal, toastr) {
 		var mapVm = this;
 
 		// From resolve
@@ -20,6 +20,7 @@
 		//finish function line 189
 
 		// Function binding
+		mapVm.upload 			= upload;
 		mapVm.editUser 			= editUser;
 		mapVm.settings 			= settings;
 		mapVm.defaultView  		= defaultView;
@@ -81,6 +82,11 @@
 
 		if($state.includes('friends') == true){
 			mapVm.checkFriends();
+		}
+
+		function upload(){
+			var fileName = mapVm.file;
+			mapSrv.upload(fileName,user.id)
 		}
 
 		function showSide(){

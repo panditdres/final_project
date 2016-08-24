@@ -4,7 +4,7 @@
 		.module('mapApp')
 		.service('mapSrv', mapSrv)
 
-	function mapSrv($http, $state, api){
+	function mapSrv($http, $state, api, toastr){
 		var self = this;
 		console.log("Map service loading")
 
@@ -33,12 +33,36 @@
 		// self.accept 			= accept;
 		// self.reject 			= reject;
 		self.updateInvitation   = updateInvitation;
-
+		self.upload				= upload;
+		self.updateProfilePic   = updateProfilePic;
 
 		self.message;
 		self.userData;
 		self.logInInfo;
 		self.userId;
+
+		function upload(fileName,userId){
+			var file = fileName;
+			var user = userId;
+		    var formData = new FormData();
+		    formData.append('file', file);
+
+		    $http.post('/api/upload',formData, {
+		        transformRequest: angular.identity,
+		        headers: {'Content-Type': undefined}
+		    })
+		    .then(function(res){
+		    	console.log(res.data)
+		    	self.filePath = res.data.path.slice(6);
+		    	toastr.success('Profile Picture Updated', 'Success')
+		    	console.log(self.filePath)
+		      	console.log('successfully uploaded file!');
+		      	self.updateProfilePic(self.filePath,userId)
+		    })
+		    .catch(function(err){
+		      	console.log(err);
+		    });
+		}
 
 		function defaultView(){
 			self.showDefault = true;
@@ -94,6 +118,21 @@
 					inviteId: inviteId
 				}
 				return self.locationInviteData
+			})
+		}
+
+		function updateProfilePic(filePath, userId){
+			console.log(filePath)
+			console.log(userId)
+			var fileObj = {
+				path: filePath
+			}
+			return api.request('/users/profilePic/'+userId,fileObj,'PUT')
+			.then(function(res){
+				console.log(res);
+				$state.reload()
+				self.defaultView();
+				return res;
 			})
 		}
 

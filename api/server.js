@@ -16,7 +16,7 @@ var auth_route  	= require('./routes/auth');
 var users_route 	= require('./routes/users');
 var admin_route 	= require('./routes/admin');
 var location_route 	= require('./routes/location');
-var history_route 	= require('./routes/history');
+//var history_route 	= require('./routes/history');
 var upload_route 	= require('./routes/upload');
 var invites_route   = require('./routes/invites')
 
@@ -25,7 +25,7 @@ app.use('/api/auth',auth_route);
 app.use('/api/users',authentication,users_route);
 app.use('/api/admin',authentication,admin_route);
 app.use('/api/location',location_route);
-app.use('/api/history',history_route);
+// app.use('/api/history',history_route);
 app.use('/api/upload',upload_route);
 app.use('/api/invites',invites_route)
 
