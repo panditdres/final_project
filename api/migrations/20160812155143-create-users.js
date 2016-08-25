@@ -44,6 +44,10 @@ module.exports = {
       profilePic: {
         type: Sequelize.STRING,
         defaultValue: "/uploads/default.png"
+      },
+      friendRequestFrom: {
+        type: Sequelize.ARRAY(Sequelize.STRING),
+        defaultValue:[]
       }
     });
   },
