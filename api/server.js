@@ -32,8 +32,8 @@ app.use('/api/invites',authentication,invites_route)
 app.use('/api/reviews',reviews_route)
 
 models.sequelize.sync().then(function(){
-	app.listen(8092, function(){
-		console.log('Server started on http://localhost:8092');
+	app.listen(80, function(){
+		console.log('Server started on http://localhost:80');
 		console.log('Press CTRL + C to stop server');
 	})
 })
