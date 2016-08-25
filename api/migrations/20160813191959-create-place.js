@@ -27,6 +27,17 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      maxCapacity: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
+      address: {
+        type: Sequelize.STRING
+      },
+      players: {
+        type: Sequelize.ARRAY(Sequelize.STRING),
+        defaultValue: []
       }
     });
   },

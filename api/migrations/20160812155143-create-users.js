@@ -28,6 +28,22 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      username: {
+        type: Sequelize.STRING,
+        unique: true
+      },
+      friends: {
+        type: Sequelize.ARRAY(Sequelize.STRING),
+        defaultValue: []
+      },
+      playing: {
+        type: Sequelize.ARRAY(Sequelize.INTEGER),
+        defaultValue: []
+      },
+      profilePic: {
+        type: Sequelize.STRING,
+        defaultValue: "/uploads/default.png"
       }
     });
   },
