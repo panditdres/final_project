@@ -3,7 +3,11 @@
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
-.angular-google-map-container { height: 100vh; }
+.angular-google-map-container { 
+  position: fixed !important;
+  height: 100% !important;
+  width: 100% !important;
+}
 
 .friends{
   height: 100vh;
@@ -21,8 +25,17 @@
 }
 
 .appName {
-  font-size: 95px;
+  font-size: 75px;
   font-family: 'Orbitron', sans-serif;
+}
+
+.gm-bundled-control, .gm-bundled-control-on-bottom{
+  left:10px;
+  bottom: 120px !important;
+}
+
+.wrap {
+  word-wrap: break-word;
 }
 
 .find-friends{
@@ -94,8 +107,8 @@ img.myLogo{
   position: absolute;
   height: 70px;
   left: 58%;
-  top: 10px;
-  z-index: 100;
+  top: 5px;
+  z-index: 1;
 }
 
 h3.events {
@@ -103,7 +116,7 @@ h3.events {
 }
 
 div.all-friends {
-  max-height: 500px;
+  max-height: 250px;
   overflow: scroll;
   color: white;
 }
@@ -159,10 +172,20 @@ div.home-view {
   right:20px;
   top: 20px;
 }
+ul{
+  padding: 0;
+}
+td.wrap{
+  word-wrap: break-word;
+  max-width: 150px;
+}
+.overflow{
+  overflow-x: scroll;
+}
 #demo{
   position: fixed;
-  top:20px;
-  right:80px;
+  top:10px;
+  left:320px;
 }
 .google-search {
 	width: 200px;
@@ -175,6 +198,7 @@ div.home-view {
 }
 .map {
 	height:100%;
+  width: 100%;
 }
 .center {
 	text-align: center;

@@ -24,6 +24,13 @@ angular.module('mapApp')
   modalVm.subInvite             = subInvite;
   modalVm.sendInvite            = sendInvite;
 
+  // review navigation
+  modalVm.showReviews           = showReviews;
+  modalVm.writeReview           = writeReview;
+
+  // review functions to api
+  modalVm.addReview             = addReview;
+
   modalVm.checkPlayer();
 
   modalVm.locations = locations;
@@ -37,6 +44,8 @@ angular.module('mapApp')
   modalVm.userPlaying = user.playing;
 
   modalVm.inviteInfo = false;
+  modalVm.reviewInfo = false;
+  modalVm.writeReviewInfo = false;
   modalVm.locationInfo = true;
 
   modalVm.inviteBtn = false;
@@ -49,6 +58,23 @@ angular.module('mapApp')
   function showInvite(){
     modalVm.inviteInfo = true;
     modalVm.locationInfo = false;
+    modalVm.reviewInfo = false;
+    modalVm.writeReviewInfo = false
+  }
+
+  function showReviews(){
+    modalVm.inviteInfo = false;
+    modalVm.locationInfo = false;
+    modalVm.reviewInfo = true;
+    modalVm.writeReviewInfo = false
+  }
+
+  function writeReview(){
+    console.log("TEST")
+    modalVm.inviteInfo = false;
+    modalVm.locationInfo = false;
+    modalVm.reviewInfo = false;
+    modalVm.writeReviewInfo = true;
   }
 
   function checkPlayer(){
@@ -162,5 +188,17 @@ angular.module('mapApp')
     modalVm.cancelBtn = true;
     modalVm.goBtn = false;
   };
+
+  function addReview(locationId, userId){
+    console.log(userId)
+    var reviewObj = {
+      "title": modalVm.reviewTitle,
+      "body": modalVm.reviewBody,
+      "locationId": locationId,
+      "userId": userId
+    }
+    toastr.success('Your review has been sent','Success')
+    mapSrv.addReview(locationId,userId,reviewObj);
+  }
 
 });

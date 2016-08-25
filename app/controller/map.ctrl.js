@@ -3,7 +3,7 @@
 		.module('mapApp')
 		.controller('mapCtrl',mapCtrl)
 
-	function mapCtrl($http, $scope, $state, $geolocation, uiGmapGoogleMapApi, user, users, locations, invites, mapSrv, adminSrv, authSrv, $log, $uibModal, toastr) {
+	function mapCtrl($http, $scope, $state, $geolocation, uiGmapGoogleMapApi, user, users, locations, invites, reviews, mapSrv, adminSrv, authSrv, $log, $uibModal, toastr) {
 		var mapVm = this;
 
 		// From resolve
@@ -14,6 +14,9 @@
 		mapVm.friendRequestFrom = user.friendRequestFrom;
 		mapVm.playingAt  		= user.playing;
 		mapVm.allInvites 		= invites;
+		mapVm.allReviews		= reviews;
+		console.log("MAP CTRL LOAD")
+		console.log(mapVm.allReviews)
 
 		// Function binding
 		mapVm.upload 			= upload;

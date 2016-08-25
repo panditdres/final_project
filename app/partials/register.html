@@ -7,25 +7,25 @@
     </h1>
       <h2 class="center">Register</h2>
         <span class="input input--ruri">
-          <input class="input__field input__field--ruri" type="text" name="FirstName" value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.firstName" id="input-26" />
+          <input class="input__field input__field--ruri" type="text" maxlength="15" name="FirstName" value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.firstName" id="input-26" />
             <label class="input__label input__label--ruri" for="input-26">
                 <span class="input__label-content input__label-content--ruri">First Name</span>
             </label>
         </span>
         <span class="input input--ruri">
-          <input class="input__field input__field--ruri" type="text" name="LastName" value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.lastName"  id="input-27" />
+          <input class="input__field input__field--ruri" type="text" maxlength="30" name="LastName" value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.lastName"  id="input-27" />
             <label class="input__label input__label--ruri" for="input-27">
                 <span class="input__label-content input__label-content--ruri">Last Name</span>
             </label>
           </span>
           <span class="input input--ruri">
-            <input class="input__field input__field--ruri" type="text" name="Username" value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.username"  id="input-28" />
+            <input class="input__field input__field--ruri" type="text" maxlength="20" name="Username" value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.username"  id="input-28" />
               <label class="input__label input__label--ruri" for="input-28">
                 <span class="input__label-content input__label-content--ruri">Username</span>
               </label>
           </span>
           <span class="input input--ruri">
-            <input class="input__field input__field--ruri" type="text" name="EmailAddress" value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.email"  id="input-28" />
+            <input class="input__field input__field--ruri" type="email" maxlength="25" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="EmailAddress" value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ng-model="ctrl.email"  id="input-28" />
               <label class="input__label input__label--ruri" for="input-28">
                 <span class="input__label-content input__label-content--ruri">Email</span>
               </label>

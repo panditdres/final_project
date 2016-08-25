@@ -15,7 +15,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a class="dropbtn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white;">{{ctrl.userData.firstName}} <span class="caret"></span></a>
+          <a class="dropbtn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white;" class="wrap">{{ctrl.userData.firstName}} <span class="caret"></span></a>
           <ul class="dropdown-content z-index-high">
             <li><a ng-click="ctrl.settings()">Settings <i class="fa fa-cogs" aria-hidden="true"></i></a></li>
             <li role="separator" class="divider"></li>
@@ -27,13 +27,16 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+<!--- ************************************* START OF MODAL ************************************* -->
+
 <script type="text/ng-template" id="myModalContent.html" ng-repeat="locations in ctrl.locations">
     <div class="location-info constant" ng-show="ctrl.locationInfo">
       <div class="modal-header">
-          <h2 class="modal-title">Name: {{ctrl.locationName}}</h2>
+          <h2 class="modal-title wrap">Name: {{ctrl.locationName}}</h2>
           <button class="btn btn-primary" type="button" ng-click="ctrl.showInvite()">Invite Friends</button>
+          <button class="btn btn-primary" type="button" ng-click="ctrl.showReviews()">Reviews</button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body wrap">
           <h3>Address: {{ctrl.locationAddress}}</h3>
           <h4>Type of field: {{ctrl.locationType}}</h4>
           <h4>Number of players: <span style="font-weight:bolder">{{ctrl.locationPlayers.length}}</span></h4>
@@ -50,6 +53,8 @@
           <button class="btn btn-warning" type="button" ng-click="ctrl.cancel(ctrl.locationId,ctrl.locationCounter); ctrl.removePlayer(ctrl.locationId,ctrl.user); ctrl.removePlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.cancelBtn">Or Nah</button>
       </div>
     </div>
+
+<!--- ************************************* INVITATION ************************************* -->
 
     <div class="invite-info constant" ng-show="ctrl.inviteInfo">
       <div class="modal-header">
@@ -75,7 +80,58 @@
           <button class="btn btn-primary" type="button" ng-click="ctrl.sendInvite(ctrl.locationId,ctrl.user)" ng-disabled="">Send</button>
       </div>
     </div>
+
+<!--- ************************************* REVIEWS ************************************* -->    
+
+    <div class="invite-info constant" ng-show="ctrl.reviewInfo">
+      <div class="modal-header">
+          <h3 class="modal-title">Reviews<i class="fa fa-envelope-o" aria-hidden="true"></i></h3>
+      </div>
+      <div class="modal-body">
+          <h4>No Reviews Yet for {{ctrl.locationName}}</h4>
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-primary" type="button" ng-click="ctrl.writeReview()" ng-disabled="">Write a review</button>
+          <button class="btn btn-primary" type="button" ng-click="ctrl.sendInvite(ctrl.locationId,ctrl.user)" ng-disabled="" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+<!--- ************************************* WRITE REVIEW ************************************* -->   
+
+    <div class="invite-info constant" ng-show="ctrl.writeReviewInfo">
+      <div class="modal-header">
+          <h3 class="modal-title">Write a review<i class="fa fa-envelope-o" aria-hidden="true"></i></h3>
+      </div>
+      <div class="modal-body">
+        <form role="form" ng-submit="ctrl.editUser(ctrl.userId)">
+          <div class="form-group">
+                <label for="firstName">Title</label>
+                <input type="text" maxlength="20" class="form-control" id="titleReview" ng-model="ctrl.reviewTitle" placeholder="Title" required>
+          </div>
+          <div class="form-group">
+                <label for="lastName">Review</label>
+                <textarea class="form-control" id="reviewBody" ng-model="ctrl.reviewBody" required>
+                  Your review
+                </textarea>
+          </div>
+          <div>
+            <h4>Level of play:</h4>
+            <span><i class="fa fa-star-o" aria-hidden="true"></i></span>
+            <span><i class="fa fa-star-o" aria-hidden="true"></i></span>
+            <span><i class="fa fa-star-o" aria-hidden="true"></i></span>
+            <span><i class="fa fa-star-o" aria-hidden="true"></i></span>
+            <span><i class="fa fa-star-o" aria-hidden="true"></i></span>
+          </div>
+          
+        </form>  
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-primary" type="button" ng-click="ctrl.addReview(ctrl.locationId,ctrl.user.id)" ng-disabled="" data-dismiss="modal">Send Review</button>
+          <button class="btn btn-primary" type="button" ng-click="ctrl.sendInvite(ctrl.locationId,ctrl.user)" ng-disabled="" data-dismiss="modal">Close</button>
+      </div>
+    </div>
 </script>
+<!--- *************************************** END OF MODAL ************************************* -->
 
 <!-- NEW SECTION -->
 <!-- SIDE FRIENDS BUTTON -->
@@ -171,19 +227,19 @@
         <form role="form" ng-submit="ctrl.editUser(ctrl.userId)">
           <div class="form-group">
                 <label for="firstName">First Name</label>
-                <input type="text" class="form-control" id="nameOfLocation" ng-model="ctrl.firstName" required>
+                <input type="text" maxlength="15" class="form-control" id="firstName" ng-model="ctrl.firstName" required>
           </div>
           <div class="form-group">
                 <label for="lastName">Last Name</label>
-                <input type="text" class="form-control" id="Latitude" ng-model="ctrl.lastName" required>
+                <input type="text" maxlength="30" class="form-control" id="lastName" ng-model="ctrl.lastName" required>
           </div>
           <div class="form-group">
                 <label for="userName">Username</label>
-                <input type="text" class="form-control" id="Latitude" ng-model="ctrl.userName" required>
+                <input type="text" maxlength="20" class="form-control" id="username" ng-model="ctrl.userName" required>
           </div>
           <div class="form-group">
                 <label for="email">Email</label>
-                <input type="text" class="form-control" id="Longitude" ng-model="ctrl.email" required>
+                <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" maxlength="25" class="form-control" id="Longitude" ng-model="ctrl.email" required>
           </div>
           <div class="form-group">
                 <label for="oldPassword">Old Password</label>

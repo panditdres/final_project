@@ -97,7 +97,8 @@
 				console.log(res);
 				if(res.status == 200){
 					self.locations.push(res.data.location)
-					$state.go('admin.allLocation')
+					self.getLocations();
+					$state.go('admin.allLocation');
 				}
 			}, function(err){
 				console.log('err', err)

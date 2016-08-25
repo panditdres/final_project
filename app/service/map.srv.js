@@ -34,6 +34,9 @@
 		self.upload				= upload;
 		self.updateProfilePic   = updateProfilePic;
 
+		self.getReviews			= getReviews;
+		self.addReview			= addReview;
+
 		self.message;
 		self.userData;
 		self.logInInfo;
@@ -291,6 +294,21 @@
 				self.userId = "hello"
 			}
 			return self.message;
+		}
+
+		function getReviews(){
+			console.log("get reviews")
+			return api.request('/reviews/',{},'GET')
+			.then(function(res){
+				console.log(res)
+			})
+		}
+
+		function addReview(locationId,userId,body){
+			return api.request('/reviews/',body,'POST')
+			.then(function(res){
+				console.log(res)
+			})
 		}
 	}
 })();

@@ -34,6 +34,10 @@
 					},
 					locations: function(adminSrv){
 						return adminSrv.getLocations();
+					},
+					reviews: function(mapSrv){
+						console.log("RESOLVE")
+						return mapSrv.getReviews();
 					}
 				}
 			})
@@ -55,6 +59,9 @@
 					},
 					locations: function(adminSrv){
 						return adminSrv.getLocations();
+					},
+					reviews: function(mapSrv){
+						return mapSrv.getReviews();
 					}
 				}
 			})

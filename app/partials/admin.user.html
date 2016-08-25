@@ -2,24 +2,26 @@
 	All Users
 </h2>
 <hr>
-
-<table class="table table-hover">
-    <thead>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Username</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-    	<tr ng-repeat="users in ctrl.users">
-    		<td>{{users.firstName}}</td>
-    		<td>{{users.lastName}}</td>
-    		<td>{{users.email}}</td>
-    		<td>{{users.username}}</td>
-    		<td><i class="fa fa-trash" aria-hidden="true" ng-click="ctrl.deleteUser(users.id)"></i></td>
-    	</tr>
-    </tbody>
-</table>
+<div class="overflow">
+    <table class="table table-hover ">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="users in ctrl.users">
+                <td class="wrap">{{users.firstName}}</td>
+                <td class="wrap">{{users.lastName}}</td>
+                <td class="wrap">{{users.email}}</td>
+                <td class="wrap">{{users.username}}</td>
+                <td class="wrap"><i class="fa fa-trash" aria-hidden="true" ng-click="ctrl.deleteUser(users.id)"></i></td>
+            </tr>
+        </tbody>
+    </table>
+      
+</div>

@@ -28,7 +28,7 @@
 					console.log(res.data);
 					if(res.data.error){
 						// Toastr implemented
-						console.log(res.data.error.errors[0].message)
+						//console.log(res.data.error.errors[0].message)
 						if(res.data.error.errors[0].message == "username must be unique"){
 							toastr.error("Please have a unique Username","Error")
 						} else {
