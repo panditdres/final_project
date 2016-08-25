@@ -105,7 +105,7 @@ angular.module('mapApp')
   function addPlayer(locationId,playerInfo){
       console.log(modalVm.mytime)
     // console.log(locationId);
-    if(modalVm.locationPlayers.length > 30) {
+    if(modalVm.locationPlayers.length > modalVm.maxCapacity - 1) {
       toastr.error('There are no more spots', 'Error')
     }else{
       modalVm.locationPlayers.push(playerInfo.firstName + ' ' + playerInfo.lastName + ' - ' + playerInfo.username);
@@ -153,18 +153,14 @@ angular.module('mapApp')
     if(modalVm.locationPlayers.length > modalVm.maxCapacity - 1){
       toastr.error('There are no more spots', 'Error')
     } else {
-      modalVm.capacity++;
       modalVm.goBtn = true;
       modalVm.cancelBtn = false;
-      mapSrv.updateCapacity(locationId,modalVm.capacity)
     }
   }
 
   function cancel(locationId, counter) {
-    modalVm.capacity--;
     modalVm.cancelBtn = true;
     modalVm.goBtn = false;
-    mapSrv.updateCapacity(locationId,modalVm.capacity)
   };
 
 });

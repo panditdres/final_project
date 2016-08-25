@@ -1,12 +1,24 @@
 <div class="admin">	
 	<div class="find-friends">
-		<div>
-			<h1>Find Friends</h1>
-			<div class="gap-bottom">
-				<button class="btn transparent" ui-sref="home.map">
-					<i class="material-icons">arrow_back</i>
-				</button>
+		
+		<div class="row">
+			<div class="col-lg-4 col-md-4 col-sm-4 center">
+				<h1>Find Friends</h1>
+				<div class="gap-bottom">
+					<button class="btn transparent" ui-sref="home.map">
+						<i class="material-icons">arrow_back</i>
+					</button>
+				</div>
 			</div>
+
+			<div class="col-lg-4 col-md-4 col-sm-4 center">
+				<h1 class="appName">KickApp</h1>
+			</div>
+
+			<div class="col-lg-4 col-md-4 col-sm-4 center">
+				<img src="Asset_1.png" class="myLogo-friends">
+			</div>
+			
 			<input ng-model="ctrl.search" type="text" class="form-control gap-bottom" id="search" placeholder="Search Friends">
 			<hr class="style-two">
 		</div>

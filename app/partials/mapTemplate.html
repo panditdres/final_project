@@ -64,7 +64,7 @@
             <div class="form-group">
               <h4 for="Friends">Include your friends:</h4>
               <div>
-                <button class="btn btn-default gap" ng-repeat="friends in ctrl.friendData" ng-click="ctrl.invite(friends.id)" ng-class="{'btn-primary': ctrl.invitation.includes(friends.id)}">
+                <button class="btn btn-primary gap" ng-repeat="friends in ctrl.friendData" ng-click="ctrl.invite(friends.id)" ng-class="{'btn-success': ctrl.invitation.includes(friends.id)}">
                   {{friends.firstName}} {{friends.lastName}}</i>
                 </button>
               </div>     
@@ -112,8 +112,8 @@
       <hr>
       <div class="all-friends" >
         <div class="relative" ng-repeat="friends in ctrl.friendData | filter:{firstName:ctrl.search}">
-          {{friends.firstName}} {{friends.lastName}} 
           <img class="profile-pic-all" ng-src="{{friends.profilePic}}">
+          {{friends.firstName}} {{friends.lastName}} 
           <hr>
         </div>
       </div>
@@ -141,13 +141,14 @@
       <h2>Hello {{ctrl.userData.firstName}}
         <img class="profile-pic" ng-src="{{ctrl.userData.profilePic}}">  
       </h2>
-      <h4>You are playing at:</h4>
+      <h4>You are playing at: <i class="fa fa-futbol-o" aria-hidden="true"></i></h4>
       <h5 ng-repeat="locations in ctrl.locationData" ng-click="ctrl.geolocate(locations.location.latitude,locations.location.longitude)">{{locations.location.name}}</h5>
       <hr>
     </div>
 
     <div class="events">
       <h3 class="events">Events <i class="fa fa-calendar" aria-hidden="true"></i></h3>
+
       <h5 ng-show="ctrl.eventShow">You have no events yet</h5>
       <h5 ng-repeat="events in ctrl.events">{{events.data.data.location.name}} with {{events.user.firstName}} {{events.user.lastName}} on {{events.event.date | date:longDate}}</h5>
     </div>
@@ -159,7 +160,7 @@
       Settings <i class="fa fa-cogs" aria-hidden="true"></i>
     </h2>
 
-    <div class="panel-body">
+    <div class="panel-body settings">
 
         <form ng-submit="ctrl.upload()" enctype="multipart/form-data">
           <h4>Add a profile picture</h4>

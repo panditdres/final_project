@@ -16,6 +16,15 @@
   padding:50px 30px 30px 30px;
 }
 
+.myLogo-friends{
+  height: 150px;
+}
+
+.appName {
+  font-size: 95px;
+  font-family: 'Orbitron', sans-serif;
+}
+
 .find-friends{
   margin-left: 200px;
   margin-right: 200px;
@@ -44,6 +53,7 @@
   width:50px;
   height:50px;
   border-radius: 50%;
+  margin-right:30px;
   background-color: white
 }
 
@@ -215,9 +225,7 @@ img.profile-pic {
   font-family: 'Abel', sans-serif;
   margin-top: 8px;
 }
-.fa-futbol-o{
-  background-color: white
-}
+
 .auth{
   height: 100vh;
 }
@@ -225,6 +233,10 @@ p .register {
   padding: 0px;
 }
 
+div.settings {
+  max-height: 400px;
+  overflow: scroll;
+}
 /*Date picker*/
 .datepickerdemoBasicUsage {
   /** Demo styles for mdCalendar. */ }

@@ -24,10 +24,10 @@ var invites_route   = require('./routes/invites')
 app.use('/api/auth',auth_route);
 app.use('/api/users',authentication,users_route);
 app.use('/api/admin',authentication,admin_route);
-app.use('/api/location',location_route);
+app.use('/api/location',authentication,location_route);
 // app.use('/api/history',history_route);
-app.use('/api/upload',upload_route);
-app.use('/api/invites',invites_route)
+app.use('/api/upload',authentication,upload_route);
+app.use('/api/invites',authentication,invites_route)
 
 models.sequelize.sync().then(function(){
 	app.listen(8092, function(){

@@ -15,8 +15,7 @@
 		self.updateUser 		= updateUser;
 		self.settings 			= settings;
 		self.defaultView 		= defaultView;
-		self.getCapacity 		= getCapacity;
-		self.updateCapacity 	= updateCapacity;
+
 		self.addPlayer      	= addPlayer;
 		self.friendRequest		= friendRequest;
 		self.addFriend      	= addFriend;
@@ -30,8 +29,7 @@
 		self.getLocationInvite	= getLocationInvite;
 		self.getLocationNameAccept  = getLocationNameAccept;
 		self.getUserNameAccept      = getUserNameAccept;
-		// self.accept 			= accept;
-		// self.reject 			= reject;
+
 		self.updateInvitation   = updateInvitation;
 		self.upload				= upload;
 		self.updateProfilePic   = updateProfilePic;
@@ -194,24 +192,6 @@
 					event:event
 				}
 				return self.userData;
-			})
-		}
-
-		function getCapacity() {
-			return api.request('/location/capacity',{},'GET')
-			.then(function(res){
-				console.log("GET CAPACITY",res.data)
-			})
-		}
-
-		function updateCapacity(locationId, capacity){
-			console.log("UPDATE SRV",locationId)
-			return api.request('/location/capacity/'+locationId,{capacity},'PUT')
-			.then(function(res){
-				console.log(res)
-				if(res.status === 200){
-					self.defaultView();
-				}
 			})
 		}
 

@@ -7,7 +7,6 @@ module.exports = function(sequelize, DataTypes) {
     type: DataTypes.STRING,
     players: DataTypes.ARRAY(DataTypes.STRING),
     address: DataTypes.STRING,
-    currCapacity: DataTypes.INTEGER,
     maxCapacity: DataTypes.INTEGER
   }, {
     classMethods: {

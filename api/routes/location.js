@@ -12,30 +12,30 @@ router.get('/', function(req,res){
 })
 
 // get all capacity
-router.get('/capacity', function(req,res){
-	console.log("CAPACITY",req.body)
-	models.Location.findAll()
-	.then(function(locations){
-		//console.log("LOCATIONS",locations)
-		res.json({locations:locations})
-	})
-})
+// router.get('/capacity', function(req,res){
+// 	console.log("CAPACITY",req.body)
+// 	models.Location.findAll()
+// 	.then(function(locations){
+// 		//console.log("LOCATIONS",locations)
+// 		res.json({locations:locations})
+// 	})
+// })
 
 // Update the capacity of the location
-router.put('/capacity/:locationId', function(req,res){
-	console.log(req.params.locationId)
-	console.log(req.params)
-	var where = {where:{id:req.params.locationId}}
-	var __location = req.body;
-	models.Location.find(where).then(function(location){
-		location.updateAttributes({
-			currCapacity: __location.capacity
-		});
-		res.json({
-			location:__location
-		});
-	})
-})
+// router.put('/capacity/:locationId', function(req,res){
+// 	console.log(req.params.locationId)
+// 	console.log(req.params)
+// 	var where = {where:{id:req.params.locationId}}
+// 	var __location = req.body;
+// 	models.Location.find(where).then(function(location){
+// 		location.updateAttributes({
+// 			currCapacity: __location.capacity
+// 		});
+// 		res.json({
+// 			location:__location
+// 		});
+// 	})
+// })
 
 // Send an invite to a location
 router.post('/invite/:locationId', function(req,res){

@@ -48,9 +48,9 @@
 		// Runs the default view function
 		mapVm.defaultView();
 
-		mapVm.showSide = showSide;
-		mapVm.hideSide = hideSide;
-		mapVm.friendsView = friendsView;
+		mapVm.showSide 			= showSide;
+		mapVm.hideSide 			= hideSide;
+		mapVm.friendsView 		= friendsView;
 		mapVm.notificationsView = notificationsView;
 
 		mapVm.accept 		= accept;
@@ -58,11 +58,11 @@
 		mapVm.checkAccepted = checkAccepted;
 		
 		mapVm.animationsEnabled = true;
-		mapVm.notificationLogo = false;
+		mapVm.notificationLogo 	= false;
 
-		mapVm.allFriends = true;
-		mapVm.notificationShow = false;
-		mapVm.status = 'friends';
+		mapVm.allFriends 		= true;
+		mapVm.notificationShow  = false;
+		mapVm.status 			= 'friends';
 
 		mapVm.friendMessage = "Add Friend"
 		
@@ -334,16 +334,40 @@
 					address: mapVm.locations[i].address,
 					type: mapVm.locations[i].type,
 					players: mapVm.locations[i].players,
-					capacity: mapVm.locations[i].currCapacity,
 					maxCapacity: mapVm.locations[i].maxCapacity
 				}
 				mapVm.map.markers.push(marker);
 			}
 		}
 
+		mapVm.styleArray = [ //any style array defined in the google documentation you linked
+		  {
+		    featureType: "all",
+		    stylers: [
+		      { saturation: -80 }
+		    ]
+		  },{
+		    featureType: "road.arterial",
+		    elementType: "geometry",
+		    stylers: [
+		      { hue: "#00ffee" },
+		      { saturation: 50 }
+		    ]
+		  },{
+		    featureType: "poi.business",
+		    elementType: "labels",
+		    stylers: [
+		      { visibility: "off" }
+		    ]
+		  }
+		];
+
 		mapVm.map = {
 			center: { latitude: 43.6532, longitude: -79.3832 },
-			options : {scrollwheel: false},			
+			options : {
+				scrollwheel: false,
+				styles: mapVm.styleArray
+			},			
 			zoom: 14,
 			searchbox : { 
 	          	template:'searchbox.tpl.html', 
