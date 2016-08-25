@@ -25,7 +25,7 @@ var reviews_route	= require('./routes/reviews')
 app.use('/api/auth',auth_route);
 app.use('/api/users',authentication,users_route);
 app.use('/api/admin',authentication,admin_route);
-app.use('/api/location',authentication,location_route);
+app.use('/api/location',location_route);
 // app.use('/api/history',history_route);
 app.use('/api/upload',authentication,upload_route);
 app.use('/api/invites',authentication,invites_route)

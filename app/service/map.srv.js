@@ -36,6 +36,9 @@
 
 		self.addReview			= addReview;
 
+		self.notifyGetUser		= notifyGetUser;
+		self.notifyGetLocation  = notifyGetLocation;
+
 		self.message;
 		self.userData;
 		self.logInInfo;
@@ -302,12 +305,33 @@
 			})
 		}
 
-		function notifyGetUser(){
+		function notifyGetUser(acceptedArr,userId){
+			console.log(userId)
+			return api.request('/users/'+userId,{},'GET')
+			.then(function(res){
+				console.log(res)
+				console.log(acceptedArr)
+				var notifyObj = {
+					res:res,
+					array:acceptedArr
+				}
+				return notifyObj;
+			})
 
 		}
 
-		function notifyGetLocation(){
-			
+		function notifyGetLocation(acceptedArr,user,locationId){
+			return api.request('/location/'+locationId,{},'GET')
+			.then(function(res){
+				console.log(res)
+				console.log(acceptedArr)
+				var notifyObj = {
+					res:res,
+					array:acceptedArr,
+					user:user
+				}
+				return notifyObj;
+			})
 		}
 
 	}

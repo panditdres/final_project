@@ -204,10 +204,24 @@
 				//console.log(mapVm.allInvites.invites[i])
 				if(mapVm.allInvites.invites[i].userId == user.id){
 					console.log(mapVm.allInvites.invites[i].accepted)
+					var acceptedArr = mapVm.allInvites.invites[i];
+					for(var j =0; j < acceptedArr.accepted.length; j++){
+						console.log(acceptedArr.accepted[j])
+						mapSrv.notifyGetUser(acceptedArr,acceptedArr.accepted[j])
+						.then(function(res){
+							console.log(res)
+							return mapSrv.notifyGetLocation(res.array,res.res,res.array.locationId)
+						}).then(function(res){
+							console.log(res)
+							if(res.array.accepted.length != 0){
+								toastr.info(res.user.data.firstName + " " + res.user.data.lastName + " has accepted your invitation to play at " + res.res.data.location.name)
+							}
+						})
+					}
 					
-						if(mapVm.allInvites.invites[i].accepted.length != 0){
-							toastr.info("User "+mapVm.allInvites.invites[i].accepted+" has accepted your invite to play at "+mapVm.allInvites.invites[i].locationId, "Invitation Accept")
-						}	
+						// if(mapVm.allInvites.invites[i].accepted.length != 0){
+						// 	toastr.info("User "+mapVm.allInvites.invites[i].accepted+" has accepted your invite to play at "+mapVm.allInvites.invites[i].locationId, "Invitation Accept")
+						// }	
 									
 				}
 			}
