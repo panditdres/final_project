@@ -1,5 +1,5 @@
 angular.module('mapApp')
-  .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, user, users, locations, friends, locationType, locationName, locationId, locationCapacity, maxCapacity, mapSrv, locationAddress, locationPlayers, toastr) {
+  .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, user, users, locations, friends, reviews, locationType, locationName, locationId, locationCapacity, maxCapacity, mapSrv, locationAddress, locationPlayers, toastr) {
 
   modalVm = this;
   console.log(friends)
@@ -11,6 +11,7 @@ angular.module('mapApp')
   modalVm.capacity        = locationCapacity;
   modalVm.maxCapacity     = maxCapacity;
 
+  console.log(modalVm.locationId)
   //modalVm.sendInvite      = sendInvite;
   modalVm.addPlayer             = addPlayer;
   modalVm.removePlayer          = removePlayer;
@@ -29,7 +30,10 @@ angular.module('mapApp')
   modalVm.writeReview           = writeReview;
 
   // review functions to api
+  modalVm.allReviews            = reviews
   modalVm.addReview             = addReview;
+  modalVm.getReview             = getReview;
+  console.log(reviews)
 
   modalVm.checkPlayer();
 
@@ -54,6 +58,8 @@ angular.module('mapApp')
   modalVm.hstep       = 1;
   modalVm.mstep       = 15;
   modalVm.ismeridian  = true;
+
+  modalVm.reviewMessage = true;
 
   function showInvite(){
     modalVm.inviteInfo = true;
@@ -198,7 +204,24 @@ angular.module('mapApp')
       "userId": userId
     }
     toastr.success('Your review has been sent','Success')
+    $uibModalInstance.close()
     mapSrv.addReview(locationId,userId,reviewObj);
   }
+
+  function getReview(locationId){
+    console.log(locationId)
+    modalVm.locationNameReview = [];
+    for(var i = 0; i < modalVm.allReviews.length; i++){
+      if(modalVm.allReviews[i].locationId == locationId){
+        console.log(locationId)
+        modalVm.locationNameReview.push(modalVm.allReviews[i]);
+        console.log(modalVm.locationNameReview)
+      }
+    }
+    if(modalVm.locationNameReview.length != 0){
+      modalVm.reviewMessage = false;
+    }
+  }
+  modalVm.getReview(modalVm.locationId)
 
 });

@@ -26,8 +26,8 @@ router.get('/:reviewId', function(req,res){
 router.delete('/:reviewId', function(req,res){
 	var where = {where:{id:req.params.reviewId}}
 	models.Reviews.find(where).then(function(review){
-		//console.log("USER", user)
-		user.destroy();
+		console.log("Review", review)
+		review.destroy();
 		res.json({
 			deleted: true
 		})

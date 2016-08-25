@@ -35,9 +35,9 @@
 					locations: function(adminSrv){
 						return adminSrv.getLocations();
 					},
-					reviews: function(mapSrv){
+					reviews: function(adminSrv){
 						console.log("RESOLVE")
-						return mapSrv.getReviews();
+						return adminSrv.getReviews();
 					}
 				}
 			})
@@ -60,8 +60,8 @@
 					locations: function(adminSrv){
 						return adminSrv.getLocations();
 					},
-					reviews: function(mapSrv){
-						return mapSrv.getReviews();
+					reviews: function(adminSrv){
+						return adminSrv.getReviews();
 					}
 				}
 			})
@@ -125,6 +125,9 @@
 					},
 					locations: function(adminSrv){
 						return adminSrv.getLocations();
+					},
+					reviews: function(adminSrv){
+						return adminSrv.getReviews();
 					}
 				}
 			})
@@ -156,6 +159,18 @@
 				templateUrl:'/partials/admin.location.html',
 				authenticate:true,
 				controller:'adminCtrl as ctrl'
+			})
+
+			.state('admin.allReview', {
+				url:'/reviews/all',
+				templateUrl:'/partials/admin.reviews.html',
+				authenticate:true,
+				controller:'adminCtrl as ctrl',
+				resolve:{
+					reviews: function(adminSrv){
+						return adminSrv.getReviews();
+					}
+				}
 			})
 
 			.state('admin.editLocation', {

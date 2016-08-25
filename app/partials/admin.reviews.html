@@ -1,0 +1,30 @@
+<h2 class="center">
+	All Reviews
+</h2>
+<hr>
+
+<div class="overflow">
+    <table class="table table-hover">
+        <thead id="center">
+          <tr>
+            <th>Location</th>
+            <th>User</th>
+            <th>Title</th>
+            <th>Body</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        	<tr ng-repeat="reviews in ctrl.reviews">
+        		<td class="wrap">{{reviews.locationId}}</td>
+        		<td class="wrap">{{reviews.userId}}</td>
+        		<td class="wrap">{{reviews.title}}</td>
+                <td class="wrap">{{reviews.body}}</td>
+        		<td><i class="fa fa-trash" aria-hidden="true" ng-click="ctrl.deleteReview(reviews.id)"></i></td>
+        	</tr>
+        </tbody>
+    </table>
+</div>
+<hr>
+
+

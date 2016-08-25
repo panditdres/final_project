@@ -3,12 +3,13 @@
 		.module('mapApp')
 		.controller('adminCtrl',adminCtrl)
 
-	function adminCtrl($scope, $stateParams, $http, $state, mapSrv, adminSrv, api, users, locations) {
+	function adminCtrl($scope, $stateParams, $http, $state, mapSrv, adminSrv, api, users, locations, reviews) {
 		var adminVm = this;
 
 		adminVm.logout         = logout;
 		adminVm.users          = users;
 		adminVm.locations      = locations;
+		adminVm.reviews		   = reviews;
 		adminVm.addLocation    = addLocation;
 		adminVm.getLocation    = adminSrv.getLocation;
 		adminVm.deleteLocation = adminSrv.deleteLocation;
@@ -16,9 +17,12 @@
 		adminVm.updateLocation = updateLocation;
 		adminVm.editLocation   = editLocation;
 		adminVm.getLocation	   = getLocation;
+		adminVm.deleteReview   = deleteReview;
 
 		adminVm.location   = adminSrv.location;
 		adminVm.locationId = $stateParams.locationId;
+
+		console.log(reviews)
 
 		if($stateParams.locationId != undefined){
 			adminSrv.getLocation($stateParams.locationId)
@@ -81,6 +85,11 @@
 				"maxCapacity": adminVm.capacity
 			}
 			adminSrv.addLocation(location)
+		}
+
+		function deleteReview(reviewId){
+			console.log("delete review",reviewId)
+			adminSrv.deleteReview(reviewId)
 		}
 	}
 

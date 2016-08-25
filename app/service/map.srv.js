@@ -34,7 +34,6 @@
 		self.upload				= upload;
 		self.updateProfilePic   = updateProfilePic;
 
-		self.getReviews			= getReviews;
 		self.addReview			= addReview;
 
 		self.message;
@@ -245,11 +244,11 @@
 		}
 
 		function getLocation(locationId){
-			self.locationData = []
+			self.locationDataArr = []
 			return api.request('/location/'+locationId,{},'GET')
 			.then(function(res){
-				self.locationData.push(res.data);
-				return self.locationData;
+				self.locationDataArr.push(res.data);
+				return self.locationDataArr;
 			})
 		}
 
@@ -296,20 +295,21 @@
 			return self.message;
 		}
 
-		function getReviews(){
-			console.log("get reviews")
-			return api.request('/reviews/',{},'GET')
-			.then(function(res){
-				console.log(res)
-			})
-		}
-
 		function addReview(locationId,userId,body){
 			return api.request('/reviews/',body,'POST')
 			.then(function(res){
 				console.log(res)
 			})
 		}
+
+		function notifyGetUser(){
+
+		}
+
+		function notifyGetLocation(){
+			
+		}
+
 	}
 })();
 

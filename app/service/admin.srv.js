@@ -19,12 +19,25 @@
 		self.updateLocationList = updateLocationList;
 		
 		self.getLocation = getLocation;
+		self.getReviews  = getReviews;
+
+		self.deleteReview = deleteReview;
+		self.removeReview = removeReview;
 
 		self.locations = [];
 		self.users 	   = [];
+		self.reviews   = [];
 		self.currCapacity = 0;
 		self.location;
 		self.user;
+
+		function getReviews(){
+			return api.request('/reviews/',{},'GET')
+			.then(function(res){
+				self.reviews = res.data.reviews
+				return res.data.reviews;
+			})
+		}
 
 		function getUsers(){
 			return api.request('/users',{},'GET')
@@ -147,6 +160,25 @@
 			for(var i = 0; i < self.locations.length; i++){
 				if(self.locations[i].id == locationId){
 					delete self.locations[i];
+				}
+			}
+		}
+
+		function deleteReview(reviewId){
+			console.log("service delete")
+			return api.request('/reviews/'+reviewId,{},'DEL')
+			.then(function(res){
+				console.log(res)
+				self.removeReview(reviewId)
+				$state.go('admin.allReview')
+				$state.reload()
+			})
+		}
+
+		function removeReview(reviewId){
+			for(var i = 0; i < self.reviews.length; i++){
+				if(self.reviews[i].id == reviewId){
+					delete self.reviews[i];
 				}
 			}
 		}

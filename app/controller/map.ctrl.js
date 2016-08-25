@@ -59,6 +59,8 @@
 		mapVm.accept 		= accept;
 		mapVm.reject 		= reject;
 		mapVm.checkAccepted = checkAccepted;
+		mapVm.notifyAccept	= notifyAccept;
+
 		
 		mapVm.animationsEnabled = true;
 		mapVm.notificationLogo 	= false;
@@ -74,6 +76,7 @@
 		mapVm.getFriend();
 		mapVm.getLocation();
 		mapVm.checkAccepted();	
+		mapVm.notifyAccept()
 
 		if($state.includes('friends') == false){
 			mapVm.checkInvited();
@@ -195,6 +198,21 @@
 			}
 		}
 
+		function notifyAccept(){
+			console.log(mapVm.allInvites.invites.length)
+			for(var i = 0; i < mapVm.allInvites.invites.length; i++){
+				//console.log(mapVm.allInvites.invites[i])
+				if(mapVm.allInvites.invites[i].userId == user.id){
+					console.log(mapVm.allInvites.invites[i].accepted)
+					
+						if(mapVm.allInvites.invites[i].accepted.length != 0){
+							toastr.info("User "+mapVm.allInvites.invites[i].accepted+" has accepted your invite to play at "+mapVm.allInvites.invites[i].locationId, "Invitation Accept")
+						}	
+									
+				}
+			}
+		}
+
 		if(mapVm.notifications != 0) {
 			mapVm.notificationLogo = true;
 		}
@@ -226,7 +244,10 @@
 		      		},
 		      		locations: function(adminSrv){
 		      			return adminSrv.getLocations();
-		      		}, 
+		      		},
+		      		reviews: function(){
+		      			return mapVm.allReviews;
+		      		},
 		      		locationAddress: function(){
 		      			return address;
 		      		},

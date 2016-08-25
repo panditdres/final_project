@@ -44,7 +44,7 @@
 							//introJs().start();
 							swal({   
 								title: "Hey!",   
-								text: "Welcome to Kick App!",   
+								text: "Welcome to Kick App! Make sure to check out the Demo button at the top left of the screen if this is your first time",   
 								type: "success",   
 								confirmButtonText: "Get Started"
 							});
