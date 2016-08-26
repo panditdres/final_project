@@ -155,6 +155,7 @@
 				console.log(res)
 				if(res.status === 200){
 					self.defaultView();
+					$state.reload();
 				}
 			})
 		}

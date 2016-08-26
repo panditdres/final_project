@@ -113,7 +113,7 @@ router.put('/update/:userId', function(req,res){
 				        	user.updateAttributes({
 								firstName: __user.firstName,
 								lastName: __user.lastName,
-								userName: __user.userName,
+								username: __user.userName,
 								email: __user.email,
 								password: __user.newPassword
 							});

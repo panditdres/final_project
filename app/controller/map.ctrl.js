@@ -215,7 +215,9 @@
 						}).then(function(res){
 							console.log(res)
 							if(res.array.accepted.length != 0){
-								toastr.info(res.user.data.firstName + " " + res.user.data.lastName + " has accepted your invitation to play at " + res.res.data.location.name)
+								toastr.info(res.user.data.firstName + " " + res.user.data.lastName + " has accepted your invitation to play at " + res.res.data.location.name,"Invitation Accepted",{
+									 iconClass: 'toast-accept'
+								})
 							}
 						})
 					}			

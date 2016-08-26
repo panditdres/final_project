@@ -3,11 +3,6 @@
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
-img.full {
-  height: 100%;
-  widows: 100%;
-}
-
 .angular-google-map-container { 
   position: fixed !important;
   height: 100% !important;
@@ -23,6 +18,10 @@ img.full {
   right: -300px;
   transition: all 1s ease;
   padding:50px 30px 30px 30px;
+}
+
+.toast-accept {
+  background-color: grey;
 }
 
 .myLogo-friends{
