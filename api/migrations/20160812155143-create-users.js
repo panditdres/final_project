@@ -33,6 +33,10 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true
       },
+      friendRequestFrom: {
+        type: Sequelize.ARRAY(Sequelize.STRING),
+        defaultValue:[]
+      },
       friends: {
         type: Sequelize.ARRAY(Sequelize.STRING),
         defaultValue: []
