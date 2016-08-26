@@ -38,6 +38,7 @@
 
 		self.notifyGetUser		= notifyGetUser;
 		self.notifyGetLocation  = notifyGetLocation;
+		self.getUserReview		= getUserReview;
 
 		self.message;
 		self.userData;
@@ -302,6 +303,7 @@
 			return api.request('/reviews/',body,'POST')
 			.then(function(res){
 				console.log(res)
+				$state.reload()
 			})
 		}
 
@@ -334,6 +336,18 @@
 			})
 		}
 
+		function getUserReview(userId,review){
+			console.log(userId)
+			return api.request('/users/'+userId,{},'GET')
+			.then(function(res){
+				console.log(res.data)
+				var userInfo = {
+					author: res.data,
+					reviewInfo: review
+				}
+				return userInfo;
+			})
+		}
 	}
 })();
 

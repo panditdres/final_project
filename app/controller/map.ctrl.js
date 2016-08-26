@@ -76,10 +76,11 @@
 		mapVm.getFriend();
 		mapVm.getLocation();
 		mapVm.checkAccepted();	
-		mapVm.notifyAccept()
+		
 
 		if($state.includes('friends') == false){
 			mapVm.checkInvited();
+			mapVm.notifyAccept()
 		}
 
 		if($state.includes('friends') == true){
@@ -217,12 +218,7 @@
 								toastr.info(res.user.data.firstName + " " + res.user.data.lastName + " has accepted your invitation to play at " + res.res.data.location.name)
 							}
 						})
-					}
-					
-						// if(mapVm.allInvites.invites[i].accepted.length != 0){
-						// 	toastr.info("User "+mapVm.allInvites.invites[i].accepted+" has accepted your invite to play at "+mapVm.allInvites.invites[i].locationId, "Invitation Accept")
-						// }	
-									
+					}			
 				}
 			}
 		}
@@ -528,7 +524,7 @@
 	        },
 	        {
 	            element: '#step2',
-	            intro: "This area will show you the events that you have accepted from your friends' invitations. It will also let you know where you decided to play after pressing GO at a particular location",
+	            intro: "This area will show you the events that you have accepted from your friends' invitations. It will also let you know where you decided to play after pressing 'Let's Play' at a particular location",
 	            position: 'right'
 	        },
 	        {

@@ -110,8 +110,9 @@
 				console.log(res);
 				if(res.status == 200){
 					self.locations.push(res.data.location)
-					self.getLocations();
 					$state.go('admin.allLocation');
+					self.getLocations();
+					// $state.reload();
 				}
 			}, function(err){
 				console.log('err', err)

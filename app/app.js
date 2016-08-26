@@ -103,6 +103,9 @@
 					},
 					locations: function(adminSrv){
 						return adminSrv.getLocations();
+					},
+					reviews: function(adminSrv){
+						return adminSrv.getReviews();
 					}
 				}
 			})

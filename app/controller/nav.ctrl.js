@@ -15,7 +15,6 @@
 		$scope.$watch(function () { 
 			return mapSrv.userId; 
 		},function(newVal,oldVal){
-			console.log("CHECL OCAL WATCH")
 		   if(oldVal!==newVal){
 		     console.log('It is undefined'); 
 		     navVm.checkMsg = mapSrv.checkMsg();

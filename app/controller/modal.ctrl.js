@@ -213,13 +213,18 @@ angular.module('mapApp')
     modalVm.locationNameReview = [];
     for(var i = 0; i < modalVm.allReviews.length; i++){
       if(modalVm.allReviews[i].locationId == locationId){
-        console.log(locationId)
-        modalVm.locationNameReview.push(modalVm.allReviews[i]);
-        console.log(modalVm.locationNameReview)
+        console.log(modalVm.allReviews[i])
+        var reviews = modalVm.allReviews[i]     
+        mapSrv.getUserReview(modalVm.allReviews[i].userId,reviews)
+        .then(function(res){
+          console.log(res)
+          modalVm.locationNameReview.push(res);
+          if(modalVm.locationNameReview.length != 0){
+            modalVm.reviewMessage = false;
+          }
+          // console.log(modalVm.locationNameReview)
+        })
       }
-    }
-    if(modalVm.locationNameReview.length != 0){
-      modalVm.reviewMessage = false;
     }
   }
   modalVm.getReview(modalVm.locationId)

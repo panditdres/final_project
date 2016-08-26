@@ -25,15 +25,15 @@ var reviews_route	= require('./routes/reviews')
 app.use('/api/auth',auth_route);
 app.use('/api/users',authentication,users_route);
 app.use('/api/admin',authentication,admin_route);
-app.use('/api/location',location_route);
+app.use('/api/location',authentication,location_route);
 // app.use('/api/history',history_route);
 app.use('/api/upload',authentication,upload_route);
 app.use('/api/invites',authentication,invites_route)
 app.use('/api/reviews',reviews_route)
 
 models.sequelize.sync().then(function(){
-	app.listen(80, function(){
-		console.log('Server started on http://localhost:80');
+	app.listen(8092, function(){
+		console.log('Server started on http://localhost:8092');
 		console.log('Press CTRL + C to stop server');
 	})
 })
