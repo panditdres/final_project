@@ -450,7 +450,7 @@
 	        },
 			marker : {
 			    id: 0,
-			    options: { draggable: true },
+			    options: { draggable: false },
 			},
 			markers: [],
 			markersEvents: {
