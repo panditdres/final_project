@@ -57,7 +57,7 @@
 		    })
 		    .then(function(res){
 		    	console.log(res.data)
-		    	self.filePath = res.data.path.slice(6);
+		    	self.filePath = res.data.path.slice(3);
 		    	toastr.success('Profile Picture Updated', 'Success')
 		    	console.log(self.filePath)
 		      	console.log('successfully uploaded file!');
