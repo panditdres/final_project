@@ -11,6 +11,7 @@ angular.module('mapApp')
   modalVm.capacity        = locationCapacity;
   modalVm.maxCapacity     = maxCapacity;
 
+  console.log(modalVm.locationPlayers)
   console.log(modalVm.locationId)
   //modalVm.sendInvite      = sendInvite;
   modalVm.addPlayer             = addPlayer;
