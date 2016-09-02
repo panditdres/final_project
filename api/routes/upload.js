@@ -6,7 +6,7 @@ console.log("loading upload route")
 
 var storage = multer.diskStorage({
 	destination: function(req, file, callback) {
-		callback(null, '/app/uploads/');
+		callback(null, 'app/uploads/');
 	},
 	filename: function(req, file, callback) {
 		var originalName = file.originalname;
