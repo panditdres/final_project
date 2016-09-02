@@ -85,6 +85,9 @@ angular.module('mapApp')
   }
 
   function checkPlayer(){
+    if(modalVm.locationPlayers == undefined){
+      modalVm.locationPlayers = []
+    }
     if(modalVm.locationPlayers.includes(user.firstName + ' ' + user.lastName + ' - ' + user.username) == true) {
       modalVm.goBtn = true;
       modalVm.cancelBtn = false;
