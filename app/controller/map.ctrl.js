@@ -427,30 +427,30 @@
 				                "longitude": place[0].geometry.location.lng()
 				            },
 				            "zoom": 16,
-				            "window": {
-				            	marker: {},
-								show: false,
-								option: {},
-								closeClick: function(){
-									this.show = false;
-								}
-				            },
 				            "marker":{
 				            	id: 0,
-					            coords: {
-					                latitude: place[0].geometry.location.lat(),
-					                longitude: place[0].geometry.location.lng()
-					            },
-					            events: {
-							    	click: function(marker, window, model){
-					          			console.log("marker clicked");	
-					          			mapVm.map.window.show  = true;
-					          			console.log("Window",mapVm.map.window)
-					          			mapVm.map.window.model = model;	
-					          			// console.log(mapVm.map.window.model)
-					          		}
+					            options: {draggable: false}
+				            },
+				            "markers": mapVm.map.markers,
+				            "markersEvents": {
+								click: function(marker, window, model){
+					          			console.log("marker clicked MARKERS", marker);
+					          			console.log("MARKERS COORDS LAT", marker.position.lat());
+					          			var window_model = {
+					          				id: marker.key,
+					          				latitude: marker.position.lat(),
+					          				longitude: marker.position.lng(),
+					          				name: marker.model.name,
+					          				address: marker.model.address,
+					          				type: marker.model.type,
+					          				players: marker.model.players,
+					          				capacity: marker.model.capacity,
+					          				maxCapacity: marker.model.maxCapacity
+					          			}
+					          			mapVm.openModal('sm',window_model.name,window_model.type,window_model.id,window_model.capacity,window_model.maxCapacity,window_model.address,window_model.players);
+					          			console.log("MARKERS MODEL",window_model);
 					          	}
-				            }
+							}
 				        };
 		            }
 	          	}

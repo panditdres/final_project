@@ -20,6 +20,10 @@
   padding:50px 30px 30px 30px;
 }
 
+.btn-cross {
+  background-color: #48494A;
+}
+
 .toast-accept {
   background-color: grey;
 }
