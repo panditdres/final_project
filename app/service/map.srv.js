@@ -217,14 +217,14 @@
 			console.log("Add friend service")
 			return api.request('/users/friends/'+userId,friendArray,'PUT')
 			.then(function(res){
-				console.log(res)
+				return res;
 			})
 		}
 
 		function friendRequest(userId, requestArray){
 			return api.request('/users/friendRequest/'+userId,requestArray,'PUT')
 			.then(function(res){
-				console.log(res)
+				return res;
 			})
 		}
 

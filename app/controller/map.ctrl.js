@@ -211,10 +211,10 @@
 			for(var i = 0; i < mapVm.allInvites.invites.length; i++){
 				//console.log(mapVm.allInvites.invites[i])
 				if(mapVm.allInvites.invites[i].userId == user.id){
-					console.log(mapVm.allInvites.invites[i].accepted)
+					//console.log(mapVm.allInvites.invites[i].accepted)
 					var acceptedArr = mapVm.allInvites.invites[i];
 					for(var j =0; j < acceptedArr.accepted.length; j++){
-						console.log(acceptedArr.accepted[j])
+						//console.log(acceptedArr.accepted[j])
 						mapSrv.notifyGetUser(acceptedArr,acceptedArr.accepted[j])
 						.then(function(res){
 							console.log(res)
