@@ -15,7 +15,7 @@ router.get('/',function(req,res){
 
 // get one user - works
 router.get('/:inviteId', function(req,res){
-	console.log(req.params);
+	// console.log(req.params);
 	var where = {where:{id:req.params.inviteId}}
 	models.Invites.find(where).then(function(invite){
 		console.log(invite)
@@ -25,8 +25,8 @@ router.get('/:inviteId', function(req,res){
 
 // delete account with click - works
 router.delete('/:inviteId', function(req,res){
-	console.log("DELETE USER")
-	console.log(req.params)
+	// console.log("DELETE USER")
+	// console.log(req.params)
 	var where = {where:{id:req.params.inviteId}}
 	models.Invites.find(where).then(function(invite){
 		invite.destroy();

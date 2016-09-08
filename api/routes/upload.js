@@ -21,8 +21,8 @@ var upload = multer({storage: storage}).any();
 
 // set up API endpoint
 router.post('/', function(req, res) {
-	console.log("UPLOAD REQ",req)
-	console.log("UPLOAD RES",res)
+	// console.log("UPLOAD REQ",req)
+	// console.log("UPLOAD RES",res)
 	upload(req, res, function(err) {
 		if (err) {
 			res.status(500).send(err);

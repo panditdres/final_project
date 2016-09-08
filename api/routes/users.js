@@ -17,7 +17,7 @@ router.get('/',function(req,res){
 router.get('/:userId', function(req,res){
 	var where = {where:{id:req.params.userId}}
 	models.Users.find(where).then(function(user){
-		console.log("GET USER",user)
+		// console.log("GET USER",user)
 		res.send(user);
 	})
 })
@@ -67,10 +67,10 @@ router.put('/location/:userId',function(req,res){
 
 // update friend request
 router.put('/friendRequest/:userId', function(req,res){
-	console.log("FRIEND REQUEST",req.params)
+	// console.log("FRIEND REQUEST",req.params)
 	var where = {where:{id:req.params.userId}}
 	var __user = req.body;
-	console.log("USER FRIEND REQUEST",__user)
+	// console.log("USER FRIEND REQUEST",__user)
 	models.Users.find(where).then(function(user){
 		user.updateAttributes({
 			friendRequestFrom: __user
@@ -85,8 +85,8 @@ router.put('/friendRequest/:userId', function(req,res){
 router.put('/profilePic/:userId', function(req,res){
 	var where = {where:{id:req.params.userId}}
 	var __user = req.body;
-	console.log('PROFILE PICTURE WHERE',where)
-	console.log("PROFILE PICTURE USER",__user)
+	// console.log('PROFILE PICTURE WHERE',where)
+	// console.log("PROFILE PICTURE USER",__user)
 	models.Users.find(where).then(function(user){
 		user.updateAttributes({
 			profilePic: __user.path

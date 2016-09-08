@@ -16,7 +16,7 @@
 		mapVm.allInvites 		= invites;
 		mapVm.allReviews		= reviews;
 		console.log("MAP CTRL LOAD")
-		console.log(mapVm.allReviews)
+		// console.log(mapVm.allReviews)
 
 		// Function binding
 		mapVm.upload 			= upload;
@@ -198,6 +198,13 @@
 				}
 			}
 		}
+
+		// function to delete events after date has passed
+		// function checkDate(){
+
+		// }
+
+		// function to delete where you're playing after date has passed
 
 		function notifyAccept(){
 			console.log(mapVm.allInvites.invites.length)

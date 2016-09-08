@@ -69,9 +69,9 @@ router.put('/player/:locationId', function(req,res){
 
 // get one location - works
 router.get('/:locationId', function(req,res){
-	console.log("GET ONE LOCATION",req.params);
+	// console.log("GET ONE LOCATION",req.params);
 	var where = {where:{id:req.params.locationId}};
-	console.log(where)
+	// console.log(where)
 	models.Location.find(where).then(function(location){
 		console.log("RESPONSE", location)
 		res.json({location:location})
@@ -80,8 +80,8 @@ router.get('/:locationId', function(req,res){
 
 // add new location - works
 router.post('/', function(req,res){
-	console.log("Venue posting onto the database");
-	console.log("REQ BODY",req.body);
+	// console.log("Venue posting onto the database");
+	// console.log("REQ BODY",req.body);
 	var location = req.body;
 	models.Location.create(location)
 		.then(function(location){
@@ -93,10 +93,10 @@ router.post('/', function(req,res){
 
 // editing location - works
 router.put('/update/:locationId', function(req,res){
-	console.log("Edit Location")
+	// console.log("Edit Location")
 	var where = {where:{id:req.params.locationId}}
 	var __location = req.body;
-	console.log("__LOCATION", req.body)
+	// console.log("__LOCATION", req.body)
 	models.Location.find(where).then(function(location){
 		console.log(__location.maxCapacity)
 		location.updateAttributes({
@@ -116,7 +116,7 @@ router.put('/update/:locationId', function(req,res){
 
 // delete location - works
 router.delete('/:locationId', function(req,res){
-	console.log("DELETE LOCATION")
+	// console.log("DELETE LOCATION")
 	var where = {where:{id:req.params.locationId}}
 	models.Location.find(where).then(function(location){
 		location.destroy();

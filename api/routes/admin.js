@@ -53,14 +53,14 @@ router.post('/login',function(req,res){
 			res.status(403)
 			.json({err:'unauthorized'})
 		}
-		console.log("PASSWORD BEFORE")
-		console.log(__user.password);
-		console.log(user.password);
+		// console.log("PASSWORD BEFORE")
+		// console.log(__user.password);
+		// console.log(user.password);
 
 		bcrypt.compare(__user.password, user.password, function(err, result){
-			console.log("PASSWORD AFTER")
-			console.log(__user.password);
-			console.log(user.password);
+			// console.log("PASSWORD AFTER")
+			// console.log(__user.password);
+			// console.log(user.password);
 			if(result == true) {
 				user.password = '';
 				delete user.password;

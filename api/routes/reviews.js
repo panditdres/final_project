@@ -17,7 +17,7 @@ router.get('/',function(req,res){
 router.get('/:reviewId', function(req,res){
 	var where = {where:{id:req.params.reviewId}}
 	models.Reviews.find(where).then(function(review){
-		console.log("GET REVIEW",review)
+		// console.log("GET REVIEW",review)
 		res.send(review);
 	})
 })
@@ -26,7 +26,7 @@ router.get('/:reviewId', function(req,res){
 router.delete('/:reviewId', function(req,res){
 	var where = {where:{id:req.params.reviewId}}
 	models.Reviews.find(where).then(function(review){
-		console.log("Review", review)
+		// console.log("Review", review)
 		review.destroy();
 		res.json({
 			deleted: true
@@ -36,8 +36,8 @@ router.delete('/:reviewId', function(req,res){
 
 // add new review - works
 router.post('/', function(req,res){
-	console.log("Review posting onto the database");
-	console.log("REQ BODY",req.body);
+	// console.log("Review posting onto the database");
+	// console.log("REQ BODY",req.body);
 	var review = req.body;
 	models.Reviews.create(review)
 		.then(function(review){
