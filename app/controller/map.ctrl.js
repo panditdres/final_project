@@ -426,7 +426,7 @@
 				                "latitude": place[0].geometry.location.lat(),
 				                "longitude": place[0].geometry.location.lng()
 				            },
-				            "zoom": 16,
+				            "zoom": 14,
 				            "marker":{
 				            	id: 0,
 					            options: {draggable: false}
