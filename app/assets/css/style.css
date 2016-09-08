@@ -298,11 +298,6 @@ font-family: 'Abel', sans-serif;
 font-weight: 400;
 }
 
-h1:hover {
- 	color: #91adc9;
- 	cursor: pointer;
-}
-
 ul {
 
 	list-style: none;

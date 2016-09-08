@@ -31,5 +31,46 @@
 		function adminLogin(){
 			authSrv.adminLogin(authVm.email,authVm.password)
 		}
+
+		(function() {
+	      console.log("SCRIPT")
+	      // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+	      console.log("IF",String.prototype)
+	      if (!String.prototype.trim) {
+	        (function() {
+	        console.log("going in if")
+	          // Make sure we trim BOM and NBSP
+	          var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+	          String.prototype.trim = function() {
+	            return this.replace(rtrim, '');
+	          };
+	        })();
+	      }
+	      console.log("before forEach");
+	      [].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+	      	console.log("forEach")
+	        // in case the input is already filled..
+	        if( inputEl.value.trim() !== '' ) {
+	          console.log("SCRIPT FILLED")
+	          classie.add( inputEl.parentNode, 'input--filled' );
+	        }
+
+	        // events:
+	        inputEl.addEventListener( 'focus', onInputFocus );
+	        inputEl.addEventListener( 'blur', onInputBlur );
+	      } );
+
+	      function onInputFocus( ev ) {
+	        console.log("onInputFocus")
+	        classie.add( ev.target.parentNode, 'input--filled' );
+	      }
+
+	      function onInputBlur( ev ) {
+	        console.log("onInputBlur")
+	        if( ev.target.value.trim() === '' ) {
+	          classie.remove( ev.target.parentNode, 'input--filled' );
+	        }
+	      }
+	    })();
 	}
 })();
