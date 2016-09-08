@@ -36,7 +36,6 @@
 						return adminSrv.getLocations();
 					},
 					reviews: function(adminSrv){
-						console.log("RESOLVE")
 						return adminSrv.getReviews();
 					}
 				}

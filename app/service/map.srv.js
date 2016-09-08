@@ -56,11 +56,8 @@
 		        headers: {'Content-Type': undefined}
 		    })
 		    .then(function(res){
-		    	console.log(res.data)
 		    	self.filePath = res.data.path.slice(3);
 		    	toastr.success('Profile Picture Updated', 'Success')
-		    	console.log(self.filePath)
-		      	console.log('successfully uploaded file!');
 		      	self.updateProfilePic(self.filePath,userId)
 		    })
 		    .catch(function(err){
@@ -105,7 +102,6 @@
 					date:date,
 					inviteId:inviteId
 				}
-				console.log(res.data)
 				return self.userInviteData
 			})
 		}
@@ -126,14 +122,11 @@
 		}
 
 		function updateProfilePic(filePath, userId){
-			console.log(filePath)
-			console.log(userId)
 			var fileObj = {
 				path: filePath
 			}
 			return api.request('/users/profilePic/'+userId,fileObj,'PUT')
 			.then(function(res){
-				console.log(res);
 				$state.reload()
 				self.defaultView();
 				return res;
@@ -144,7 +137,6 @@
 			console.log("UPDATE INVITATIONS",invitations)
 			return api.request('/invites/'+inviteId,invitations,'PUT')
 			.then(function(res){
-				console.log(res)
 				return res;
 			})
 		}
@@ -152,7 +144,6 @@
 		function updateUser(user, userId){
 			return api.request('/users/update/'+userId,user,'PUT')
 			.then(function(res){
-				console.log(res)
 				if(res.status === 200){
 					self.defaultView();
 					$state.reload();
@@ -206,7 +197,6 @@
 			console.log("ADD player to location")
 			return api.request('/location/player/'+locationId,players,'PUT')
 			.then(function(res){
-				console.log(res)
 				if(res.status === 200){
 					self.defaultView();
 				}
@@ -217,7 +207,6 @@
 			console.log("ADD location to user")
 			return api.request('/users/location/'+userId,userPlaying,'PUT')
 			.then(function(res){
-				console.log(res)
 				if(res.status === 200){
 					self.defaultView();
 				}
@@ -260,7 +249,7 @@
 		function sendInvite(locationId,userId,invitation){
 			return api.request('/location/invite/'+locationId,invitation,'POST')
 			.then(function(res){
-				console.log(res)
+				return res;
 			})	
 		}
 
@@ -282,12 +271,10 @@
 		}
 
 		function interact() {
-			console.log("INTERACT")
 			if(localStorage.authToken) {
 				// Logout
 				localStorage.clear(localStorage.authToken);
 				localStorage.clear(localStorage.loginId);
-				console.log(localStorage)
 				self.message = "Login";
 				self.userId = ''
 				$state.go('home.map');
@@ -303,17 +290,13 @@
 		function addReview(locationId,userId,body){
 			return api.request('/reviews/',body,'POST')
 			.then(function(res){
-				console.log(res)
 				$state.reload()
 			})
 		}
 
 		function notifyGetUser(acceptedArr,userId){
-			console.log(userId)
 			return api.request('/users/'+userId,{},'GET')
 			.then(function(res){
-				console.log(res)
-				console.log(acceptedArr)
 				var notifyObj = {
 					res:res,
 					array:acceptedArr
@@ -326,8 +309,6 @@
 		function notifyGetLocation(acceptedArr,user,locationId){
 			return api.request('/location/'+locationId,{},'GET')
 			.then(function(res){
-				console.log(res)
-				console.log(acceptedArr)
 				var notifyObj = {
 					res:res,
 					array:acceptedArr,
@@ -338,10 +319,8 @@
 		}
 
 		function getUserReview(userId,review){
-			console.log(userId)
 			return api.request('/users/'+userId,{},'GET')
 			.then(function(res){
-				console.log(res.data)
 				var userInfo = {
 					author: res.data,
 					reviewInfo: review

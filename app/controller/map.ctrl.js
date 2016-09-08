@@ -383,6 +383,16 @@
 			}
 		}
 
+		navigator.geolocation.getCurrentPosition(function(pos) {
+			console.log("POSITION", pos.coords)
+		    mapVm.map.center = {
+		    	latitude: pos.coords.latitude,
+		    	longitude: pos.coords.longitude
+		    };
+		    mapVm.map.zoom = 16;
+		    $scope.$apply();
+		});
+
 		mapVm.styleArray = [ //any style array defined in the google documentation you linked
 		  {
 		    featureType: "all",
@@ -480,16 +490,6 @@
 	          	}
 			}
 		};
-		
-		navigator.geolocation.getCurrentPosition(function(pos) {
-			// console.log("POSITION", pos.coords)
-		    mapVm.map.center = {
-		    	latitude: pos.coords.latitude,
-		    	longitude: pos.coords.longitude
-		    };
-		    mapVm.map.zoom = 16;
-		    $scope.$apply();
-		});
 
 		mapVm.populateMarkers();
 
