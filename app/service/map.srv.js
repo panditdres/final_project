@@ -79,10 +79,7 @@
 			// check if user is even logged in
 			if(localStorage.authToken){
 				return $http.get('/api/users/'+localStorage.loginId)
-				.success(function(data,status){
-			})
 				.then(function(res,err){
-					//console.log(res.data)
 					self.userData = res.data;
 					self.userId = res.data.id;
 					self.token = res.config.headers.authentication;
@@ -147,6 +144,12 @@
 				if(res.status === 200){
 					self.defaultView();
 					$state.reload();
+				}
+			}, function(err){
+				console.log(err);
+				if(err.data.err == 'wrong password'){
+					toastr.error("Incorrect Old Password", "Error");
+					self.settings();
 				}
 			})
 		}
@@ -290,7 +293,7 @@
 		function addReview(locationId,userId,body){
 			return api.request('/reviews/',body,'POST')
 			.then(function(res){
-				$state.reload()
+				return res;
 			})
 		}
 

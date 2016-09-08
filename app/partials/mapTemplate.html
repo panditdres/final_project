@@ -229,9 +229,10 @@
         <form ng-submit="ctrl.upload()" enctype="multipart/form-data">
           <h4>Add a profile picture</h4>
           <input file-model="ctrl.file" type="file" name="file">
-          <button class="btn-xs btn-primary " type="submit">upload file</button>
+          <button class="btn btn-xs btn-primary " type="submit">upload file</button>
         </form>
         <hr>
+
         <form role="form" ng-submit="ctrl.editUser(ctrl.userId)">
           <div class="form-group">
                 <label for="firstName">First Name</label>

@@ -1,8 +1,8 @@
 angular.module('mapApp')
-  .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, user, users, locations, friends, reviews, locationType, locationName, locationId, locationCapacity, maxCapacity, mapSrv, locationAddress, locationPlayers, toastr) {
+  .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, user, users, locations, friends, reviews, locationType, locationName, locationId, locationCapacity, maxCapacity, mapSrv, adminSrv, locationAddress, locationPlayers, toastr) {
 
   modalVm = this;
-  console.log(friends)
+
   modalVm.friendData      = friends;
   modalVm.locationAddress = locationAddress;
   modalVm.locationName    = locationName;
@@ -11,8 +11,6 @@ angular.module('mapApp')
   modalVm.capacity        = locationCapacity;
   modalVm.maxCapacity     = maxCapacity;
 
-  console.log(modalVm.locationPlayers)
-  console.log(modalVm.locationId)
   //modalVm.sendInvite      = sendInvite;
   modalVm.addPlayer             = addPlayer;
   modalVm.removePlayer          = removePlayer;
@@ -34,7 +32,6 @@ angular.module('mapApp')
   modalVm.allReviews            = reviews
   modalVm.addReview             = addReview;
   modalVm.getReview             = getReview;
-  console.log(reviews)
 
   modalVm.checkPlayer();
 
@@ -77,7 +74,6 @@ angular.module('mapApp')
   }
 
   function writeReview(){
-    console.log("TEST")
     modalVm.inviteInfo = false;
     modalVm.locationInfo = false;
     modalVm.reviewInfo = false;
@@ -199,8 +195,28 @@ angular.module('mapApp')
     modalVm.goBtn = false;
   };
 
+  function getReview(locationId){
+    adminSrv.getReviews()
+    .then(function(res){
+      modalVm.allReviews = res;
+      modalVm.locationNameReview = [];
+      for(var i = 0; i < modalVm.allReviews.length; i++){
+        if(modalVm.allReviews[i].locationId == locationId){
+          var reviews = modalVm.allReviews[i]     
+          mapSrv.getUserReview(modalVm.allReviews[i].userId,reviews)
+          .then(function(res){
+            modalVm.locationNameReview.push(res);
+            if(modalVm.locationNameReview.length != 0){
+              modalVm.reviewMessage = false;
+            }
+          })
+        }
+      }
+    });
+  }
+  modalVm.getReview(modalVm.locationId)
+
   function addReview(locationId, userId){
-    console.log(userId)
     var reviewObj = {
       "title": modalVm.reviewTitle,
       "body": modalVm.reviewBody,
@@ -209,28 +225,10 @@ angular.module('mapApp')
     }
     toastr.success('Your review has been sent','Success')
     $uibModalInstance.close()
-    mapSrv.addReview(locationId,userId,reviewObj);
+    mapSrv.addReview(locationId,userId,reviewObj)
+    .then(function(res){
+      modalVm.getReview(locationId);
+    });
   }
-
-  function getReview(locationId){
-    console.log(locationId)
-    modalVm.locationNameReview = [];
-    for(var i = 0; i < modalVm.allReviews.length; i++){
-      if(modalVm.allReviews[i].locationId == locationId){
-        console.log(modalVm.allReviews[i])
-        var reviews = modalVm.allReviews[i]     
-        mapSrv.getUserReview(modalVm.allReviews[i].userId,reviews)
-        .then(function(res){
-          console.log(res)
-          modalVm.locationNameReview.push(res);
-          if(modalVm.locationNameReview.length != 0){
-            modalVm.reviewMessage = false;
-          }
-          // console.log(modalVm.locationNameReview)
-        })
-      }
-    }
-  }
-  modalVm.getReview(modalVm.locationId)
 
 });

@@ -37,6 +37,7 @@
 		mapVm.interact  = mapSrv.interact;
 		mapVm.userCheck = mapSrv.userCheck;
 
+		console.log(mapVm.userData)
 		// Renders the form inside the setting for user update
 		mapVm.firstName = mapVm.userData.firstName;
 		mapVm.lastName 	= mapVm.userData.lastName;
@@ -199,13 +200,6 @@
 			}
 		}
 
-		// function to delete events after date has passed
-		// function checkDate(){
-
-		// }
-
-		// function to delete where you're playing after date has passed
-
 		function notifyAccept(){
 			//console.log(mapVm.allInvites.invites.length)
 			for(var i = 0; i < mapVm.allInvites.invites.length; i++){
@@ -348,6 +342,7 @@
 					if(i == mapVm.playingAt.length){
 						mapVm.locationData = res;
 					}
+					console.log(Date.now())
 				})
 			}
 		}
@@ -362,9 +357,7 @@
 				oldPassword: mapVm.oldPassword,
 				newPassword: mapVm.newPassword
 			}
-			console.log(updatedUser)
 			mapSrv.updateUser(updatedUser, userId)
-			mapVm.defaultView();
 		}
 
 		function populateMarkers(){

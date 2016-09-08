@@ -73,9 +73,6 @@
 		}
 
 		function authenticate(email,password){
-			console.log("authenticate is running the function")
-			console.log(email);
-			console.log(password);
 			var user = {
 				email:email,
 				password:password

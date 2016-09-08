@@ -100,6 +100,7 @@ router.put('/profilePic/:userId', function(req,res){
 // update users
 router.put('/update/:userId', function(req,res){
 	var __user = req.body;
+	console.log(__user)
 	var where = {where:{id:req.params.userId}}
 	models.Users.find(where).then(function(user){
 
@@ -113,7 +114,7 @@ router.put('/update/:userId', function(req,res){
 				        	user.updateAttributes({
 								firstName: __user.firstName,
 								lastName: __user.lastName,
-								username: __user.userName,
+								username: __user.username,
 								email: __user.email,
 								password: __user.newPassword
 							});
@@ -129,7 +130,7 @@ router.put('/update/:userId', function(req,res){
 		    }
 		    else{
 		    	res.status(403)
-		    		.json({err:'unauhthorized'});
+		    		.json({err:'wrong password'});
 		    }
 		});	        		       
 	});	
