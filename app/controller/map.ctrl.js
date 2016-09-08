@@ -207,7 +207,7 @@
 		// function to delete where you're playing after date has passed
 
 		function notifyAccept(){
-			console.log(mapVm.allInvites.invites.length)
+			//console.log(mapVm.allInvites.invites.length)
 			for(var i = 0; i < mapVm.allInvites.invites.length; i++){
 				//console.log(mapVm.allInvites.invites[i])
 				if(mapVm.allInvites.invites[i].userId == user.id){
@@ -217,10 +217,10 @@
 						//console.log(acceptedArr.accepted[j])
 						mapSrv.notifyGetUser(acceptedArr,acceptedArr.accepted[j])
 						.then(function(res){
-							console.log(res)
+							//console.log(res)
 							return mapSrv.notifyGetLocation(res.array,res.res,res.array.locationId)
 						}).then(function(res){
-							console.log(res)
+							//console.log(res)
 							if(res.array.accepted.length != 0){
 								toastr.info(res.user.data.firstName + " " + res.user.data.lastName + " has accepted your invitation to play at " + res.res.data.location.name,"Invitation Accepted",{
 									 iconClass: 'toast-accept'
