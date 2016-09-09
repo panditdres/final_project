@@ -5,8 +5,7 @@ console.log("loading location route")
 // get all location - works
 router.get('/', function(req,res){
 	console.log(req.body)
-	models.Location.findAll()
-	.then(function(locations){
+	models.Location.findAll().then(function(locations){
 		res.json({locations:locations})
 	})
 })
@@ -42,8 +41,7 @@ router.post('/invite/:locationId', function(req,res){
 	console.log(req.params)
 	console.log(req.body)
 	var invite = req.body;
-	models.Invites.create(invite)
-	.then(function(invite){
+	models.Invites.create(invite).then(function(invite){
 		console.log(invite)
 		res.json({
 			invite: invite
@@ -83,8 +81,7 @@ router.post('/', function(req,res){
 	// console.log("Venue posting onto the database");
 	// console.log("REQ BODY",req.body);
 	var location = req.body;
-	models.Location.create(location)
-		.then(function(location){
+	models.Location.create(location).then(function(location){
 			res.json({
 				location:location
 			})

@@ -36,18 +36,21 @@
           <button class="btn btn-primary" type="button" ng-click="ctrl.showInvite()">Invite Friends</button>
           <button class="btn btn-primary" type="button" ng-click="ctrl.showReviews()">Reviews</button>
       </div>
-      <div class="modal-body wrap">
+      <div class="modal-body wrap height">
           <h3>Address: {{ctrl.locationAddress}}</h3>
           <h4>Type of field: {{ctrl.locationType}}</h4>
           <h4>Number of players: <span style="font-weight:bolder">{{ctrl.locationPlayers.length}}</span></h4>
           <h4>Players going today: </h4>
           <ul>
-            <li ng-repeat="players in ctrl.locationPlayers">{{players}}</li>
+            <li ng-repeat="players in ctrl.locationPlayers">{{players.firstName}} {{players.lastName}} - {{players.username}} at {{players.time|date:'shortTime'}}</li>
           </ul>
       </div>
       <div class="modal-footer">
-
-<!--           <div uib-timepicker ng-model="ctrl.mytime" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></div> -->
+          <div ng-show="ctrl.timepicker">
+            <h4 style="text-align:left">What time do you want to play today?</h4>
+            <div style="padding-left:50px" uib-timepicker ng-model="ctrl.mytime" hour-step="ctrl.hstep" minute-step="ctrl.mstep" show-meridian="ctrl.ismeridian"></div>
+          </div>
+          
 
           <button class="btn btn-primary" type="button" ng-click="ctrl.incrementCounter(ctrl.locationId,ctrl.locationCounter); ctrl.addPlayer(ctrl.locationId,ctrl.user); ctrl.addPlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.goBtn">Let's Play</button>
           <button class="btn btn-warning" type="button" ng-click="ctrl.cancel(ctrl.locationId,ctrl.locationCounter); ctrl.removePlayer(ctrl.locationId,ctrl.user); ctrl.removePlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.cancelBtn">Or Nah</button>

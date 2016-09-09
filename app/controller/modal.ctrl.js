@@ -11,12 +11,11 @@ angular.module('mapApp')
   modalVm.capacity        = locationCapacity;
   modalVm.maxCapacity     = maxCapacity;
 
-  //modalVm.sendInvite      = sendInvite;
   modalVm.addPlayer             = addPlayer;
   modalVm.removePlayer          = removePlayer;
   modalVm.addPlayingLocation    = addPlayingLocation;
   modalVm.removePlayingLocation = removePlayingLocation;
-  modalVm.locationPlayers       = locationPlayers;
+  modalVm.locationPlayersForDB  = locationPlayers;
   modalVm.checkPlayer           = checkPlayer;
   modalVm.showInvite            = showInvite;
   modalVm.invite                = invite;
@@ -24,6 +23,8 @@ angular.module('mapApp')
   modalVm.subInvite             = subInvite;
   modalVm.sendInvite            = sendInvite;
 
+  modalVm.locationPlayers       = locationPlayers;
+  
   // review navigation
   modalVm.showReviews           = showReviews;
   modalVm.writeReview           = writeReview;
@@ -33,14 +34,15 @@ angular.module('mapApp')
   modalVm.addReview             = addReview;
   modalVm.getReview             = getReview;
 
-  modalVm.checkPlayer();
-
   modalVm.locations = locations;
   modalVm.users     = users;
   modalVm.user      = user;
 
   modalVm.incrementCounter = incrementCounter;
   modalVm.cancel           = cancel;
+
+  modalVm.showTime = showTime
+  modalVm.hideTime = hideTime;
 
   modalVm.invitation = [];
   modalVm.userPlaying = user.playing;
@@ -58,6 +60,29 @@ angular.module('mapApp')
   modalVm.ismeridian  = true;
 
   modalVm.reviewMessage = true;
+
+  modalVm.timepicker = true
+
+  modalVm.checkPlayer();
+
+  // console.log(locationPlayers)
+  for(var i = 0; i < modalVm.locationPlayers.length; i++){
+    if(typeof modalVm.locationPlayers[i] == "string"){
+      console.log("type string")
+      modalVm.locationPlayers[i] = JSON.parse(locationPlayers[i])
+    } else {
+      console.log("type object")
+    }
+  }
+
+
+  function hideTime(){
+    modalVm.timepicker = false;
+  }
+
+  function showTime(){
+    modalVm.timepicker = true;
+  }
 
   function showInvite(){
     modalVm.inviteInfo = true;
@@ -84,12 +109,16 @@ angular.module('mapApp')
     if(modalVm.locationPlayers == undefined){
       modalVm.locationPlayers = []
     }
-    if(modalVm.locationPlayers.includes(user.firstName + ' ' + user.lastName + ' - ' + user.username) == true) {
-      modalVm.goBtn = true;
-      modalVm.cancelBtn = false;
-    } else {
-      modalVm.goBtn = false;
-      modalVm.cancelBtn = true;
+    console.log(modalVm.locationPlayers[0].username)
+    console.log(modalVm.user)
+    for(var i = 0; i < modalVm.locationPlayers.length; i++){
+      if(modalVm.locationPlayers[i].username == modalVm.user.username){
+        modalVm.goBtn = true;
+        modalVm.cancelBtn = false;
+      } else {
+        modalVm.goBtn = false;
+        modalVm.cancelBtn = true;
+      }
     }
   }
 
@@ -124,6 +153,7 @@ angular.module('mapApp')
     console.log(locationId)
     //console.log(userId)
     console.log(modalVm.eventDate)
+    //if(modalVm.eventDate < Date.now())
     var invite = {
       "userId": user.id,
       "locationId": locationId,
@@ -135,24 +165,47 @@ angular.module('mapApp')
   }
 
   function addPlayer(locationId,playerInfo){
-      console.log(modalVm.mytime)
-    // console.log(locationId);
     if(modalVm.locationPlayers.length > modalVm.maxCapacity - 1) {
       toastr.error('There are no more spots', 'Error')
     }else{
-      modalVm.locationPlayers.push(playerInfo.firstName + ' ' + playerInfo.lastName + ' - ' + playerInfo.username);
-      mapSrv.addPlayer(locationId,modalVm.locationPlayers);
+      var info = {
+        firstName: playerInfo.firstName,
+        lastName: playerInfo.lastName,
+        username: playerInfo.username,
+        time: modalVm.mytime
+      }
+      modalVm.locationPlayersForDB.push(JSON.stringify(info));
+      for(var i = 0; i < modalVm.locationPlayersForDB.length; i++){
+        if(typeof modalVm.locationPlayersForDB[i] == "object"){
+          modalVm.locationPlayersForDB[i] = JSON.stringify(modalVm.locationPlayersForDB[i])
+        }
+      }
+      mapSrv.addPlayer(locationId,modalVm.locationPlayersForDB)
+      .then(function(res){
+        for(var i = 0; i < res.data.location.length; i++){
+          if(typeof res.data.location[i] == "object"){
+            res.data.location[i] = JSON.stringify(res.data.location[i])
+          }
+          modalVm.locationPlayers[i] = JSON.parse(res.data.location[i])
+        }
+      });
     }
   }
 
   function removePlayer(locationId,playerInfo){
-    // console.log(modalVm.locationPlayers)
-    // console.log(locationId)
-    // console.log(playerInfo)
     for(var i = 0; i < modalVm.locationPlayers.length; i++){
-      if(modalVm.locationPlayers[i].includes(modalVm.user.username)){
+      if(modalVm.locationPlayers[i].username == modalVm.user.username){
         modalVm.locationPlayers.splice(i,1)
-        mapSrv.addPlayer(locationId,modalVm.locationPlayers)
+        mapSrv.removePlayer(locationId,modalVm.locationPlayersForDB)
+        .then(function(res){
+          console.log(res.data.location)
+          for(var i = 0; i < res.data.location.length; i++){
+          if(typeof res.data.location[i] == "object"){
+            res.data.location[i] = JSON.stringify(res.data.location[i])
+          }
+          modalVm.locationPlayers[i] = JSON.parse(res.data.location[i])
+        }
+        })        
       }
     }
   }
@@ -167,18 +220,19 @@ angular.module('mapApp')
       modalVm.userPlaying.push(locationId);
       mapSrv.addPlayingLocation(userId,modalVm.userPlaying)
     }
+    modalVm.hideTime();
   }
 
   function removePlayingLocation(userId,locationId){
     console.log(locationId)
     console.log(modalVm.userPlaying)
-    console.log(modalVm.userPlaying[4])
     for(var i = 0; i < modalVm.userPlaying.length; i++){
       if(modalVm.userPlaying.includes(locationId)){
         modalVm.userPlaying.splice(i, 1);
         mapSrv.addPlayingLocation(userId,modalVm.userPlaying);
       }
     }
+    modalVm.showTime();
   }
 
   function incrementCounter(locationId, counter){ 

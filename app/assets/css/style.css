@@ -219,6 +219,9 @@ td.wrap{
 .center {
 	text-align: center;
 }
+.height {
+  max-height: 320px;
+}
 
 div.introjs-tooltip{
   font-family: 'Abel', sans-serif;

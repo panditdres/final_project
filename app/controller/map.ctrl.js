@@ -78,7 +78,6 @@
 		mapVm.getLocation();
 		mapVm.checkAccepted();	
 		
-
 		if($state.includes('friends') == false){
 			mapVm.checkInvited();
 			mapVm.notifyAccept()
@@ -342,7 +341,6 @@
 					if(i == mapVm.playingAt.length){
 						mapVm.locationData = res;
 					}
-					console.log(Date.now())
 				})
 			}
 		}

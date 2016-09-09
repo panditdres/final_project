@@ -17,6 +17,7 @@
 		self.defaultView 		= defaultView;
 
 		self.addPlayer      	= addPlayer;
+		self.removePlayer		= removePlayer;
 		self.friendRequest		= friendRequest;
 		self.addFriend      	= addFriend;
 		self.getFriend			= getFriend;
@@ -197,17 +198,29 @@
 		}
 
 		function addPlayer(locationId,players){
-			console.log("ADD player to location")
 			return api.request('/location/player/'+locationId,players,'PUT')
 			.then(function(res){
 				if(res.status === 200){
 					self.defaultView();
+					return res;
+				}
+			})
+		}
+
+		function removePlayer(locationId,players){
+			for(var i = 0; i < players.length; i++){
+				players[i] = JSON.stringify(players[i])
+			}
+			return api.request('/location/player/'+locationId,players,'PUT')
+			.then(function(res){
+				if(res.status === 200){
+					self.defaultView();
+					return res;
 				}
 			})
 		}
 
 		function addPlayingLocation(userId,userPlaying){
-			console.log("ADD location to user")
 			return api.request('/users/location/'+userId,userPlaying,'PUT')
 			.then(function(res){
 				if(res.status === 200){
@@ -217,7 +230,6 @@
 		}
 
 		function addFriend(userId, friendArray){
-			console.log("Add friend service")
 			return api.request('/users/friends/'+userId,friendArray,'PUT')
 			.then(function(res){
 				return res;
