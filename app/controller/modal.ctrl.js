@@ -110,8 +110,6 @@ angular.module('mapApp')
     if(modalVm.locationPlayers == undefined){
       modalVm.locationPlayers = []
     }
-    console.log(modalVm.locationPlayers[0].username)
-    console.log(modalVm.user)
     for(var i = 0; i < modalVm.locationPlayers.length; i++){
       if(modalVm.locationPlayers[i].username == modalVm.user.username){
         modalVm.goBtn = true;
