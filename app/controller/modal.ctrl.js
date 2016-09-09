@@ -69,6 +69,7 @@ angular.module('mapApp')
   for(var i = 0; i < modalVm.locationPlayers.length; i++){
     if(typeof modalVm.locationPlayers[i] == "string"){
       console.log("type string")
+      console.log(locationPlayers)
       modalVm.locationPlayers[i] = JSON.parse(locationPlayers[i])
     } else {
       console.log("type object")
