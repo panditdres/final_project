@@ -3,7 +3,7 @@
 		.module('mapApp')
 		.controller('adminCtrl',adminCtrl)
 
-	function adminCtrl($scope, $stateParams, $http, $state, mapSrv, adminSrv, api, users, locations, reviews) {
+	function adminCtrl($scope, $stateParams, $http, $state, mapSrv, adminSrv, api, users, locations, reviews, toastr) {
 		var adminVm = this;
 
 		adminVm.logout         = logout;
@@ -18,6 +18,7 @@
 		adminVm.editLocation   = editLocation;
 		adminVm.getLocation	   = getLocation;
 		adminVm.deleteReview   = deleteReview;
+		adminVm.clearPlayers   = clearPlayers;	
 
 		adminVm.location   = adminSrv.location;
 		adminVm.locationId = $stateParams.locationId;
@@ -66,6 +67,14 @@
 			}
 			adminSrv.updateLocation(updated_Location, locationId)
 			$state.go('admin.allLocation');
+		}
+
+		function clearPlayers(locationId){
+			var empty = [];
+			adminSrv.clearPlayers(empty,locationId)
+			.then(function(res){
+				toastr.success("Players playing at location cleared","Success")
+			})
 		}
 
 		function logout(){

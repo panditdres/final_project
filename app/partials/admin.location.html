@@ -13,18 +13,20 @@
             <th>Address</th>
             <th>Type</th>
             <th>Maximum Capacity</th>
+            <th>Clear players</th>
             <th></th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-        	<tr ng-repeat="locations in ctrl.locations" ng-click="ctrl.getLocation(locations.id)">
+        	<tr ng-repeat="locations in ctrl.locations">
         		<td class="wrap">{{locations.name}}</td>
         		<td class="wrap">{{locations.latitude}}</td>
         		<td class="wrap">{{locations.longitude}}</td>
                 <td class="wrap">{{locations.address}}</td>
         		<td class="wrap">{{locations.type}}</td>
         		<td class="wrap">{{locations.maxCapacity}}</td>
+                <td><i class="fa fa-times" aria-hidden="true" ng-click="ctrl.clearPlayers(locations.id)"></i></td>
         		<td><i class="fa fa-pencil" aria-hidden="true" ng-click="ctrl.editLocation(locations); ctrl.getLocation(locations.id)"></i></td>
         		<td><i class="fa fa-trash" aria-hidden="true" ng-click="ctrl.deleteLocation(locations.id)"></i></td>
         	</tr>
