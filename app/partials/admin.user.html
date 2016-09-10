@@ -10,6 +10,7 @@
             <th>Last Name</th>
             <th>Email</th>
             <th>Username</th>
+            <th>Clear Playing Location</th>
             <th></th>
           </tr>
         </thead>
@@ -19,6 +20,7 @@
                 <td class="wrap">{{users.lastName}}</td>
                 <td class="wrap">{{users.email}}</td>
                 <td class="wrap">{{users.username}}</td>
+                <td class="wrap"><i class="fa fa-times" aria-hidden="true" ng-click="ctrl.clearLocation(users.id)"></i></td>
                 <td class="wrap"><i class="fa fa-trash" aria-hidden="true" ng-click="ctrl.deleteUser(users.id)"></i></td>
             </tr>
         </tbody>

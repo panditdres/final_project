@@ -17,7 +17,8 @@
 		self.removeLocation = removeLocation;
 		self.updateLocation = updateLocation;
 		self.updateLocationList = updateLocationList;
-		self.clearPlayers   = clearPlayers
+		self.clearPlayers   = clearPlayers;
+		self.clearLocation  = clearLocation;
 		
 		self.getLocation = getLocation;
 		self.getReviews  = getReviews;
@@ -168,6 +169,16 @@
 
 		function clearPlayers(players,locationId){
 			return api.request('/location/player/'+locationId,players,'PUT')
+			.then(function(res){
+				if(res.status === 200){
+					console.log(res)
+					return res;
+				}
+			})
+		}
+
+		function clearLocation(location,userId){
+			return api.request('/users/location/'+userId,location,'PUT')
 			.then(function(res){
 				if(res.status === 200){
 					console.log(res)

@@ -49,7 +49,7 @@ router.put('/friends/:userId',function(req,res){
 	})
 })
 
-// add location playing
+// update location playing
 router.put('/location/:userId',function(req,res){
 	var __user = req.body
 	var where = {where:{id:req.params.userId}}

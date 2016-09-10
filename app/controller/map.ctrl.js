@@ -335,6 +335,7 @@
 		}
 
 		function getLocation(){
+			console.log("getLocation")
 			for(var i = 0; i < mapVm.playingAt.length; i++){
 				mapSrv.getLocation(mapVm.playingAt[i])
 				.then(function(res){

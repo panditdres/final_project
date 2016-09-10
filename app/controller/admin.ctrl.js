@@ -19,6 +19,7 @@
 		adminVm.getLocation	   = getLocation;
 		adminVm.deleteReview   = deleteReview;
 		adminVm.clearPlayers   = clearPlayers;	
+		adminVm.clearLocation  = clearLocation;	
 
 		adminVm.location   = adminSrv.location;
 		adminVm.locationId = $stateParams.locationId;
@@ -72,6 +73,14 @@
 		function clearPlayers(locationId){
 			var empty = [];
 			adminSrv.clearPlayers(empty,locationId)
+			.then(function(res){
+				toastr.success("Players playing at location cleared","Success")
+			})
+		}
+
+		function clearLocation(userId){
+			var empty = [];
+			adminSrv.clearLocation(empty,userId)
 			.then(function(res){
 				toastr.success("Players playing at location cleared","Success")
 			})
