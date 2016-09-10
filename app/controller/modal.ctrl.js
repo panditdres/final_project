@@ -112,10 +112,18 @@ angular.module('mapApp')
       modalVm.locationPlayers = []
     }
     for(var i = 0; i < modalVm.locationPlayers.length; i++){
+      console.log(modalVm.locationPlayers[i].username == modalVm.user.username)
+      console.log(modalVm.locationPlayers[i])
+      console.log(modalVm.user.username)
+      if(typeof modalVm.locationPlayers[i] == "string"){
+        modalVm.locationPlayers[i] = JSON.parse(modalVm.locationPlayers[i])
+      }
       if(modalVm.locationPlayers[i].username == modalVm.user.username){
+        console.log("cancel Btn enabled")
         modalVm.goBtn = true;
         modalVm.cancelBtn = false;
       } else {
+        console.log("Go Btn enabled")
         modalVm.goBtn = false;
         modalVm.cancelBtn = true;
       }
