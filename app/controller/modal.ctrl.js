@@ -22,6 +22,7 @@ angular.module('mapApp')
   modalVm.addInvite             = addInvite;
   modalVm.subInvite             = subInvite;
   modalVm.sendInvite            = sendInvite;
+  modalVm.close                 = close;
 
   modalVm.locationPlayers       = locationPlayers;
   
@@ -152,15 +153,24 @@ angular.module('mapApp')
     console.log(locationId)
     //console.log(userId)
     console.log(modalVm.eventDate)
-    //if(modalVm.eventDate < Date.now())
-    var invite = {
-      "userId": user.id,
-      "locationId": locationId,
-      "date": modalVm.eventDate,
-      "invited": modalVm.invitation
+    if(!modalVm.eventDate){ 
+      toastr.info("Please input a date","Info")
+    } else if (modalVm.eventDate < Date.now()){
+      toastr.info("Please select appropriate date","Info")
+    } else {
+      var invite = {
+        "userId": user.id,
+        "locationId": locationId,
+        "date": modalVm.eventDate,
+        "invited": modalVm.invitation
+      }
+      $uibModalInstance.close()
+      mapSrv.sendInvite(locationId,user.id,invite)
     }
+  }
+
+  function close(){
     $uibModalInstance.close()
-    mapSrv.sendInvite(locationId,user.id,invite)
   }
 
   function addPlayer(locationId,playerInfo){
@@ -222,6 +232,7 @@ angular.module('mapApp')
     modalVm.hideTime();
   }
 
+  // something needs to be fixed here
   function removePlayingLocation(userId,locationId){
     console.log(locationId)
     console.log(modalVm.userPlaying)
