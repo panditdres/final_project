@@ -203,6 +203,9 @@ td.wrap{
   top:10px;
   left:320px;
 }
+div.welcome{
+  width: 185px;
+}
 .google-search {
 	width: 200px;
 	height: 33px;

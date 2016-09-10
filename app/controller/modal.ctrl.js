@@ -235,10 +235,11 @@ angular.module('mapApp')
   // something needs to be fixed here
   function removePlayingLocation(userId,locationId){
     console.log(locationId)
-    console.log(modalVm.userPlaying)
+    console.log("before",modalVm.userPlaying)
     for(var i = 0; i < modalVm.userPlaying.length; i++){
-      if(modalVm.userPlaying.includes(locationId)){
+      if(modalVm.userPlaying[i] == locationId){
         modalVm.userPlaying.splice(i, 1);
+        console.log("After",modalVm.userPlaying)
         mapSrv.addPlayingLocation(userId,modalVm.userPlaying);
       }
     }

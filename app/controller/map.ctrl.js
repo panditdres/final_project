@@ -287,6 +287,7 @@
 		      	mapVm.selected = selectedItem;
 		    },function () {
 		    	console.log(mapVm.playingAt)
+		    	console.log("closed modal")
 		    	mapVm.getLocation()
 		      	$log.info('Modal dismissed at: ' + new Date());
 		    });  
@@ -334,15 +335,23 @@
 			}	
 		}
 
+		// something needs to be fixed here
 		function getLocation(){
 			console.log("getLocation")
-			for(var i = 0; i < mapVm.playingAt.length; i++){
-				mapSrv.getLocation(mapVm.playingAt[i])
-				.then(function(res){
-					if(i == mapVm.playingAt.length){
-						mapVm.locationData = res;
-					}
-				})
+			if(mapVm.playingAt.length == 0) {
+				mapVm.locationData = []
+			} else {
+				for(var i = 0; i < mapVm.playingAt.length; i++){
+					mapSrv.getLocation(mapVm.playingAt[i])
+					.then(function(res){
+						console.log("response",res)
+						//if(i == mapVm.playingAt.length){
+							console.log("going inside if")
+							mapVm.locationData = res;
+							console.log(mapVm.locationData)
+						//}
+					})
+				}
 			}
 		}
 

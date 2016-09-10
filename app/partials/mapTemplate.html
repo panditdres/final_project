@@ -204,15 +204,14 @@
 <!-- make each button toggle -->
 <div>
   <div class="home-view" ng-show="ctrl.showDefault">
-    <div>
-      <h2>Hello {{ctrl.userData.firstName}}
+    <div class="welcome">
+      <h2 class="wrap">Hello {{ctrl.userData.firstName}}
         <img class="profile-pic" ng-src="{{ctrl.userData.profilePic}}">  
       </h2>
       <h4>You are playing at: <i class="fa fa-futbol-o" aria-hidden="true"></i></h4>
       <h5 ng-repeat="locations in ctrl.locationData" ng-click="ctrl.geolocate(locations.location.latitude,locations.location.longitude)">{{locations.location.name}}</h5>
-      <hr>
     </div>
-
+    <hr>
     <div class="events">
       <h3 class="events">Events <i class="fa fa-calendar" aria-hidden="true"></i></h3>
 
