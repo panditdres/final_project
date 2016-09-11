@@ -62,6 +62,7 @@
 		mapVm.checkAccepted = checkAccepted;
 		mapVm.notifyAccept	= notifyAccept;
 
+		mapVm.okayAccept	= okayAccept;
 		
 		mapVm.animationsEnabled = true;
 		mapVm.notificationLogo 	= false;
@@ -73,6 +74,8 @@
 		mapVm.friendMessage = "Add Friend"
 		
 		mapVm.eventShow = true;
+
+		mapVm.showAccepted = true;
 
 		mapVm.getFriend();
 		mapVm.getLocation();
@@ -177,6 +180,16 @@
 			mapVm.notificationData = []
 			mapVm.notifications = 0;
 			for(var i = 0; i < mapVm.allInvites.invites.length; i++){
+				//console.log(mapVm.allInvites.invites[i])
+				//console.log(user.id)
+				if(mapVm.allInvites.invites[i].userId == user.id){
+					//console.log(mapVm.allInvites.invites[i])
+					var acceptedArr = mapVm.allInvites.invites[i];
+					for(var j =0; j < acceptedArr.accepted.length; j++){
+						mapVm.notifications++
+					}
+					console.log(mapVm.notifications)
+				}
 				if(mapVm.allInvites.invites[i].invited.includes(user.id)){
 					mapVm.notifications++
 					mapSrv.getUserInvite(mapVm.allInvites.invites[i].userId,i,mapVm.allInvites.invites[i].date,mapVm.allInvites.invites[i].id)
@@ -193,14 +206,19 @@
 							inviteId: res2.inviteId
 						}
 						mapVm.notificationData.push(data);
-						toastr.info("You have a new invitation from "+ res2.firstName + ' ' + res2.lastName + ' to play at ' + res2.location.name, "Notification")
 					})
 				}
 			}
+			return mapVm.notifications;
+		}
+		console.log(mapVm.notifications)
+		if(mapVm.notifications != 0){
+			toastr.info("You have " + mapVm.notifications + " new notifications")
 		}
 
 		function notifyAccept(){
-			//console.log(mapVm.allInvites.invites.length)
+			console.log(mapVm.events)
+			mapVm.acceptedData = []
 			for(var i = 0; i < mapVm.allInvites.invites.length; i++){
 				//console.log(mapVm.allInvites.invites[i])
 				if(mapVm.allInvites.invites[i].userId == user.id){
@@ -213,14 +231,27 @@
 							//console.log(res)
 							return mapSrv.notifyGetLocation(res.array,res.res,res.array.locationId)
 						}).then(function(res){
-							//console.log(res)
-							if(res.array.accepted.length != 0){
-								toastr.info(res.user.data.firstName + " " + res.user.data.lastName + " has accepted your invitation to play at " + res.res.data.location.name,"Invitation Accepted",{
-									 iconClass: 'toast-accept'
-								})
-							}
+							console.log(res)
+							mapVm.acceptedData.push(res);
+							return mapVm.acceptedData;
 						})
 					}			
+				}
+			}
+		}
+
+		// Think about it, see how you can reduce notifications
+		// after pressing the sweet button
+		// Also, after someone accepts, you should be able to
+		// see in your OWN events
+		function okayAccept(acceptedUserId){
+			console.log("okayAccept")
+			console.log(acceptedUserId)
+			console.log(mapVm.acceptedData)
+			for(var i = 0; i < mapVm.acceptedData.length; i++){
+				if(mapVm.acceptedData[i].user.data.id == acceptedUserId){
+					mapVm.acceptedData.splice(i,1)
+					console.log(mapVm.acceptedData)
 				}
 			}
 		}
@@ -335,7 +366,6 @@
 			}	
 		}
 
-		// something needs to be fixed here
 		function getLocation(){
 			console.log("getLocation")
 			if(mapVm.playingAt.length == 0) {
@@ -346,9 +376,8 @@
 					.then(function(res){
 						console.log("response",res)
 						//if(i == mapVm.playingAt.length){
-							console.log("going inside if")
-							mapVm.locationData = res;
-							console.log(mapVm.locationData)
+						mapVm.locationData = res;
+						console.log(mapVm.locationData)
 						//}
 					})
 				}

@@ -187,11 +187,16 @@
       
     </div>
 
-    <div ng-show="ctrl.notificationShow">
-      <div ng-repeat="notifications in ctrl.notificationData">
+    <div ng-show="ctrl.notificationShow" class="all-notifications">
+      <div ng-repeat="notifications in ctrl.notificationData" class="wrap">
         <p style="color:white">{{notifications.firstname}}  {{notifications.lastname}} invited you to play at {{notifications.location.name}} on {{notifications.date | date:longDate}}</p>
         <button class="btn btn-sm btn-primary" ng-click="ctrl.accept(notifications.inviteId)">Accept</button>
         <button class="btn btn-sm btn-danger" ng-click="ctrl.reject(notifications.inviteId)" style="margin-left:10px; background-color:#F28679">Reject</button>
+        <hr>
+      </div>
+      <div ng-repeat="accepted in ctrl.acceptedData" class="wrap" ng-show="ctrl.showAccepted">
+        <p>{{accepted.user.data.firstName}} {{accepted.user.data.lastName}} has accepted your invitation to play at {{accepted.res.data.location.name}}</p>
+        <button class="btn btn-sm btn-success center" ng-click="ctrl.okayAccept(accepted.user.data.id)">Sweet</button>
         <hr>
       </div>
     </div>

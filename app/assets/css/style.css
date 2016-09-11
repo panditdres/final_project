@@ -137,6 +137,12 @@ div.all-friends {
   color: white;
 }
 
+div.all-notifications {
+  max-height: 250px;
+  overflow: scroll;
+  color: white;
+}
+
 p.notification {
   color: white;
 }
