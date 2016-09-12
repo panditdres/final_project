@@ -13,7 +13,7 @@
 		        libraries: 'weather,geometry,visualization,places',
 		    });
 	
-			$urlRouterProvider.otherwise('/login');
+			$urlRouterProvider.otherwise('/');
 
 			$stateProvider
 
@@ -66,7 +66,7 @@
 			})
 
 			.state('login', {
-				url:'/login',
+				url:'/',
 				templateUrl:'/partials/logIn.html',
 				authenticate:false,
 				controller:'authCtrl as ctrl'
