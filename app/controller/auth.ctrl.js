@@ -38,12 +38,9 @@
 		}
 
 		(function() {
-	      console.log("SCRIPT")
 	      // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
-	      console.log("IF",String.prototype)
 	      if (!String.prototype.trim) {
 	        (function() {
-	        console.log("going in if")
 	          // Make sure we trim BOM and NBSP
 	          var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
 	          String.prototype.trim = function() {
@@ -51,12 +48,9 @@
 	          };
 	        })();
 	      }
-	      console.log("before forEach");
 	      [].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
-	      	console.log("forEach")
 	        // in case the input is already filled..
 	        if( inputEl.value.trim() !== '' ) {
-	          console.log("SCRIPT FILLED")
 	          classie.add( inputEl.parentNode, 'input--filled' );
 	        }
 
@@ -79,60 +73,13 @@
 	    })();
 
 	    $("#menu-close").click(function(e) {
-	    	console.log("close sidebar")
 	        e.preventDefault();
 	        $("#sidebar-wrapper").toggleClass("active");
 	    });
 	    // Opens the sidebar menu
 	    $("#menu-toggle").click(function(e) {
-	    	console.log("open sidebar")
 	        e.preventDefault();
 	        $("#sidebar-wrapper").toggleClass("active");
-	    });
-	    // Scrolls to the selected menu item on the page
-	    $(function() {
-	    	console.log("scrolling item")
-	        $('a[href*=#]:not([href=#],[data-toggle],[data-target],[data-slide])').click(function() {
-	            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-	                var target = $(this.hash);
-	                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-	                if (target.length) {
-	                    $('html,body').animate({
-	                        scrollTop: target.offset().top
-	                    }, 1000);
-	                    return false;
-	                }
-	            }
-	        });
-	    });
-	    console.log(document)
-	    //#to-top button appears after scrolling
-	    var fixed = false;
-	    $('html,body').scroll(function() {
-	    	console.log("SCROLL")
-	        if ($(this).scrollTop() > 250) {
-	        	
-	        	console.log("inside")
-	            if (!fixed) {
-	                fixed = true;
-	                $('#to-top').css({position:'fixed', display:'block'});
-	                $('#to-top').show("slow", function() {
-	                    $('#to-top').css({
-	                        position: 'fixed',
-	                        display: 'block'
-	                    });
-	                });
-	            }
-	        } else {
-	            if (fixed) {
-	                fixed = false;
-	                $('#to-top').hide("slow", function() {
-	                    $('#to-top').css({
-	                        display: 'none'
-	                    });
-	                });
-	            }
-	        }
 	    });
 		
 	}
