@@ -188,7 +188,6 @@
 					for(var j =0; j < acceptedArr.accepted.length; j++){
 						mapVm.notifications++
 					}
-					console.log(mapVm.notifications)
 				}
 				if(mapVm.allInvites.invites[i].invited.includes(user.id)){
 					mapVm.notifications++
@@ -212,7 +211,7 @@
 			return mapVm.notifications;
 		}
 		console.log(mapVm.notifications)
-		if(mapVm.notifications != 0){
+		if(mapVm.notifications != 0 && $state.includes('friends') == false){
 			toastr.info("You have " + mapVm.notifications + " new notifications")
 		}
 
@@ -231,7 +230,6 @@
 							//console.log(res)
 							return mapSrv.notifyGetLocation(res.array,res.res,res.array.locationId)
 						}).then(function(res){
-							console.log(res)
 							mapVm.acceptedData.push(res);
 							return mapVm.acceptedData;
 						})
@@ -239,6 +237,8 @@
 				}
 			}
 		}
+
+		console.log("Accepted Data",mapVm.acceptedData)
 
 		// Think about it, see how you can reduce notifications
 		// after pressing the sweet button
@@ -251,8 +251,8 @@
 			for(var i = 0; i < mapVm.acceptedData.length; i++){
 				if(mapVm.acceptedData[i].user.data.id == acceptedUserId){
 					mapVm.acceptedData.splice(i,1)
-					console.log(mapVm.acceptedData)
-				}
+					console.log(mapVm.acceptedData.length)
+				}	
 			}
 		}
 
