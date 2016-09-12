@@ -83,7 +83,7 @@
 		
 		if($state.includes('friends') == false){
 			mapVm.checkInvited();
-			mapVm.notifyAccept()
+			mapVm.notifyAccept(mapVm.notifications)
 		}
 
 		if($state.includes('friends') == true){
@@ -164,6 +164,7 @@
 						}).then(function(response){
 							return mapSrv.getUserNameAccept(response,response.hostId,response.event)
 						}).then(function(res2){
+							console.log(res2)
 							var eventInfo = res2;			
 							mapVm.events.push(eventInfo);
 							mapVm.eventShow = false;
@@ -182,13 +183,13 @@
 			for(var i = 0; i < mapVm.allInvites.invites.length; i++){
 				//console.log(mapVm.allInvites.invites[i])
 				//console.log(user.id)
-				if(mapVm.allInvites.invites[i].userId == user.id){
-					//console.log(mapVm.allInvites.invites[i])
-					var acceptedArr = mapVm.allInvites.invites[i];
-					for(var j =0; j < acceptedArr.accepted.length; j++){
-						mapVm.notifications++
-					}
-				}
+				// if(mapVm.allInvites.invites[i].userId == user.id){
+				// 	//console.log(mapVm.allInvites.invites[i])
+				// 	var acceptedArr = mapVm.allInvites.invites[i];
+				// 	for(var j =0; j < acceptedArr.accepted.length; j++){
+				// 		mapVm.notifications++
+				// 	}
+				// }
 				if(mapVm.allInvites.invites[i].invited.includes(user.id)){
 					mapVm.notifications++
 					mapSrv.getUserInvite(mapVm.allInvites.invites[i].userId,i,mapVm.allInvites.invites[i].date,mapVm.allInvites.invites[i].id)
@@ -210,13 +211,10 @@
 			}
 			return mapVm.notifications;
 		}
-		console.log(mapVm.notifications)
-		if(mapVm.notifications != 0 && $state.includes('friends') == false){
-			toastr.info("You have " + mapVm.notifications + " new notifications")
-		}
 
-		function notifyAccept(){
+		function notifyAccept(x){
 			console.log(mapVm.events)
+			console.log(x)
 			mapVm.acceptedData = []
 			for(var i = 0; i < mapVm.allInvites.invites.length; i++){
 				//console.log(mapVm.allInvites.invites[i])
@@ -230,13 +228,31 @@
 							//console.log(res)
 							return mapSrv.notifyGetLocation(res.array,res.res,res.array.locationId)
 						}).then(function(res){
-							mapVm.acceptedData.push(res);
-							return mapVm.acceptedData;
+							var today = new Date()
+							if(Date.parse(res.array.date) < today.valueOf() == false){
+								mapVm.acceptedData.push(res);
+								console.log(mapVm.acceptedData)
+								console.log(mapVm.acceptedData.length)
+								return mapVm.acceptedData.length;
+							}
+						}).then(function(res2){
+							console.log(res2)
+							if(res2 != undefined){
+								mapVm.notifications = x + res2;
+								console.log(mapVm.notifications)
+								return mapVm.notifications
+							}
 						})
 					}			
 				}
 			}
 		}
+
+		if(mapVm.notifications != 0 && $state.includes('friends') == false){
+			toastr.info("You have " + mapVm.notifications + " new notifications")
+		}
+		console.log(mapVm.notifications)
+		
 
 		console.log("Accepted Data",mapVm.acceptedData)
 
@@ -244,10 +260,11 @@
 		// after pressing the sweet button
 		// Also, after someone accepts, you should be able to
 		// see in your OWN events
-		function okayAccept(acceptedUserId){
+		function okayAccept(acceptedUserId,x){
 			console.log("okayAccept")
 			console.log(acceptedUserId)
 			console.log(mapVm.acceptedData)
+			console.log(x)
 			for(var i = 0; i < mapVm.acceptedData.length; i++){
 				if(mapVm.acceptedData[i].user.data.id == acceptedUserId){
 					mapVm.acceptedData.splice(i,1)

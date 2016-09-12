@@ -195,8 +195,8 @@
         <hr>
       </div>
       <div ng-repeat="accepted in ctrl.acceptedData" class="wrap" ng-show="ctrl.showAccepted">
-        <p>{{accepted.user.data.firstName}} {{accepted.user.data.lastName}} has accepted your invitation to play at {{accepted.res.data.location.name}}</p>
-        <button class="btn btn-sm btn-success center" ng-click="ctrl.okayAccept(accepted.user.data.id)">Sweet</button>
+        <p>{{accepted.user.data.firstName}} {{accepted.user.data.lastName}} has accepted your invitation to play at {{accepted.res.data.location.name}} on {{accepted.array.date | date:longDate}}</p>
+        <button class="btn btn-sm btn-success center" ng-click="ctrl.okayAccept(accepted.user.data.id,ctrl.notifications)">Sweet</button>
         <hr>
       </div>
     </div>

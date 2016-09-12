@@ -157,13 +157,14 @@ angular.module('mapApp')
   }
 
   function sendInvite(locationId, user){
-    console.log(modalVm.invitation)
-    console.log(locationId)
+    // console.log(modalVm.invitation)
+    // console.log(locationId)
     //console.log(userId)
-    console.log(modalVm.eventDate)
+    // console.log(modalVm.eventDate)
+    var today = new Date()
     if(!modalVm.eventDate){ 
       toastr.info("Please input a date","Info")
-    } else if (modalVm.eventDate < Date.now()){
+    } else if (Date.parse(modalVm.eventDate) < today.valueOf()){
       toastr.info("Please select appropriate date","Info")
     } else {
       var invite = {
