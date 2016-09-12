@@ -19,7 +19,6 @@ a:not(.md-button) {
 
 .overlay {
   color: white;
-  border-radius: 55%;
   position: absolute;
   top: 0;
   left: 0;

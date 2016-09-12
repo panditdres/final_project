@@ -44,13 +44,13 @@
 			<div class="col-lg-3 col-md-3 col-xs-12 center" ng-repeat="users in ctrl.nonFriends | filter:{firstName:ctrl.search}" ng-click="ctrl.checkFriends; ctrl.addFriend(users)">
 				<div class="add-friend center">
 					
-					<img class="profile-pic-friends" ng-src="{{users.profilePic}}" style="height:100%;width:100%">
-					
+					<img class="profile-pic-friends" ng-src="{{users.profilePic}}">
+					<h3>{{users.firstName}} {{users.lastName}}</h3>
+					<h4>{{users.username}}</h4>	
 				
 					
 					<div class="overlay center">
-						<h3>{{users.firstName}} {{users.lastName}}</h3>
-						<h4>{{users.username}}</h4>	
+						
 						<button class="btn right" ng-class="{'btn-success': ctrl.friends.includes(users.id)}" ng-click="ctrl.checkFriends; ctrl.addFriend(users)">
 						<i class="fa fa-user-plus fa-2x" style="color:white;font-weight:lighter" aria-hidden="true"></i>
 						</button>
