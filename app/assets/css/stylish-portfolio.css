@@ -44,12 +44,6 @@ body {
     background-color: rgba(0,0,0,0.7);
 }
 
-.btn-light {
-    border-radius: 0;
-    color: #333;
-    background-color: rgb(255,255,255);
-}
-
 .btn-light:hover,
 .btn-light:focus,
 .btn-light:active {

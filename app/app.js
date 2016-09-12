@@ -13,16 +13,9 @@
 		        libraries: 'weather,geometry,visualization,places',
 		    });
 	
-			$urlRouterProvider.otherwise('/welcome');
+			$urlRouterProvider.otherwise('/login');
 
 			$stateProvider
-
-			.state('landing', {
-				url:'/welcome',
-				templateUrl:'/partials/landing.page.html',
-				controller:'landingCtrl as ctrl',
-				authenticate:false
-			})
 
 			.state('home', {
 				url:'/home',
