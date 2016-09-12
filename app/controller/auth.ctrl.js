@@ -31,7 +31,6 @@
 		}
 
 		function scroll(x){
-			console.log("scroll function")
 			var newHash = x;
 			$location.hash(x);
 			$anchorScroll();
