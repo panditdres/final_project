@@ -3,22 +3,22 @@
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
             <li class="sidebar-brand">
-                <a href="#top" onclick=$("#menu-close").click();>KickApp</a>
+                <a ng-click="ctrl.scroll('top')" onclick=$("#menu-close").click();>KickApp</a>
             </li>
             <li>
-                <a href="#about" onclick=$("#menu-close").click();>About</a>
+                <a ng-click="ctrl.scroll('about')" onclick=$("#menu-close").click();>About</a>
             </li>
             <li>
-                <a href="#services" onclick=$("#menu-close").click();>Services</a>
+                <a ng-click="ctrl.scroll('services')" onclick=$("#menu-close").click();>Services</a>
             </li>
             <li>
-                <a href="#contact" onclick=$("#menu-close").click();>Contact</a>
+                <a ng-click="ctrl.scroll('contact')" onclick=$("#menu-close").click();>Contact</a>
             </li>
         </ul>
     </nav>
 
 
-<div>
+<div id="top">
   <section class="content bgcolor-4 auth">
     <h1 class="appName center">
       KickApp
@@ -50,6 +50,9 @@
         <p id="register">No account? No problem, create one here</p>
         <input class="input__field input__field--ruri btn btn-primary" ui-sref="register" value="Register" id="input-31" />
       </span>
+    </div>
+    <div class="center bottom">
+      <i class="fa fa-angle-down fa-4x center" aria-hidden="true"></i>
     </div>
   </section>
 </div>
@@ -136,13 +139,15 @@
 
 <!-- Footer -->
 <footer>
-    <div class="container ">
+    <div id="contact" class="container ">
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 text-center">
                 <h4><strong>KickApp</strong>
                 </h4>
-                <p>507-761 Bay St 
-                    <br>M5G 2R2, Toronto, ON, Canada</p>
+                <p>761 Bay St, Suite 507 
+                  <br>M5G 2R2, Toronto, ON, Canada
+                </p>
+                <hr class="small" style="border-color:black">
                 <ul class="list-unstyled">
                     <li><i class="fa fa-phone fa-fw"></i> (647) 705 9548</li>
                     <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:pandit.dres@gmail.com">pandit.dres@gmail.com</a>

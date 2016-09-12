@@ -1,9 +1,12 @@
 (function(){
 	angular
 		.module('mapApp')
+		.run(['$anchorScroll', function($anchorScroll) {
+		  $anchorScroll.yOffset = 50;   // always scroll by 50 extra pixels
+		}])
 		.controller('authCtrl',authCtrl)
 
-	function authCtrl($scope, $http, $state, $interval, mapSrv, authSrv, toastr) {
+	function authCtrl($scope, $http, $state, $interval, $anchorScroll, $location, mapSrv, authSrv, toastr) {
 		var authVm = this;
 
 		authVm.registerBtn = 'Register';
@@ -13,6 +16,7 @@
 		authVm.register 	= register;
 		authVm.authenticate = authenticate;
 		authVm.adminLogin 	= adminLogin;
+		authVm.scroll       = scroll;
 
 		function register(){
 			authSrv.register(authVm.firstName,authVm.lastName,authVm.username,authVm.email,authVm.password,authVm.passwordRedo)
@@ -24,6 +28,13 @@
 
 		function adminLogin(){
 			authSrv.adminLogin(authVm.email,authVm.password)
+		}
+
+		function scroll(x){
+			console.log("scroll function")
+			var newHash = x;
+			$location.hash(x);
+			$anchorScroll();
 		}
 
 		(function() {
@@ -123,26 +134,6 @@
 	            }
 	        }
 	    });
-	    // Disable Google Maps scrolling
-	    // See http://stackoverflow.com/a/25904582/1607849
-	    // Disable scroll zooming and bind back the click event
-	    var onMapMouseleaveHandler = function(event) {
-	        var that = $(this);
-	        that.on('click', onMapClickHandler);
-	        that.off('mouseleave', onMapMouseleaveHandler);
-	        that.find('iframe').css("pointer-events", "none");
-	    }
-	    var onMapClickHandler = function(event) {
-	            var that = $(this);
-	            // Disable the click handler until the user leaves the map area
-	            that.off('click', onMapClickHandler);
-	            // Enable scrolling zoom
-	            that.find('iframe').css("pointer-events", "auto");
-	            // Handle the mouse leave event
-	            that.on('mouseleave', onMapMouseleaveHandler);
-	        }
-	        // Enable map zooming with mouse scroll when the user clicks the map
-	    $('.map').on('click', onMapClickHandler);
 		
 	}
 })();
