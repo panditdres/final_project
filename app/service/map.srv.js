@@ -125,7 +125,7 @@
 			}
 			return api.request('/users/profilePic/'+userId,fileObj,'PUT')
 			.then(function(res){
-				$state.reload()
+				$state.reload();
 				self.defaultView();
 				return res;
 			})
