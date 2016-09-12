@@ -13,6 +13,27 @@ a:not(.md-button) {
     color: #428bca;
 }
 
+.add-friend:hover .overlay{
+  opacity: 1;
+}
+
+.overlay {
+  color: white;
+  border-radius: 55%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+    opacity:0;
+    background-color: rgba(0,0,0,0.75);
+  -webkit-transition: opacity .25s ease;
+  -moz-transition: opacity .25s ease;
+}
+.add-friend{
+  height: 100%;
+}
+
 #menu-toggle {
   color: white !important;
 }

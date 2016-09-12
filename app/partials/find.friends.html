@@ -22,8 +22,8 @@
 			<input ng-model="ctrl.search" type="text" class="form-control gap-bottom" id="search" placeholder="Search Friends">
 			<hr class="style-two">
 		</div>
-		{{ctrl.friendShow}}
-		<div ng-repeat="users in ctrl.nonFriends | filter:{firstName:ctrl.search}">
+
+		<!-- <div ng-repeat="users in ctrl.nonFriends | filter:{firstName:ctrl.search}">
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-xs-4 center">
 					<img class="profile-pic-friends" ng-src="{{users.profilePic}}">
@@ -39,6 +39,72 @@
 				</div>	
 			</div>
 			<hr class="style-two">
+		</div> -->
+		<div class="row">
+			<div class="col-lg-3 col-md-3 col-xs-12 center" ng-repeat="users in ctrl.nonFriends | filter:{firstName:ctrl.search}" ng-click="ctrl.checkFriends; ctrl.addFriend(users)">
+				<div class="add-friend center">
+					
+					<img class="profile-pic-friends" ng-src="{{users.profilePic}}" style="height:100%;width:100%">
+					
+				
+					
+					<div class="overlay center">
+						<h3>{{users.firstName}} {{users.lastName}}</h3>
+						<h4>{{users.username}}</h4>	
+						<button class="btn right" ng-class="{'btn-success': ctrl.friends.includes(users.id)}" ng-click="ctrl.checkFriends; ctrl.addFriend(users)">
+						<i class="fa fa-user-plus fa-2x" style="color:white;font-weight:lighter" aria-hidden="true"></i>
+						</button>
+						<h4>Add Friend</h4>
+					</div>
+				</div>
+				
+			</div>
+			<!-- <div class="col-lg-3 col-md-3 col-xs-12 center add-friend overlay">
+				<button class="btn right" ng-class="{'btn-success': ctrl.friends.includes(users.id)}" ng-click="ctrl.checkFriends; ctrl.addFriend(users)">
+					<i class="fa fa-user-plus fa-2x" style="color:white;font-weight:lighter" aria-hidden="true"></i>
+				</button>
+			</div> -->
 		</div>
 	</div>
+	<!-- Footer -->
+	<hr style="border-color:black">
+    <div id="contact" class="container ">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <h4><strong>KickApp</strong>
+                </h4>
+                <p>761 Bay St, Suite 507 
+                  <br>M5G 2R2, Toronto, ON, Canada
+                </p>
+                <hr class="small" style="border-color:black">
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-phone fa-fw"></i> (647) 705 9548</li>
+                    <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:pandit.dres@gmail.com">pandit.dres@gmail.com</a>
+                    </li>
+                </ul>
+                <br>
+                <ul class="list-inline">
+                    <li>
+                        <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/padhilaga_dres/"><i class="fa fa-instagram fa-fw fa-3x"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/panditdres"><i class="fa fa-github fa-fw fa-3x"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://ca.linkedin.com/in/panditadhilagadres"><i class="fa fa-linkedin fa-fw fa-3x"></i></a>
+                    </li>
+
+                </ul>
+                <hr class="small">
+                <p class="text-muted">Copyright &copy; KickApp 2016</p>
+            </div>
+        </div>
+    </div>
+    <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
+
 </div>
+
+
