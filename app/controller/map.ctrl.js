@@ -249,7 +249,7 @@
 		}
 
 		if(mapVm.notifications != 0 && $state.includes('friends') == false){
-			toastr.info("You have " + mapVm.notifications + " new notifications")
+			toastr.info("You have new notifications")
 		}
 		console.log(mapVm.notifications)
 		
