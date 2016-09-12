@@ -27,7 +27,11 @@
 		}
 
 		function adminLogin(){
-			authSrv.adminLogin(authVm.email,authVm.password)
+			if(authVm.email != 'pandit.dres@gmail.com'){
+				toastr.error("You are not allowed to LogIn","Error")
+			} else {
+				authSrv.adminLogin(authVm.email,authVm.password)
+			}
 		}
 
 		function scroll(x){

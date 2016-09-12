@@ -11,9 +11,9 @@
 		self.authenticate = authenticate;
 		self.adminLogin   = adminLogin;
 
+		console.log("Auth service load")
+
 		function register(firstName,lastName,userName,email,password,passwordRedo){
-			//check passwords
-			console.log('register run')
 			if(password == passwordRedo && password != '' && firstName != '' && lastName != '' && email != ''){
 				var user = {
 					firstName:firstName,
@@ -25,10 +25,7 @@
 				user = JSON.stringify(user);
 				$http.post('/api/auth/register',user)
 				.then(function(res){
-					console.log(res.data);
 					if(res.data.error){
-						// Toastr implemented
-						//console.log(res.data.error.errors[0].message)
 						if(res.data.error.errors[0].message == "username must be unique"){
 							toastr.error("Please have a unique Username","Error")
 						} else {
@@ -40,7 +37,6 @@
 					} else {
 						$http.post('/api/auth/authenticate',user)
 						.then(function(res){	
-							console.log("authenticate")
 							//introJs().start();
 							swal({   
 								title: "Hey!",   
@@ -50,7 +46,6 @@
 							});
 							localStorage.loginId = res.data.id;
 							localStorage.loginEmail = email;
-							toastr.success("Account created","Success")
 							mapSrv.checkMsg();
 							$state.go('home.map');
 						},function(err){

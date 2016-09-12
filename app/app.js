@@ -79,12 +79,6 @@
 				controller:'authCtrl as ctrl'
 			})
 
-			.state('tutorial', {
-				url:'/tutorial',
-				templateUrl:'/partials/tutorial.html',
-				authenticate:true,
-			})
-
 			.state('friends', {
 				url:'/friends',
 				templateUrl:'/partials/find.friends.html',
