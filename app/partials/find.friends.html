@@ -1,4 +1,4 @@
-<div>	
+<div class="admin">	
 	<div class="find-friends">
 		
 		<div class="row">
@@ -23,23 +23,6 @@
 			<hr class="style-two">
 		</div>
 
-		<!-- <div ng-repeat="users in ctrl.nonFriends | filter:{firstName:ctrl.search}">
-			<div class="row">
-				<div class="col-lg-4 col-md-4 col-xs-4 center">
-					<img class="profile-pic-friends" ng-src="{{users.profilePic}}">
-				</div>
-				<div class="col-lg-4 col-md-4 col-xs-4">
-					<h3>{{users.firstName}} {{users.lastName}}</h3>
-					<h4>{{users.username}}</h4>
-				</div>
-				<div class="col-lg-4 col-md-4 col-xs-4 center">
-					<button class="btn right" ng-class="{'btn-success': ctrl.friends.includes(users.id)}" ng-click="ctrl.checkFriends; ctrl.addFriend(users)">
-						<i class="fa fa-user-plus fa-2x" style="color:white;font-weight:lighter" aria-hidden="true"></i>
-					</button>
-				</div>	
-			</div>
-			<hr class="style-two">
-		</div> -->
 		<div class="row">
 			<div class="col-lg-3 col-md-3 col-xs-12 center" ng-repeat="users in ctrl.nonFriends | filter:{firstName:ctrl.search}" ng-click="ctrl.checkFriends; ctrl.addFriend(users)">
 				<div class="add-friend center">
@@ -49,7 +32,7 @@
 					<h4>{{users.username}}</h4>	
 				
 					<div class="overlay center">
-						<button class="btn right" ng-class="{'btn-success': ctrl.friends.includes(users.id)}" ng-click="ctrl.checkFriends; ctrl.addFriend(users)">
+						<button class="btn right" ng-class="{'btn-success': ctrl.friends.includes(users.id)}">
 						<i class="fa fa-user-plus fa-2x" style="color:white;font-weight:lighter" aria-hidden="true"></i>
 						</button>
 						<h4>Add Friend</h4>

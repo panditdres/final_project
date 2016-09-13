@@ -214,10 +214,6 @@ div.home-view {
   transform: translateX(-300px);
 }
 
-.friends {
-  background-image: url(../../asanoha-400px.png);
-}
-
 .location-info, .invite-info{
   color:white;
   background-color: #48494A;
