@@ -195,12 +195,10 @@ div.home-view {
 
 .constant {
   font-family: 'Abel', sans-serif;
-  background-image: url(../../../asanoha-400px.png);
-}
-
-#about, footer {
   background-color: #f0f3f4;
 }
+
+
 
 .right {
   background-color: #48494A;
@@ -486,6 +484,10 @@ p.company {
 .footer-right{
 	float:right;
 	font-size: 20px;
+}
+
+footer {
+	margin-top: 2%;
 }
 
 .btn.trash {
