@@ -25,6 +25,8 @@
 		mapVm.defaultView  		= defaultView;
 		mapVm.populateMarkers 	= populateMarkers;
 		mapVm.openModal 		= openModal;
+		mapVm.openFriend		= openFriend;
+
 		mapVm.toggleAnimations 	= toggleAnimations;
 		mapVm.addFriend 		= addFriend;
 		mapVm.friendRequest		= friendRequest
@@ -330,6 +332,40 @@
 		        	locationId: function(){
 		        		return id;
 		        	}
+		      	}
+		    });
+		    modalInstance.result.then(function (selectedItem) {
+		      	mapVm.selected = selectedItem;
+		    },function () {
+		    	console.log(mapVm.playingAt)
+		    	console.log("closed modal")
+		    	mapVm.getLocation()
+		      	$log.info('Modal dismissed at: ' + new Date());
+		    });  
+		}
+
+		function openFriend(size, friendInfo){
+			var modalInstance = $uibModal.open({
+		      	animation: mapVm.animationsEnabled,
+		      	templateUrl: 'myModalFriend.html',
+		      	controller: 'ModalInstanceFriendCtrl as ctrl',
+		      	size: size,
+		      	resolve: {
+		      		user: function(){
+		      			return mapVm.userData;
+		      		},
+		      		friends: function(){
+		      			return mapVm.friendData;
+		      		},
+		      		users: function(adminSrv){
+		      			return adminSrv.getUsers();
+		      		},
+		      		locations: function(adminSrv){
+		      			return adminSrv.getLocations();
+		      		},
+		      		friendInfo: function(){
+		      			return friendInfo;
+		      		}
 		      	}
 		    });
 		    modalInstance.result.then(function (selectedItem) {
