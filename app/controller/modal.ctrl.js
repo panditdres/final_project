@@ -122,6 +122,7 @@ angular.module('mapApp')
         console.log("cancel Btn enabled")
         modalVm.goBtn = true;
         modalVm.cancelBtn = false;
+        modalVm.timepicker = false;
       } else {
         console.log("Go Btn enabled")
         modalVm.goBtn = false;
