@@ -359,10 +359,8 @@
 		}
 		mapVm.counterFriend = 0;
 		function addFriend(friendInfo){
-			console.log(friendInfo)
 			toastr.success("Nice! You have added a new friend","Success")
 			mapVm.friends.push(friendInfo.id)
-			console.log(mapVm.nonFriends)
 			for(var i = 0; i < mapVm.nonFriends.length; i++){
 				if(mapVm.nonFriends[i].id == friendInfo.id){
 					mapVm.nonFriends.splice(i,1)
@@ -370,7 +368,6 @@
 			}
 			mapSrv.addFriend(localStorage.loginId, mapVm.friends)
 			return mapVm.nonFriends;
-			//mapVm.friendBtn = true;
 		}
 
 		function friendRequest(friendInfo){
