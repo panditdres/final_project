@@ -3,6 +3,8 @@ angular.module('mapApp')
 
   modalVm = this;
 
+  console.log(modalVm.friendData)
+
   modalVm.friendData      = friends;
   modalVm.locationAddress = locationAddress;
   modalVm.locationName    = locationName;
