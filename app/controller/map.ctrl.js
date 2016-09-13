@@ -70,6 +70,7 @@
 		mapVm.allFriends 		= true;
 		mapVm.notificationShow  = false;
 		mapVm.status 			= 'friends';
+		mapVm.friendBtn			= false;
 
 		mapVm.friendMessage = "Add Friend"
 		
@@ -361,7 +362,11 @@
 			toastr.success("Nice! You have added a new friend","Success")
 			mapVm.friends.push(friendInfo.id)
 			mapSrv.addFriend(localStorage.loginId, mapVm.friends)
-			mapVm.checkFriends();
+			.then(function(res){
+				console.log(res)
+				mapVm.checkFriends();
+			})
+			mapVm.friendBtn = true;
 		}
 
 		function friendRequest(friendInfo){

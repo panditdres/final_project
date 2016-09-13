@@ -24,7 +24,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-lg-3 col-md-3 col-xs-12 center" ng-repeat="users in ctrl.nonFriends | filter:{firstName:ctrl.search}" ng-click="ctrl.checkFriends; ctrl.addFriend(users)">
+			<div class="col-lg-3 col-md-3 col-xs-12 center" ng-repeat="users in ctrl.nonFriends | filter:{firstName:ctrl.search}">
 				<div class="add-friend center">
 					
 					<img class="profile-pic-friends" ng-src="{{users.profilePic}}">
@@ -32,7 +32,7 @@
 					<h4>{{users.username}}</h4>	
 				
 					<div class="overlay center">
-						<button class="btn right" ng-class="{'btn-success': ctrl.friends.includes(users.id)}">
+						<button class="btn right" ng-class="{'btn-success': ctrl.friends.includes(users.id)}" ng-click="ctrl.checkFriends(); ctrl.addFriend(users)" ng-disabled="ctrl.friendBtn">
 						<i class="fa fa-user-plus fa-2x" style="color:white;font-weight:lighter" aria-hidden="true"></i>
 						</button>
 						<h4>Add Friend</h4>
