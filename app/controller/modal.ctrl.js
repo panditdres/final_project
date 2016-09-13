@@ -19,6 +19,8 @@ angular.module('mapApp')
     }
   }
 
+   console.log(modalVm.friendData)
+
   modalVm.addPlayer             = addPlayer;
   modalVm.removePlayer          = removePlayer;
   modalVm.addPlayingLocation    = addPlayingLocation;
