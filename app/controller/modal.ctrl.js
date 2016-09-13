@@ -10,7 +10,6 @@ angular.module('mapApp')
   modalVm.locationId      = locationId;
   modalVm.capacity        = locationCapacity;
   modalVm.maxCapacity     = maxCapacity;
-  console.log(modalVm.friendData)
 
   for(var i = 0; i < modalVm.friendData.length; i++){
     if(modalVm.friendData[i] == ""){
@@ -18,8 +17,6 @@ angular.module('mapApp')
       return modalVm.friendData;
     }
   }
-
-   console.log(modalVm.friendData)
 
   modalVm.addPlayer             = addPlayer;
   modalVm.removePlayer          = removePlayer;
