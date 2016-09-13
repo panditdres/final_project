@@ -580,12 +580,12 @@
 	        steps:[
 	        {
 	            element: '#step1',
-	            intro: "This is your navigation bar. You can start searching for friends and under your name, you can change your settings and log out",
+	            intro: "This is your navigation bar. You can start searching for friends, change your settings and log out",
 	        	position: 'right'
 	        },
 	        {
 	            element: '#step2',
-	            intro: "This area will show you the events that you have accepted from your friends' invitations. It will also let you know where you decided to play after pressing 'Let's Play' at a particular location",
+	            intro: "This area will show you the events that you have accepted from your friends' invitations. It will let you know where you decided to play after pressing 'Let's Play' at a particular location",
 	            position: 'right'
 	        },
 	        {
@@ -600,7 +600,7 @@
 	        },
 	        {
 	            element: '#step5',
-	            intro: 'You can start using the application by pressing one of the markers. It will allow you to see who is playing there, the type of field that it is and the address'
+	            intro: 'You can start using the application by pressing one of the markers. It will allow you to see the players, the type of field that it is and the address'
 	        }
 	        ],
 	        showStepNumbers: false,
