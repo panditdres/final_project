@@ -11,12 +11,12 @@ angular.module('mapApp')
   modalVm.capacity        = locationCapacity;
   modalVm.maxCapacity     = maxCapacity;
 
-  for(var i = 0; i < modalVm.friendData.length; i++){
-    if(modalVm.friendData[i] == ""){
-      modalVm.friendData.splice(i,1);
-      return modalVm.friendData;
-    }
-  }
+  // for(var i = 0; i < modalVm.friendData.length; i++){
+  //   if(modalVm.friendData[i] == ""){
+  //     modalVm.friendData.splice(i,1);
+  //     return modalVm.friendData;
+  //   }
+  // }
 
   modalVm.addPlayer             = addPlayer;
   modalVm.removePlayer          = removePlayer;
