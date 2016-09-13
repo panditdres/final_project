@@ -195,6 +195,10 @@ div.home-view {
 
 .constant {
   font-family: 'Abel', sans-serif;
+  background-image: url(../../../asanoha-400px.png);
+}
+
+#about, footer {
   background-color: #f0f3f4;
 }
 
@@ -210,6 +214,10 @@ div.home-view {
 
 .move {
   transform: translateX(-300px);
+}
+
+.friends {
+  background-image: url(../../asanoha-400px.png);
 }
 
 .location-info, .invite-info{
@@ -478,10 +486,6 @@ p.company {
 .footer-right{
 	float:right;
 	font-size: 20px;
-}
-
-footer {
-	margin-top: 2%;
 }
 
 .btn.trash {
