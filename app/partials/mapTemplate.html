@@ -52,8 +52,8 @@
           </div>
           
 
-          <button class="btn btn-primary" type="button" ng-click="ctrl.incrementCounter(ctrl.locationId,ctrl.locationCounter); ctrl.addPlayer(ctrl.locationId,ctrl.user); ctrl.addPlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.goBtn">Let's Play</button>
-          <button class="btn btn-warning" type="button" ng-click="ctrl.cancel(ctrl.locationId,ctrl.locationCounter); ctrl.removePlayer(ctrl.locationId,ctrl.user); ctrl.removePlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.cancelBtn">Or Nah</button>
+          <button class="btn btn-primary" type="button" ng-click="ctrl.incrementCounter(ctrl.locationId); ctrl.addPlayer(ctrl.locationId,ctrl.user); ctrl.addPlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.goBtn">Let's Play</button>
+          <button class="btn btn-warning" type="button" ng-click="ctrl.cancel(ctrl.locationId); ctrl.removePlayer(ctrl.locationId,ctrl.user); ctrl.removePlayingLocation(ctrl.user.id,ctrl.locationId)" ng-disabled="ctrl.cancelBtn">Or Nah</button>
       </div>
     </div>
 

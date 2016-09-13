@@ -108,8 +108,10 @@ angular.module('mapApp')
   }
 
   function checkPlayer(){
+    modalVm.goBtn = false;
+    modalVm.cancelBtn = true;
     if(modalVm.locationPlayers == undefined){
-      modalVm.locationPlayers = []
+      modalVm.locationPlayers = [];
     }
     for(var i = 0; i < modalVm.locationPlayers.length; i++){
       console.log(modalVm.locationPlayers[i].username == modalVm.user.username)
@@ -141,27 +143,19 @@ angular.module('mapApp')
   }
 
   function addInvite(friendId){
-    console.log("add invite")
     modalVm.inviteBtn = true;
     modalVm.invitation.push(friendId)
-    console.log(modalVm.invitation)
   }
 
   function subInvite(friendId){
-    console.log("remove invite")
     for(var i = 0; i < modalVm.invitation.length; i++){
       if(modalVm.invitation[i] == friendId){
         modalVm.invitation.splice(i,1);
       }
     }
-    console.log(modalVm.invitation)
   }
 
   function sendInvite(locationId, user){
-    // console.log(modalVm.invitation)
-    // console.log(locationId)
-    //console.log(userId)
-    // console.log(modalVm.eventDate)
     var today = new Date()
     if(!modalVm.eventDate){ 
       toastr.info("Please input a date","Info")
@@ -242,21 +236,18 @@ angular.module('mapApp')
     modalVm.hideTime();
   }
 
-  // something needs to be fixed here
+  // might be fixed?
   function removePlayingLocation(userId,locationId){
-    console.log(locationId)
-    console.log("before",modalVm.userPlaying)
     for(var i = 0; i < modalVm.userPlaying.length; i++){
       if(modalVm.userPlaying[i] == locationId){
         modalVm.userPlaying.splice(i, 1);
-        console.log("After",modalVm.userPlaying)
         mapSrv.addPlayingLocation(userId,modalVm.userPlaying);
       }
     }
     modalVm.showTime();
   }
 
-  function incrementCounter(locationId, counter){ 
+  function incrementCounter(locationId){ 
     if(modalVm.locationPlayers.length > modalVm.maxCapacity - 1){
       toastr.error('There are no more spots', 'Error')
     } else {
@@ -265,7 +256,7 @@ angular.module('mapApp')
     }
   }
 
-  function cancel(locationId, counter) {
+  function cancel(locationId) {
     modalVm.cancelBtn = true;
     modalVm.goBtn = false;
   };
