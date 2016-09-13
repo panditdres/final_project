@@ -169,6 +169,7 @@ angular.module('mapApp')
         "invited": modalVm.invitation
       }
       $uibModalInstance.close()
+      toastr.success("Invitation sent","Success")
       mapSrv.sendInvite(locationId,user.id,invite)
     }
   }
