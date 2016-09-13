@@ -107,9 +107,6 @@ angular.module('mapApp')
     modalVm.writeReviewInfo = true;
   }
 
-  modalVm.goBtn = false;
-  modalVm.cancelBtn = true;
-
   function checkPlayer(){
     if(modalVm.locationPlayers == undefined){
       modalVm.locationPlayers = []
