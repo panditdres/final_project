@@ -22,6 +22,7 @@ var invites_route   = require('./routes/invites')
 var reviews_route	= require('./routes/reviews')
 
 // Use app for the proper route
+//change
 app.use('/api/auth',auth_route);
 app.use('/api/users',authentication,users_route);
 app.use('/api/admin',authentication,admin_route);
