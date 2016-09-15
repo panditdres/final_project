@@ -29,7 +29,7 @@ app.use('/api/location',authentication,location_route);
 // app.use('/api/history',history_route);
 app.use('/api/upload',authentication,upload_route);
 app.use('/api/invites',authentication,invites_route)
-app.use('/api/reviews',reviews_route)
+app.use('/api/reviews',authentication,reviews_route)
 
 models.sequelize.sync().then(function(){
 	app.listen(8092, function(){
